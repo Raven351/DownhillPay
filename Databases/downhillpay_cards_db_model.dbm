@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<database name="downhillpay_cards_db" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="cards" rect-visible="true" fill-color="#00aaff">
+	<role name="postgres"/>
+</schema>
+
+<table name="subscription">
+	<schema name="cards"/>
+	<position x="1100" y="40"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="date_start" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="date_end" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="subscription_pk" type="pk-constr" table="cards.subscription">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_rfid_card" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="rfid_card_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="rfid_card">
+	<schema name="cards"/>
+	<position x="540" y="20"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="uid" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="uid2" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="card_number" not-null="true">
+		<type name="varchar" length="16"/>
+		<comment><![CDATA[YYYY/MM/A-000000]]></comment>
+	</column>
+	<column name="points_balance" not-null="true" default-value="0">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="card_expiration">
+		<type name="date" length="0"/>
+	</column>
+	<column name="created_date" not-null="true" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="modfied_date" not-null="true" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="timeout">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="rfid_card_pk" type="pk-constr" table="cards.rfid_card">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rfid_card_uq" type="uq-constr" table="cards.rfid_card">
+		<columns names="uid,card_number,uid2" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_client" index="9"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="client_fk" index="2"/>
+		<object name="rfid_card_uq1" index="3"/>
+	</customidxs>
+</table>
+
+<relationship name="rfid_card_has_many_subscription" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="cards.rfid_card"
+	 dst-table="cards.subscription"
+	 src-required="true" dst-required="false"/>
+
+<table name="client">
+	<schema name="cards"/>
+	<position x="20" y="60"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="first_name" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="last_name" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="phone_number" not-null="true">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="birth_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="client_pk" type="pk-constr" table="cards.client">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="rfid_card_has_one_client" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="cards.client"
+	 dst-table="cards.rfid_card"
+	 src-required="false" dst-required="false"/>
+
+<schema name="users" rect-visible="true" fill-color="#aa55ff">
+	<role name="postgres"/>
+</schema>
+
+<table name="user">
+	<schema name="users"/>
+	<position x="20" y="280"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="varchar" length="60"/>
+	</column>
+	<column name="account_created_date" not-null="true" default-value="now()">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="user_pk" type="pk-constr" table="users.&quot;user&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="user_unique" type="uq-constr" table="users.&quot;user&quot;">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_client" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="client_fk" index="2"/>
+		<object name="user_uq" index="3"/>
+	</customidxs>
+</table>
+
+<schema name="prices" rect-visible="true" fill-color="#ffaa00">
+	<role name="postgres"/>
+</schema>
+
+<table name="subscription">
+	<schema name="prices"/>
+	<position x="380" y="300"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="price" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="period" not-null="true">
+		<type name="interval" length="0"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="60"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="subscription_pk" type="pk-constr" table="prices.subscription">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="points">
+	<schema name="prices"/>
+	<position x="700" y="300"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="amount" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="price" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+</table>
+
+<schema name="devices" rect-visible="true" fill-color="#00aa7f">
+	<role name="postgres"/>
+</schema>
+
+<table name="gate">
+	<schema name="devices"/>
+	<position x="380" y="480"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<constraint name="gate_pk" type="pk-constr" table="devices.gate">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="ski_lift">
+	<schema name="devices"/>
+	<position x="740" y="500"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="60"/>
+	</column>
+	<column name="points_price" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="ski_lift_pk" type="pk-constr" table="devices.ski_lift">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="ski_lift_has_many_gate" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="devices.ski_lift"
+	 dst-table="devices.gate"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="user_has_one_client" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="cards.client"
+	 dst-table="users.&quot;user&quot;"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
