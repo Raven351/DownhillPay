@@ -10,7 +10,7 @@ namespace ArduinoRFIDReader
     /// <summary>
     /// Includes methods for Arduino device detection. 
     /// </summary>
-    public class ArduinoPortDetection
+    public static class ArduinoPortDetection
     {
         /// <summary>
         /// Returns port name from Win32_SerialPort with 'Arduino' phrase in it's description.
