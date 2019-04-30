@@ -12,21 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Management;
-using System.Data.SqlClient;
-using DownhillPayClient.UserControls;
 
 namespace DownhillPayClient
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AppSettingsUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AppSettingsUserControl : UserControl
     {
-        public MainWindow()
+
+        public AppSettingsUserControl()
         {
             InitializeComponent();
-            this.contentControl.Content = new LoginUserControl(this);
         }
+
+
     }
 }

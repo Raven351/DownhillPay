@@ -4,9 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DownhillPayClient"
+        xmlns:userControls="clr-namespace:DownhillPayClient.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Background="SteelBlue" WindowState="Maximized" WindowStyle="None" MinWidth="1024"  MinHeight="768" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="222" Width="458">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="20">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate x:Key="RoundedButton" TargetType="{x:Type Button}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="20">
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
+    <ContentControl x:Name="contentControl"/>
 </Window>

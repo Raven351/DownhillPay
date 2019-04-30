@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="DownhillPayClient.AppSettingsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DownhillPayClient"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" d:DesignWidth="1024">
+    <Grid>
+        <Label Content="POS ID" Grid.Column="0" Grid.Row="1" />
+        <ComboBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" MinWidth="400" Height="70" FontSize="62" Margin="10" HorizontalAlignment="Stretch"/>
+        <Label Content="API URI" Grid.Column="0" Grid.Row="2" />
+        <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" MinWidth="400" MinHeight="70" FontSize="42" HorizontalAlignment="Stretch"/>
+        <Label Content="RFID Port" Grid.Column="0" Grid.Row="3" />
+        <Grid Grid.Row="3" Grid.Column="1">
+            <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" MinWidth="200" MinHeight="70" FontSize="30"/>
+            <Button Grid.Column="1" Content="Autodetect"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Button Grid.Column="0" Grid.Row="4" Content="Start Application" />
+        <Button Grid.Column="1" Grid.Row="4" Content="Save Settings"/>
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="62"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="MinHeight" Value="70" />
+                <Setter Property="MinWidth" Value="100"/>
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+    </Grid>
+</UserControl>
