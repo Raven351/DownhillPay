@@ -36,7 +36,7 @@ namespace DownhillPayClient
 
         private void StaffLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            parentWindow.contentControl.Content = new POSMainMenuView();
+            //parentWindow.contentControl.Content = new AppSettingsUserControl();
         }
     }
 }

@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace ArduinoRFIDReader
 {
-    class SerialCommunication : SerialPort
+    public class SerialCommunication : SerialPort
     {
-        private string receivedCommand;
-        private string commandToSend;
+        //private string receivedCommand;
+        //private string commandToSend;
         public SerialCommunication(string portName, int baudRate) : base(portName, baudRate)
         {
 

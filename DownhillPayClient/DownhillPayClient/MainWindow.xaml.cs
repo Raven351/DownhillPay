@@ -23,10 +23,15 @@ namespace DownhillPayClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        public POSMainMenuView POSMainMenuView { get; }
+        public CheckPointsBalanceUserControl CheckPointsBalanceUserControl { get; }
         public MainWindow()
         {
             InitializeComponent();
-            this.contentControl.Content = new LoginUserControl(this);
+            POSMainMenuView = new POSMainMenuView(this);
+            CheckPointsBalanceUserControl = new CheckPointsBalanceUserControl(this);
+            this.contentControl.Content = new POSMainMenuView(this);
+            MessageBox.Show(Properties.Settings.Default.API_URI);
         }
     }
 }

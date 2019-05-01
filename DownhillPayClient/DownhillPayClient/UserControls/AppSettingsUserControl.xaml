@@ -13,8 +13,8 @@
         <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" MinWidth="400" MinHeight="70" FontSize="42" HorizontalAlignment="Stretch"/>
         <Label Content="RFID Port" Grid.Column="0" Grid.Row="3" />
         <Grid Grid.Row="3" Grid.Column="1">
-            <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch" MinWidth="200" MinHeight="70" FontSize="30"/>
-            <Button Grid.Column="1" Content="Autodetect"/>
+            <TextBox x:Name="rfidPortTextBox" VerticalAlignment="Center" HorizontalAlignment="Stretch" MinWidth="200" MinHeight="70" FontSize="30"/>
+            <Button x:Name="autodetectRFIDPortButton" Grid.Column="1" Content="Autodetect" Click="AutodetectRFIDPortButton_Button_Click"/>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

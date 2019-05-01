@@ -37,7 +37,7 @@ namespace ArduinoRFIDReader
             }
             catch (ManagementException e)
             {
-                /* Do Nothing */
+                throw e;
             }
 
             return null;

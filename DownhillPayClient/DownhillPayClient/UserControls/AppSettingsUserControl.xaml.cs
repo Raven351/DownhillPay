@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ArduinoRFIDReader;
 
 namespace DownhillPayClient
 {
@@ -20,12 +21,30 @@ namespace DownhillPayClient
     /// </summary>
     public partial class AppSettingsUserControl : UserControl
     {
-
+        public MainWindow MainWindow { get; }
         public AppSettingsUserControl()
         {
             InitializeComponent();
         }
 
+        public AppSettingsUserControl(MainWindow mainWindow)
+        {
+            InitializeComponent();
+            MainWindow = mainWindow;
+        }
 
+        private void AutodetectRFIDPortButton_Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ArduinoPortDetection.AutodetectPort() == null) MessageBox.Show("Arduino device hasn't been found","ERROR");
+                else rfidPortTextBox.Text = ArduinoPortDetection.AutodetectPort();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            
+        }
     }
 }
