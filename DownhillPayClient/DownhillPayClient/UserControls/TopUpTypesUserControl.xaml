@@ -147,7 +147,7 @@
             </Grid>
         </Viewbox>
         <Viewbox Grid.Column="0" Grid.Row="3">
-            <Button x:Name="PointsButton" Content="Points" Grid.Column="0" Grid.Row="2"/>
+            <Button x:Name="PointsButton" Content="Points" Grid.Column="0" Grid.Row="2" Click="PointsButton_Click"/>
         </Viewbox>
         <Viewbox Grid.Column="1" Grid.Row="3">
             <Button x:Name="SubscriptionButton" Content="Subscription" Grid.Column="1" Grid.Row="2"/>

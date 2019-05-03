@@ -51,5 +51,10 @@ namespace DownhillPayClient.UserControls
         {
             MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
         }
+
+        private void PointsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.contentControl.Content = MainWindow.PointTopUpUserControl.ChangeToControl(this);
+        }
     }
 }

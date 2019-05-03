@@ -16,33 +16,35 @@ using System.Windows.Shapes;
 namespace DownhillPayClient.UserControls
 {
     /// <summary>
-    /// Interaction logic for NewCardUserControl.xaml
+    /// Interaction logic for NewPersonalizedCardFormUserControl.xaml
     /// </summary>
-    public partial class NewCardUserControl : UserControl, IUserControlWindow
+    public partial class NewPersonalizedCardFormUserControl : UserControl, IUserControlWindow
     {
-        public MainWindow MainWindow { get; }
-
-        public UserControl PreviousControl { get ; set ; }
-
-        public NewCardUserControl()
+        public NewPersonalizedCardFormUserControl()
         {
             InitializeComponent();
         }
 
-        public NewCardUserControl(MainWindow mainWindow) : this()
+        public NewPersonalizedCardFormUserControl(MainWindow mainWindow) : this()
         {
             MainWindow = mainWindow;
         }
 
+        public MainWindow MainWindow { get; }
+
+        public UserControl PreviousControl { get; set; }
+
         public UserControl ChangeToControl(UserControl previousControl)
         {
             PreviousControl = previousControl;
+            if (PreviousControl == MainWindow.POSMainMenuView) CancelButton.Visibility = Visibility.Hidden;
+            else CancelButton.Visibility = Visibility.Visible;
             return this;
         }
 
-        private void PersonalizedCardButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.contentControl.Content = MainWindow.NewPersonalizedCardFormUserControl.ChangeToControl(this);
+            MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
@@ -50,9 +52,9 @@ namespace DownhillPayClient.UserControls
             MainWindow.contentControl.Content = PreviousControl;
         }
 
-        private void NonPersonalizedCardButton_Click(object sender, RoutedEventArgs e)
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.contentControl.Content = MainWindow.TopUpTypesUserControl.ChangeToControl(this);
+            
         }
     }
 }

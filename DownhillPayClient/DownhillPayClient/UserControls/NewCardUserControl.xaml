@@ -107,7 +107,7 @@
         </Grid>
         <Viewbox Grid.Row="2" Grid.Column="0" Margin="10">
             <Grid Grid.Row="1" Grid.Column="0">
-                <Border BorderThickness="2" CornerRadius="50,50,50,50" BorderBrush="Black" Background="Silver" Width="500" Height="300">
+                <Border BorderThickness="2" CornerRadius="50,50,50,50" BorderBrush="Black" Background="LightPink" Width="500" Height="300">
                     <RichTextBox  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32"  Margin="20" Background="Transparent" BorderBrush="Transparent" Focusable="False" IsReadOnly="True" BorderThickness="0">
                         <RichTextBox.Resources>
                             <Style TargetType="{x:Type Paragraph}">
@@ -126,7 +126,7 @@
         </Viewbox>
         <Viewbox Grid.Row="2" Grid.Column="1" Margin="10">
             <Grid Grid.Row="1" Grid.Column="1">
-                <Border BorderThickness="2" CornerRadius="50,50,50,50" BorderBrush="Black" Background="Silver" Width="500" Height="300">
+                <Border BorderThickness="2" CornerRadius="50,50,50,50" BorderBrush="Black" Background="LightPink" Width="500" Height="300">
                     <RichTextBox  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32"  Margin="20" Background="Transparent" BorderBrush="Transparent" Focusable="False" IsReadOnly="True" BorderThickness="0">
                         <RichTextBox.Resources>
                             <Style TargetType="{x:Type Paragraph}">

@@ -30,6 +30,8 @@ namespace DownhillPayClient
         public NewCardUserControl NewCardUserControl { get; }
         public PaymentMethod PaymentMethod { get; }
         public TopUpTypesUserControl TopUpTypesUserControl { get; }
+        public NewPersonalizedCardFormUserControl NewPersonalizedCardFormUserControl { get; }
+        public PointTopUpUserControl PointTopUpUserControl { get; }
         #endregion
         public MainWindow()
         {
@@ -39,6 +41,8 @@ namespace DownhillPayClient
             NewCardUserControl = new NewCardUserControl(this);
             PaymentMethod = new PaymentMethod(this);
             TopUpTypesUserControl = new TopUpTypesUserControl(this);
+            NewPersonalizedCardFormUserControl = new NewPersonalizedCardFormUserControl(this);
+            PointTopUpUserControl = new PointTopUpUserControl(this);
             this.contentControl.Content = POSMainMenuView;
             //MessageBox.Show(Properties.Settings.Default.API_URI);
             //var tc = new TESTCards();

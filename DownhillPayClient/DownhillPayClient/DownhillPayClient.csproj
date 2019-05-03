@@ -66,8 +66,14 @@
     <Compile Include="UserControls\NewCardUserControl.xaml.cs">
       <DependentUpon>NewCardUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\NewPersonalizedCardFormUserControl.xaml.cs">
+      <DependentUpon>NewPersonalizedCardFormUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\PaymentMethodUserControl.xaml.cs">
       <DependentUpon>PaymentMethodUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PointsTopUpUserControl.xaml.cs">
+      <DependentUpon>PointsTopUpUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\POSMainMenuView.xaml.cs">
       <DependentUpon>POSMainMenuView.xaml</DependentUpon>
@@ -112,7 +118,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\NewPersonalizedCardFormUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\PaymentMethodUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PointsTopUpUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
