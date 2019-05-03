@@ -23,11 +23,4 @@ namespace DownhillPayClient.UserControls
 
         UserControl ChangeToControl(UserControl previousControl);
     }
-    //public class UserControlWindow : UserControl
-    //{
-    //    private readonly MainWindow parentWindow;
-    //    private readonly UserControlWindow previousUserControl;
-    //    public UserControlWindow(MainWindow mainWindow) => parentWindow = mainWindow;
-    //    public UserControlWindow(MainWindow mainWindow, UserControlWindow previousControl) : this(mainWindow) => previousUserControl = previousControl;
-    //}
 }

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArduinoRFIDReader", "ArduinoRFIDReader\ArduinoRFIDReader.csproj", "{8E543A59-6F84-46F2-A533-9C5B0B07E5E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIClient", "APIClient\APIClient.csproj", "{2611310B-4EAE-4BE9-A705-E43E55DB21A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{8E543A59-6F84-46F2-A533-9C5B0B07E5E1}.Release|x64.Build.0 = Release|Any CPU
 		{8E543A59-6F84-46F2-A533-9C5B0B07E5E1}.Release|x86.ActiveCfg = Release|Any CPU
 		{8E543A59-6F84-46F2-A533-9C5B0B07E5E1}.Release|x86.Build.0 = Release|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Debug|x64.Build.0 = Debug|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Debug|x86.Build.0 = Debug|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Release|x64.ActiveCfg = Release|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Release|x64.Build.0 = Release|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Release|x86.ActiveCfg = Release|Any CPU
+		{2611310B-4EAE-4BE9-A705-E43E55DB21A6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

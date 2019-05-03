@@ -12,33 +12,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using APIClient;
 
 namespace DownhillPayClient.UserControls
 {
     /// <summary>
-    /// Interaction logic for CheckPointsBalanceUserControl.xaml
+    /// Interaction logic for TopUpTypesUserControl.xaml
     /// </summary>
-    public partial class CheckPointsBalanceUserControl : UserControl, IUserControlWindow
+    public partial class TopUpTypesUserControl : UserControl, IUserControlWindow
     {
-        public MainWindow MainWindow { get; }
-        public UserControl PreviousControl { get; set; }
-        public CheckPointsBalanceUserControl()
+        public TopUpTypesUserControl()
         {
             InitializeComponent();
-            //var client = new TESTCards(Properties.Settings.Default.API_URI); // test
-            //CardBalanceTextBlock.Text = client.GetCardById(2); // test
-            //CardBalanceTextBlock.FontSize = 32; // test
         }
 
-        public CheckPointsBalanceUserControl(MainWindow mainWindow) : this()
+        public TopUpTypesUserControl(MainWindow mainWindow) : this()
         {
             MainWindow = mainWindow;
         }
 
+        public MainWindow MainWindow { get; }
+
+        public UserControl PreviousControl { get; set; }
+
         public UserControl ChangeToControl(UserControl previousControl)
         {
             PreviousControl = previousControl;
+            if (PreviousControl == MainWindow.POSMainMenuView) CancelButton.Visibility = Visibility.Hidden;
+            else CancelButton.Visibility = Visibility.Visible;
             return this;
         }
 
@@ -47,5 +47,9 @@ namespace DownhillPayClient.UserControls
             MainWindow.contentControl.Content = PreviousControl;
         }
 
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+        }
     }
 }

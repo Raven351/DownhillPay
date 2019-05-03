@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DownhillPayClient.UserControls"
              mc:Ignorable="d" 
-                        Background="SteelBlue"
+             Background="SteelBlue"
              d:DesignHeight="768 " d:DesignWidth="1024">
     <Grid>
         <Grid.RowDefinitions>
@@ -101,7 +101,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="ScanAnotherCardButton" Content="Scan another card" Grid.Column="0"/>
+            <Button x:Name="ScanAnotherCardButton" Content="Scan another card" Grid.Column="0" IsEnabled="False"/>
             <Button x:Name="GoBackButton" Content="Go back" Grid.Column="1" Click="GoBackButton_Click"/>
         </Grid>
     </Grid>
