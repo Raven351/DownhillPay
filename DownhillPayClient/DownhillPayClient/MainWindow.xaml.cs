@@ -14,8 +14,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Management;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using DownhillPayClient.UserControls;
 using APIClient;
+using APIClient.Models;
+using APIClient.Requests;
 
 namespace DownhillPayClient
 {
@@ -44,6 +47,15 @@ namespace DownhillPayClient
             NewPersonalizedCardFormUserControl = new NewPersonalizedCardFormUserControl(this);
             PointTopUpUserControl = new PointTopUpUserControl(this);
             this.contentControl.Content = POSMainMenuView;
+
+
+            //tests
+            ClientRequest clientRequest = new ClientRequest();
+            //var sth = clientRequest.Post(new Client("Piotr", "Miotła", "631-124-111", "1999-07-12"));
+            var sth = clientRequest.Get(6);
+            
+            Debug.WriteLine(sth.Id);
+
             //MessageBox.Show(Properties.Settings.Default.API_URI);
             //var tc = new TESTCards();
             //tc.PayByBLIK(777123);

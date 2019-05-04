@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DownhillPayClient.Properties" GeneratedClassName="APIEndpoints">
+  <Profiles />
+  <Settings>
+    <Setting Name="Client" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">client</Value>
+    </Setting>
+    <Setting Name="ClientID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">client?id=eq.</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

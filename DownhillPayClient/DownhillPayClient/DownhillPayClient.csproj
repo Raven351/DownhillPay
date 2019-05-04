@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp, Version=106.6.9.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.6.9\lib\net452\RestSharp.dll</HintPath>
     </Reference>
@@ -60,6 +63,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="APIClient\Models\Client.cs" />
+    <Compile Include="APIClient\Models\DatabaseModel.cs" />
+    <Compile Include="APIClient\Requests\ClientRequest.cs" />
+    <Compile Include="APIClient\Serializers\JsonNETSerializer.cs" />
+    <Compile Include="Properties\APIEndpoints.cs" />
+    <Compile Include="Properties\APIEndpoints.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>APIEndpoints.settings</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\CheckPointsBalanceUserControl.xaml.cs">
       <DependentUpon>CheckPointsBalanceUserControl.xaml</DependentUpon>
     </Compile>
@@ -157,6 +170,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Properties\APIEndpoints.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>APIEndpoints.Designer.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -167,14 +184,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\APIClient\APIClient.csproj">
-      <Project>{2611310b-4eae-4be9-a705-e43e55db21a6}</Project>
-      <Name>APIClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ArduinoRFIDReader\ArduinoRFIDReader.csproj">
       <Project>{8e543a59-6f84-46f2-a533-9c5b0b07e5e1}</Project>
       <Name>ArduinoRFIDReader</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="APIClient\Requests\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
