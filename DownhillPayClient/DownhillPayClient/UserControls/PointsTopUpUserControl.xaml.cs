@@ -51,5 +51,11 @@ namespace DownhillPayClient.UserControls
         {
             MainWindow.contentControl.Content = PreviousControl;
         }
+
+        private void Value1_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.PaymentValue += 450;
+            MainWindow.contentControl.Content = MainWindow.PaymentMethod.ChangeToControl(this);
+        }
     }
 }

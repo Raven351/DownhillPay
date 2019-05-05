@@ -37,6 +37,7 @@ namespace DownhillPayClient.UserControls
         public UserControl ChangeToControl(UserControl previousControl)
         {
             PreviousControl = previousControl;
+            AmountLabel.Content = ((decimal)MainWindow.PaymentValue / 100).ToString("0.00") + " PLN";
             return this;
         }
     }

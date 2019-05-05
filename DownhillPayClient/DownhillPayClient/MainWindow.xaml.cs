@@ -35,7 +35,11 @@ namespace DownhillPayClient
         public TopUpTypesUserControl TopUpTypesUserControl { get; }
         public NewPersonalizedCardFormUserControl NewPersonalizedCardFormUserControl { get; }
         public PointTopUpUserControl PointTopUpUserControl { get; }
+        #endregion
+        #region PROPERTIES
         public Client Client { get; set; }
+        public int PaymentValue { get; set; }
+        public bool IsNewCard { get; set; }
         #endregion
         public MainWindow()
         {

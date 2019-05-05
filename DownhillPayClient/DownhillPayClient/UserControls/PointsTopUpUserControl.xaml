@@ -100,26 +100,26 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Viewbox Grid.Column="0" Grid.Row="1">
-                <Button x:Name="FortyFivePointsButton">
+                <Button x:Name="Value1_Button" Click="Value1_Button_Click">
                     <TextBlock TextAlignment="Center">
                         45 Points <LineBreak/>
-                        4zł 50gr
+                        4,50 PLN
                     </TextBlock>
                 </Button>
             </Viewbox>
             <Viewbox Grid.Column="1" Grid.Row="1">
-                <Button >
+                <Button x:Name="Value2_Button" >
                     <TextBlock TextAlignment="Center">
                         90 Points <LineBreak/>
-                        9zł
+                        9 PLN
                     </TextBlock>
                 </Button>
             </Viewbox>
             <Viewbox Grid.Column="2" Grid.Row="1">
-                <Button >
+                <Button x:Name="Value3_Button">
                     <TextBlock TextAlignment="Center">
-                        135 Points <LineBreak/>
-                        13zł 50gr
+                        180 Points <LineBreak/>
+                        18 PLN
                     </TextBlock>
                 </Button>
             </Viewbox>
@@ -131,26 +131,26 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Viewbox Grid.Column="0" Grid.Row="1">
-                <Button >
+                <Button x:Name="Value4_Button">
                     <TextBlock TextAlignment="Center">
-                        45 Points <LineBreak/>
-                        4zł 50gr
+                        270 Points <LineBreak/>
+                        27 PLN
                     </TextBlock>
                 </Button>
             </Viewbox>
             <Viewbox Grid.Column="1" Grid.Row="1">
-                <Button >
+                <Button x:Name="Value5_Button">
                     <TextBlock TextAlignment="Center">
-                        90 Points <LineBreak/>
-                        9zł
+                        360 Points <LineBreak/>
+                        36 PLN
                     </TextBlock>
                 </Button>
             </Viewbox>
             <Viewbox Grid.Column="2" Grid.Row="1">
-                <Button >
+                <Button x:Name="Value6_Button">
                     <TextBlock TextAlignment="Center">
-                        135 Points <LineBreak/>
-                        13zł 50gr
+                        450 Points <LineBreak/>
+                        45 PLN
                     </TextBlock>
                 </Button>
             </Viewbox>

@@ -39,11 +39,15 @@ namespace DownhillPayClient.UserControls
         private void NewCardButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = MainWindow.NewCardUserControl.ChangeToControl(this);
+            MainWindow.PaymentValue = 1000;
+            MainWindow.IsNewCard = true;
         }
 
         private void TopUpCardButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = MainWindow.TopUpTypesUserControl.ChangeToControl(this);
+            MainWindow.PaymentValue = 0;
+            MainWindow.IsNewCard = false;
         }
     }
 }

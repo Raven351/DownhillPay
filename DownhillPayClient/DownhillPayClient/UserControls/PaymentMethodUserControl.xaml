@@ -122,7 +122,7 @@
                 <Label Grid.Column="0" Content="Amount:" HorizontalAlignment="Right" VerticalAlignment="Top"/>
             </Viewbox>
             <Viewbox Grid.Column="1">
-                <Label Grid.Column="1" Content="XXX PLN" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label x:Name="AmountLabel" Grid.Column="1" Content="XXX PLN" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </Viewbox>
         </Grid>
 
