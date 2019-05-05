@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using APIClient.Models;
+using APIClient.Requests;
 
 namespace DownhillPayClient.UserControls
 {
@@ -45,16 +48,40 @@ namespace DownhillPayClient.UserControls
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+            MainWindow.Client = null;
+            ClearTextBoxes();
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = PreviousControl;
+            MainWindow.Client = null;
+            ClearTextBoxes();
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            MainWindow.Client = new Client(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text, 
+                new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text)));
+            var clientRequest = new ClientRequest();
+            var responseData = clientRequest.Get(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text)));
+            if (responseData != null) //todo
+            {
+
+            }
+            else MainWindow.contentControl.Content = MainWindow.TopUpTypesUserControl;
+
+        }
+
+        private void ClearTextBoxes()
+        {
+            firstNameTextBox.Clear();
+            lastNameTextBox.Clear();
+            phoneNumberTextBox.Clear();
+            dayTextBox.Clear();
+            monthTextBox.Clear();
+            yearTextBox.Clear();
         }
     }
 }

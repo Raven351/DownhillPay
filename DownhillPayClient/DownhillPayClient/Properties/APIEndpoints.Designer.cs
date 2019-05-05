@@ -25,7 +25,7 @@ namespace DownhillPayClient.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("client")]
+        [global::System.Configuration.DefaultSettingValueAttribute("client?")]
         public string Client {
             get {
                 return ((string)(this["Client"]));
@@ -34,10 +34,55 @@ namespace DownhillPayClient.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("client?id=eq.")]
+        [global::System.Configuration.DefaultSettingValueAttribute("id=eq.")]
         public string ClientID {
             get {
                 return ((string)(this["ClientID"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("first_name=eq.")]
+        public string ClientFirstName {
+            get {
+                return ((string)(this["ClientFirstName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("last_name=eq.")]
+        public string ClientLastName {
+            get {
+                return ((string)(this["ClientLastName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("phone_number=eq.")]
+        public string ClientPhoneNumber {
+            get {
+                return ((string)(this["ClientPhoneNumber"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("birth_date=eq.")]
+        public string ClientBirthDate {
+            get {
+                return ((string)(this["ClientBirthDate"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("&")]
+        public string spacer {
+            get {
+                return ((string)(this["spacer"]));
             }
         }
     }

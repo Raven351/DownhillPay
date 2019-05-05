@@ -18,7 +18,7 @@ namespace APIClient.Models
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
         [JsonProperty("birth_date")]
-        public string BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public Client()
         {
@@ -28,7 +28,7 @@ namespace APIClient.Models
         /// <summary>
         /// Initializes object with given properties.
         /// </summary>
-        public Client(string firstName, string lastName, string phoneNumber, string birthDate)
+        public Client(string firstName, string lastName, string phoneNumber, DateTime birthDate)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -39,12 +39,18 @@ namespace APIClient.Models
         /// <summary>
         /// Initializes object with given properties.
         /// </summary>
-        public Client(int id, string firstName, string lastName, string phoneNumber, string birthDate) : base(id)
+        public Client(int id, string firstName, string lastName, string phoneNumber, DateTime birthDate) : base(id)
         {
             FirstName = firstName;
             LastName = lastName;
             PhoneNumber = phoneNumber;
             BirthDate = birthDate;
+        }
+
+        public bool Compare(Client client)
+        {
+            if (this.FirstName == client.FirstName && this.LastName == client.LastName && this.PhoneNumber == client.PhoneNumber && this.BirthDate == client.BirthDate) return true;
+            else return false;
         }
     }
 }

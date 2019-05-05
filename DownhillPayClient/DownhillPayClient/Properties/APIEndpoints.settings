@@ -3,10 +3,25 @@
   <Profiles />
   <Settings>
     <Setting Name="Client" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">client</Value>
+      <Value Profile="(Default)">client?</Value>
     </Setting>
     <Setting Name="ClientID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">client?id=eq.</Value>
+      <Value Profile="(Default)">id=eq.</Value>
+    </Setting>
+    <Setting Name="ClientFirstName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">first_name=eq.</Value>
+    </Setting>
+    <Setting Name="ClientLastName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">last_name=eq.</Value>
+    </Setting>
+    <Setting Name="ClientPhoneNumber" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">phone_number=eq.</Value>
+    </Setting>
+    <Setting Name="ClientBirthDate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">birth_date=eq.</Value>
+    </Setting>
+    <Setting Name="spacer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&amp;</Value>
     </Setting>
   </Settings>
 </SettingsFile>
