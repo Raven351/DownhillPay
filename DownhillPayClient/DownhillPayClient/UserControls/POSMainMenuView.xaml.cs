@@ -33,13 +33,12 @@ namespace DownhillPayClient.UserControls
 
         private void CheckPointsBalanceButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.contentControl.Content = MainWindow.CheckPointsBalanceUserControl.ChangeToControl(this);
+            MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this);
         }
 
         private void NewCardButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = MainWindow.NewCardUserControl.ChangeToControl(this);
-            MainWindow.PaymentValue = 1000;
             MainWindow.IsNewCard = true;
         }
 

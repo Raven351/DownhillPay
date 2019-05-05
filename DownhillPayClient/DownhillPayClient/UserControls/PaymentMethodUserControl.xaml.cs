@@ -40,5 +40,16 @@ namespace DownhillPayClient.UserControls
             AmountLabel.Content = ((decimal)MainWindow.PaymentValue / 100).ToString("0.00") + " PLN";
             return this;
         }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.PaymentValue = 0;
+            MainWindow.contentControl.Content = PreviousControl;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace DownhillPayClient
     {
         #region USER CONTROLS PROPERTIES
         public POSMainMenuView POSMainMenuView { get; }
+        public CardReadingUserControl CardReadingUserControl { get; }
         public CheckPointsBalanceUserControl CheckPointsBalanceUserControl { get; }
         public NewCardUserControl NewCardUserControl { get; }
         public PaymentMethod PaymentMethod { get; }
@@ -45,6 +46,7 @@ namespace DownhillPayClient
         {
             InitializeComponent();
             POSMainMenuView = new POSMainMenuView(this);
+            CardReadingUserControl = new CardReadingUserControl(this);
             CheckPointsBalanceUserControl = new CheckPointsBalanceUserControl(this);
             NewCardUserControl = new NewCardUserControl(this);
             PaymentMethod = new PaymentMethod(this);

@@ -73,6 +73,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>APIEndpoints.settings</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\CardReadingUserControl.xaml.cs">
+      <DependentUpon>CardReadingUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\CheckPointsBalanceUserControl.xaml.cs">
       <DependentUpon>CheckPointsBalanceUserControl.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
     <Compile Include="UserControls\UserControlWindow.cs" />
     <Compile Include="Views.cs" />
     <Page Include="UserControls\AppSettingsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\CardReadingUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

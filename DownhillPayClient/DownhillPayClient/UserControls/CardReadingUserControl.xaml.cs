@@ -16,16 +16,16 @@ using System.Windows.Shapes;
 namespace DownhillPayClient.UserControls
 {
     /// <summary>
-    /// Interaction logic for PointTopUpUserControl.xaml
+    /// Interaction logic for CardReadingUserControl.xaml
     /// </summary>
-    public partial class PointTopUpUserControl : UserControl, IUserControlWindow
+    public partial class CardReadingUserControl : UserControl, IUserControlWindow
     {
-        public PointTopUpUserControl()
+        public CardReadingUserControl()
         {
             InitializeComponent();
         }
 
-        public PointTopUpUserControl(MainWindow mainWindow) : this()
+        public CardReadingUserControl(MainWindow mainWindow) : this()
         {
             MainWindow = mainWindow;
         }
@@ -37,26 +37,12 @@ namespace DownhillPayClient.UserControls
         public UserControl ChangeToControl(UserControl previousControl)
         {
             PreviousControl = previousControl;
-            if (PreviousControl == MainWindow.POSMainMenuView) CancelButton.Visibility = Visibility.Hidden;
-            else CancelButton.Visibility = Visibility.Visible;
             return this;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
-        }
-
-        private void GoBackButton_Click(object sender, RoutedEventArgs e)
-        {
             MainWindow.contentControl.Content = PreviousControl;
-        }
-
-        private void Value1_Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (MainWindow.IsNewCard == true) MainWindow.PaymentValue += 1000;
-            MainWindow.PaymentValue += 450;
-            MainWindow.contentControl.Content = MainWindow.PaymentMethod.ChangeToControl(this);
         }
     }
 }
