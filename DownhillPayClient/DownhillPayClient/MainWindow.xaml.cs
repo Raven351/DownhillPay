@@ -19,6 +19,7 @@ using DownhillPayClient.UserControls;
 using APIClient;
 using APIClient.Models;
 using APIClient.Requests;
+using ArduinoRFIDReader;
 
 namespace DownhillPayClient
 {
@@ -39,6 +40,7 @@ namespace DownhillPayClient
         #endregion
         #region PROPERTIES
         public Client Client { get; set; }
+        public MFRC522ReaderWriter MFRC522ReaderWriter { get; set; }
         public int PaymentValue { get; set; }
         public bool IsNewCard { get; set; }
         #endregion
@@ -54,6 +56,7 @@ namespace DownhillPayClient
             NewPersonalizedCardFormUserControl = new NewPersonalizedCardFormUserControl(this);
             PointTopUpUserControl = new PointTopUpUserControl(this);
             this.contentControl.Content = POSMainMenuView;
+            MFRC522ReaderWriter = new MFRC522ReaderWriter(Properties.Settings.Default.RFID_USB_PORT, 9600);
 
 
             //tests

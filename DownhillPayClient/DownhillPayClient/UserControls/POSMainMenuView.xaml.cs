@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,9 +32,13 @@ namespace DownhillPayClient.UserControls
             MainWindow = mainWindow;
         }
 
-        private void CheckPointsBalanceButton_Click(object sender, RoutedEventArgs e)
+        private async void CheckPointsBalanceButton_Click(object sender, RoutedEventArgs e)
         {
+            var task = MainWindow.CardReadingUserControl.ReadCardAsync();
             MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this);
+            await task;
+            MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+
         }
 
         private void NewCardButton_Click(object sender, RoutedEventArgs e)

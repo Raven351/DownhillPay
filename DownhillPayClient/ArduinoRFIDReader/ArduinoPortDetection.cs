@@ -29,7 +29,7 @@ namespace ArduinoRFIDReader
                     string desc = item["Description"].ToString();
                     string deviceId = item["DeviceID"].ToString();
 
-                    if (desc.Contains("Arduino"))
+                    if (desc.Contains("Arduino") || desc.Contains("CH340")) 
                     {
                         return deviceId;
                     }

@@ -10,7 +10,7 @@
       <Value Profile="(Default)">http://localhost:3000</Value>
     </Setting>
     <Setting Name="RFID_USB_PORT" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">COM3</Value>
+      <Value Profile="(Default)">COM5</Value>
     </Setting>
     <Setting Name="POS_ID" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">0</Value>

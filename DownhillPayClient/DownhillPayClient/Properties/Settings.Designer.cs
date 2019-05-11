@@ -35,7 +35,7 @@ namespace DownhillPayClient.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM5")]
         public string RFID_USB_PORT {
             get {
                 return ((string)(this["RFID_USB_PORT"]));

@@ -29,19 +29,18 @@ void setup(){
 
 void loop(){
     receiveCommand();
-    
-  if (newCommand == true){
-    strcpy(tempCommand, receivedCommand);
     receiveCommandNumber();
-    newCommand = false;
-  }
-  
+//  if (newCommand == true){
+//    strcpy(tempCommand, receivedCommand);
+//    receiveCommandNumber();
+//    newCommand = false;
+//  }
   switch(commandNumber)
   {
     case 1:
     {
-      bool isCardReadable = readUID();;
-      if (isCardReadable == true){
+      bool isCardReaded = readUID();;
+      if (isCardReaded == true){
         printHexUID(cardUID, sizeof(cardUID));
       }
       else Serial.println("<0>");
@@ -106,13 +105,23 @@ void receiveCommand(){
 }
 
 void receiveCommandNumber(){
-  char * strtokIndex;
-  strtokIndex = strtok(tempCommand, ",");
-  commandNumber = atoi(strtokIndex);
+    if (newCommand == true){
+    strcpy(tempCommand, receivedCommand);
+    char * strtokIndex;
+    strtokIndex = strtok(tempCommand, ",");
+    commandNumber = atoi(strtokIndex);
+    newCommand = false;
+  }
 }
 
 bool readUID(){
-  while(!rfid.PICC_IsNewCardPresent());
+  unsigned long operationStartTime = millis(); //sets timer
+  while(!rfid.PICC_IsNewCardPresent()){
+    unsigned long currentTime = millis();
+    receiveCommand();
+    receiveCommandNumber();
+    if(currentTime - operationStartTime > 30000 || commandNumber == -1) return false;
+  }
   while(!rfid.PICC_ReadCardSerial());
   tone(BUZZ, 2300, 500);
   MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
@@ -133,11 +142,15 @@ bool readUID(){
 }
 
 void printHexUID(byte *buffer, byte bufferSize) { //prints UID to serial in hexadecimal format || *buffer = arrray of UID values in byte, bufferSize cardUID.size
+  Serial.print("<");
   for (byte i = 0; i < bufferSize; i++) {
+
     Serial.print(buffer[i] < 0x10 ? "0" : "");
     Serial.print(buffer[i], HEX);
     Serial.print(i == bufferSize-1 ? "" : " ");
   }
+  Serial.print(">");  
+  Serial.println("");
 }
 
 void printDecUID(byte *buffer, byte bufferSize) { //prints UID to serial in decimal format || *buffer = arrray of UID values in byte, bufferSize cardUID.size
