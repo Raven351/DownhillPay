@@ -19,7 +19,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="cards"/>
 	<position x="1100" y="40"/>
 	<column name="id" not-null="true">
-		<type name="serial" length="0"/>
+		<type name="uuid" length="0"/>
 	</column>
 	<column name="date_start" not-null="true">
 		<type name="date" length="0"/>
@@ -44,7 +44,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="cards"/>
 	<position x="540" y="20"/>
 	<column name="id" not-null="true">
-		<type name="serial" length="0"/>
+		<type name="uuid" length="0"/>
 	</column>
 	<column name="uid" not-null="true">
 		<type name="varchar" length="20"/>
@@ -101,7 +101,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="cards"/>
 	<position x="20" y="60"/>
 	<column name="id" not-null="true">
-		<type name="serial" length="0"/>
+		<type name="uuid" length="0"/>
 	</column>
 	<column name="first_name" not-null="true">
 		<type name="varchar" length="100"/>
@@ -137,7 +137,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="users"/>
 	<position x="20" y="280"/>
 	<column name="id" not-null="true">
-		<type name="serial" length="0"/>
+		<type name="uuid" length="0"/>
 	</column>
 	<column name="email" not-null="true">
 		<type name="varchar" length="100"/>
@@ -204,6 +204,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="price" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
+	<constraint name="points_pk" type="pk-constr" table="prices.points">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <schema name="devices" rect-visible="true" fill-color="#00aa7f">
