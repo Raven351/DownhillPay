@@ -93,8 +93,18 @@
         </Grid.Resources>
         <Grid Grid.Row="1">
             <Viewbox Margin="20">
-                <Border BorderThickness="2" CornerRadius="50,50,50,50" BorderBrush="Black" Background="Green" Width="500" Height="200">
-                    <TextBlock x:Name="CardBalanceTextBlock" Text="Place your card&#x0a;close to the reader" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="54" TextAlignment="Center" FontWeight="SemiBold"/>
+                <Border BorderThickness="2" CornerRadius="50,50,50,50" BorderBrush="Black" Background="Green" Width="500" Height="200" Padding="10,0,10,0">
+                    <RichTextBox x:Name="MessageTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="48" FontWeight="SemiBold" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </RichTextBox.Resources>
+                        <FlowDocument x:Name="messageFlowDocument">
+                            <Paragraph>Please place your card next to the reader.</Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
                 </Border>
             </Viewbox>
         </Grid>

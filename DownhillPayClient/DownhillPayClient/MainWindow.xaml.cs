@@ -41,6 +41,7 @@ namespace DownhillPayClient
         #region PROPERTIES
         public Client Client { get; set; }
         public MFRC522ReaderWriter MFRC522ReaderWriter { get; set; }
+        public string CardUid { get; set; }
         public int PaymentValue { get; set; }
         public bool IsNewCard { get; set; }
         #endregion

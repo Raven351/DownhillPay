@@ -44,13 +44,30 @@ namespace DownhillPayClient.UserControls
             return this;
         }
 
+        public UserControl ChangeToControl(UserControl previousControl, string message)
+        {
+            var paragraph = new Paragraph();
+            paragraph.Inlines.Add(message);
+            messageFlowDocument.Blocks.Clear();
+            messageFlowDocument.Blocks.Add(paragraph);
+            return ChangeToControl(previousControl);
+        }
+
+        //public async Task<UserControl> ChangeToControlAsync(UserControl previousControl)
+        //{
+        //    var changeToControlTask = Task.Run(() => ChangeToControl(previousControl));
+        //    var readCardTask = ReadCardAsync();
+        //    await readCardTask;
+        //    return await changeToControlTask;
+        //}
+
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.MFRC522ReaderWriter.Close();
             MainWindow.contentControl.Content = PreviousControl;
         }
 
-        public async Task ReadCardAsync() //working on
+        public async Task ReadCardAsync() //not used
         {
             CancellationTokenSource cancellationToken = new CancellationTokenSource();
             string uid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();

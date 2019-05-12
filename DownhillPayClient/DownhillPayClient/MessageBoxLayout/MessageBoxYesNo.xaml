@@ -1,0 +1,39 @@
+﻿<Window x:Class="DownhillPayClient.MessageBoxLayout.MessageBoxYesNo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DownhillPayClient.MessageBoxLayout"
+        mc:Ignorable="d"
+        Title="MessageBoxLayoutYesNo" Height="Auto" Width="1000"
+        WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" Background="Transparent">
+
+    <Border BorderThickness="5" BorderBrush="White" CornerRadius="20" Background="SkyBlue">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Row="1">
+                <TextBlock x:Name="messageTextBlock" Width="420" FontSize="42"  TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Text="Are you sure?"/>
+            </Viewbox>
+
+            <Viewbox Grid.Row="3">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Yes" x:Name="Yes" Margin="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Click="Yes_Click"/>
+                    <Button Content="No" x:Name="No" Margin="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Click="No_Click" IsCancel="True"/>
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+    </Border>
+</Window>

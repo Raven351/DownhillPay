@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DownhillPayClient"
         xmlns:userControls="clr-namespace:DownhillPayClient.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Background="SteelBlue" WindowState="Maximized" WindowStyle="None" MinWidth="1024"  MinHeight="768" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="768" Width="1024">
+        Title="DownhillPay Client" Background="SteelBlue" WindowState="Maximized" WindowStyle="None" MinWidth="1024"  MinHeight="768" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="768" Width="1024">
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 

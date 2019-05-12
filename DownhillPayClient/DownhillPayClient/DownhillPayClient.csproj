@@ -65,8 +65,15 @@
     </ApplicationDefinition>
     <Compile Include="APIClient\Models\Client.cs" />
     <Compile Include="APIClient\Models\DatabaseModel.cs" />
+    <Compile Include="APIClient\Models\RfidCard.cs" />
     <Compile Include="APIClient\Requests\ClientRequest.cs" />
     <Compile Include="APIClient\Serializers\JsonNETSerializer.cs" />
+    <Compile Include="MessageBoxLayout\MessageBoxLayoutInfo.xaml.cs">
+      <DependentUpon>MessageBoxLayoutInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MessageBoxLayout\MessageBoxYesNo.xaml.cs">
+      <DependentUpon>MessageBoxYesNo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\APIEndpoints.cs" />
     <Compile Include="Properties\APIEndpoints.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -100,6 +107,14 @@
     </Compile>
     <Compile Include="UserControls\UserControlWindow.cs" />
     <Compile Include="Views.cs" />
+    <Page Include="MessageBoxLayout\MessageBoxLayoutInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MessageBoxLayout\MessageBoxYesNo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\AppSettingsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

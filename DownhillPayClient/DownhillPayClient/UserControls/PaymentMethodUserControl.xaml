@@ -108,7 +108,7 @@
             </Viewbox>
         </Grid>
         <Viewbox Margin="10" Grid.Column="0" Grid.Row="1">
-            <Button x:Name="CashButton">
+            <Button x:Name="CashButton" Click="CashButton_Click">
                 <TextBlock TextAlignment="Center" FontWeight="Bold">
                     Cash
                 </TextBlock>
