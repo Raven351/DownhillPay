@@ -68,7 +68,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="modfied_date" not-null="true" default-value="now()">
 		<type name="timestamp" length="0"/>
 	</column>
-	<column name="timeout">
+	<column name="timeout" default-value="now()">
 		<type name="date" length="0"/>
 	</column>
 	<constraint name="rfid_card_pk" type="pk-constr" table="cards.rfid_card">
@@ -173,7 +173,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="prices"/>
 	<position x="380" y="300"/>
 	<column name="id" not-null="true">
-		<type name="serial" length="0"/>
+		<type name="uuid" length="0"/>
 	</column>
 	<column name="price" not-null="true">
 		<type name="integer" length="0"/>
@@ -196,7 +196,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="prices"/>
 	<position x="700" y="300"/>
 	<column name="id" not-null="true">
-		<type name="serial" length="0"/>
+		<type name="uuid" length="0"/>
 	</column>
 	<column name="amount" not-null="true">
 		<type name="integer" length="0"/>
@@ -217,18 +217,29 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="devices"/>
 	<position x="380" y="480"/>
 	<column name="id" not-null="true">
-		<type name="serial" length="0"/>
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="number" not-null="true">
+		<type name="integer" length="0"/>
 	</column>
 	<constraint name="gate_pk" type="pk-constr" table="devices.gate">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_ski_lift" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="ski_lift_fk" index="1"/>
+	</customidxs>
 </table>
 
 <table name="ski_lift">
 	<schema name="devices"/>
-	<position x="740" y="500"/>
+	<position x="720" y="500"/>
 	<column name="id" not-null="true">
-		<type name="serial" length="0"/>
+		<type name="uuid" length="0"/>
 	</column>
 	<column name="name" not-null="true">
 		<type name="varchar" length="60"/>
@@ -257,6 +268,108 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#83af1f"
 	 src-table="cards.client"
 	 dst-table="users.&quot;user&quot;"
+	 src-required="false" dst-required="false"/>
+
+<schema name="api" rect-visible="true" fill-color="#94e1e5">
+	<role name="postgres"/>
+</schema>
+
+<view name="client">
+	<schema name="api"/>
+	<role name="postgres"/>
+	<position x="1040" y="360"/>
+	<reference table="cards.client"/>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">0</expression>
+</view>
+
+<relationship name="rel_client_client" type="reltv" faded-out="true"
+	 src-table="api.client"
+	 dst-table="cards.client"
+	 src-required="false" dst-required="false"/>
+
+<view name="rfid_card">
+	<schema name="api"/>
+	<role name="postgres"/>
+	<position x="1120" y="360"/>
+	<reference table="cards.rfid_card"/>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">0</expression>
+</view>
+
+<relationship name="rel_rfid_card_rfid_card" type="reltv" faded-out="true"
+	 src-table="api.rfid_card"
+	 dst-table="cards.rfid_card"
+	 src-required="false" dst-required="false"/>
+
+<view name="subscription">
+	<schema name="api"/>
+	<role name="postgres"/>
+	<position x="1220" y="360"/>
+	<reference table="cards.subscription"/>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">0</expression>
+</view>
+
+<relationship name="rel_new_object_subscription" type="reltv" faded-out="true"
+	 src-table="api.subscription"
+	 dst-table="cards.subscription"
+	 src-required="false" dst-required="false"/>
+
+<view name="subscription_prices">
+	<schema name="api"/>
+	<role name="postgres"/>
+	<position x="1040" y="420"/>
+	<reference table="prices.subscription"/>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">0</expression>
+</view>
+
+<relationship name="rel_subscription_prices_subscription" type="reltv" faded-out="true"
+	 src-table="api.subscription_prices"
+	 dst-table="prices.subscription"
+	 src-required="false" dst-required="false"/>
+
+<view name="points_prices">
+	<schema name="api"/>
+	<role name="postgres"/>
+	<position x="1220" y="420"/>
+	<reference table="prices.points"/>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">0</expression>
+</view>
+
+<relationship name="rel_points_prices_points" type="reltv" faded-out="true"
+	 src-table="api.points_prices"
+	 dst-table="prices.points"
+	 src-required="false" dst-required="false"/>
+
+<view name="gate">
+	<schema name="api"/>
+	<role name="postgres"/>
+	<position x="1100" y="480"/>
+	<reference table="devices.gate"/>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">0</expression>
+</view>
+
+<relationship name="rel_gate_gate" type="reltv" faded-out="true"
+	 src-table="api.gate"
+	 dst-table="devices.gate"
+	 src-required="false" dst-required="false"/>
+
+<view name="ski_lift">
+	<schema name="api"/>
+	<role name="postgres"/>
+	<position x="1220" y="480"/>
+	<reference table="devices.ski_lift"/>
+	<expression type="select-exp">0</expression>
+	<expression type="from-exp">0</expression>
+</view>
+
+<relationship name="rel_ski_lift_ski_lift" type="reltv" faded-out="true"
+	 src-table="api.ski_lift"
+	 dst-table="devices.ski_lift"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>

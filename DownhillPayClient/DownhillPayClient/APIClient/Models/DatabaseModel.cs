@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace APIClient.Models
 {
@@ -9,12 +10,13 @@ namespace APIClient.Models
         {
         }
 
-        public DatabaseModel(int id)
+        public DatabaseModel(Guid id)
         {
             Id = id;
         }
 
-        [JsonIgnore]
-        public int Id { get; set; }
+        //[JsonIgnore]
+        [JsonProperty("id")]
+        public Guid Id { get; set; }
     }
 }

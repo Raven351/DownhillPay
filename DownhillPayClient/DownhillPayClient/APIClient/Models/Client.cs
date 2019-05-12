@@ -39,7 +39,7 @@ namespace APIClient.Models
         /// <summary>
         /// Initializes object with given properties.
         /// </summary>
-        public Client(int id, string firstName, string lastName, string phoneNumber, DateTime birthDate) : base(id)
+        public Client(Guid id, string firstName, string lastName, string phoneNumber, DateTime birthDate) : base(id)
         {
             FirstName = firstName;
             LastName = lastName;
