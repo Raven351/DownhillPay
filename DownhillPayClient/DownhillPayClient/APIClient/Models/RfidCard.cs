@@ -14,7 +14,7 @@ namespace DownhillPayClient.APIClient.Models
         {
         }
 
-        public RfidCard(string uid, string uid2, string cardNumber, string pointsBalance, DateTime createdDate, DateTime modifiedDate, DateTime timeout)
+        public RfidCard(string uid, string uid2, string cardNumber, string pointsBalance, DateTime createdDate, DateTime modifiedDate, DateTime timeout) : base()
         {
             Uid = uid;
             Uid2 = uid2;

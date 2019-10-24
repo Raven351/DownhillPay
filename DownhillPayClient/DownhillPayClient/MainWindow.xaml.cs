@@ -20,6 +20,7 @@ using APIClient;
 using APIClient.Models;
 using APIClient.Requests;
 using ArduinoRFIDReader;
+using DownhillPayClient.Classes.Transactions;
 
 namespace DownhillPayClient
 {
@@ -43,14 +44,14 @@ namespace DownhillPayClient
         public MFRC522ReaderWriter MFRC522ReaderWriter { get; set; }
         public string CardUid { get; set; }
         public int PaymentValue { get; set; }
-        public bool IsNewCard { get; set; }
+        public Transaction Transaction { get; set; }
         #endregion
         public MainWindow()
         {
             InitializeComponent();
             POSMainMenuView = new POSMainMenuView(this);
             CardReadingUserControl = new CardReadingUserControl(this);
-            CheckPointsBalanceUserControl = new CheckPointsBalanceUserControl(this);
+            CheckPointsBalanceUserControl = new CheckPointsBalanceUserControl(this); 
             NewCardUserControl = new NewCardUserControl(this);
             PaymentMethod = new PaymentMethod(this);
             TopUpTypesUserControl = new TopUpTypesUserControl(this);
@@ -61,11 +62,11 @@ namespace DownhillPayClient
 
 
             //tests
-            ClientRequest clientRequest = new ClientRequest();
-            //var sth = clientRequest.Post(new Client("Piotr", "Miotła", "631-124-111", "1999-07-12"));
-            var sth = clientRequest.Get(6);
+            //ClientRequest clientRequest = new ClientRequest();
+            //var sth = clientRequest.Post(new Client("Piotr", "Miotła", "631-124-111", new System.DateTime(1999, 07, 12)));
+            //var sth = clientRequest.Get(6);
             
-            Debug.WriteLine(sth.BirthDate);
+            //Debug.WriteLine(sth.BirthDate);
 
             //MessageBox.Show(Properties.Settings.Default.API_URI);
             //var tc = new TESTCards();

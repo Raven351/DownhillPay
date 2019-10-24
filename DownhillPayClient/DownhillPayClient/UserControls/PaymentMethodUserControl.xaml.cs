@@ -38,13 +38,13 @@ namespace DownhillPayClient.UserControls
         public UserControl ChangeToControl(UserControl previousControl)
         {
             PreviousControl = previousControl;
-            AmountLabel.Content = ((decimal)MainWindow.PaymentValue / 100).ToString("0.00") + " PLN";
+            AmountLabel.Content = ((decimal)MainWindow.Transaction.PaymentValue / 100).ToString("0.00") + " PLN";
             return this;
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.PaymentValue = 0;
+            MainWindow.Transaction.PaymentValue = 0;
             MainWindow.contentControl.Content = PreviousControl;
         }
 
@@ -56,7 +56,8 @@ namespace DownhillPayClient.UserControls
         private async void CashButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxLayoutInfo messageBox = new MessageBoxLayoutInfo();
-            if (MainWindow.IsNewCard) MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, "Please place provided blank card close to the reader.");
+            //if (MainWindow.IsNewCard) MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, "Please place provided blank card close to the reader.");
+            if (MainWindow.Transaction is Classes.Transactions.NewCardTransaction) MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, "Please place provided blank card close to the reader.");
             else MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, "Please place your card close to the reader.");
             MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
 
