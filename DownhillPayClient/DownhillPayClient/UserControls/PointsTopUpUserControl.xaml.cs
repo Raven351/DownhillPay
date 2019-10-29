@@ -56,7 +56,7 @@ namespace DownhillPayClient.UserControls
         {
             if (MainWindow.Transaction is Classes.Transactions.NewCardTransaction) MainWindow.Transaction.PaymentValue += 1000;
             MainWindow.Transaction.PaymentValue += 450;
-            MainWindow.contentControl.Content = MainWindow.PaymentMethod.ChangeToControl(this);
+            MainWindow.contentControl.Content = MainWindow.PaymentMethodUserControl.ChangeToControl(this);
         }
     }
 }

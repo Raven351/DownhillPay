@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ArduinoRFIDReader;
+using DownhillPayClient.MessageBoxLayout;
 
 namespace DownhillPayClient.UserControls
 {
@@ -51,6 +52,27 @@ namespace DownhillPayClient.UserControls
             messageFlowDocument.Blocks.Clear();
             messageFlowDocument.Blocks.Add(paragraph);
             return ChangeToControl(previousControl);
+        }
+
+        public async void ChangeToControlVoid(UserControl previousControl, string message)
+        {
+            MessageBoxLayoutInfo messageBox = new MessageBoxLayoutInfo();
+            MainWindow.contentControl.Content = ChangeToControl(previousControl, message);
+            if (previousControl == MainWindow.POSMainMenuView)
+            {
+                MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
+                Debug.WriteLine(MainWindow.CardUid);
+            }
+
+            if (previousControl == MainWindow.PaymentMethodUserControl)
+            {
+                MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, message);
+                MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
+                messageBox.Message = "Payment started. Please take your card and pay at the cash payment point. Your card will be activated after payment is completed.";
+                messageBox.ShowDialog();
+            }
+            MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+
         }
 
         //public async Task<UserControl> ChangeToControlAsync(UserControl previousControl)

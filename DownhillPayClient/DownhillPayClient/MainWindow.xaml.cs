@@ -34,11 +34,12 @@ namespace DownhillPayClient
         public CardReadingUserControl CardReadingUserControl { get; }
         public CheckPointsBalanceUserControl CheckPointsBalanceUserControl { get; }
         public NewCardUserControl NewCardUserControl { get; }
-        public PaymentMethod PaymentMethod { get; }
+        public PaymentMethod PaymentMethodUserControl { get; }
         public TopUpTypesUserControl TopUpTypesUserControl { get; }
         public NewPersonalizedCardFormUserControl NewPersonalizedCardFormUserControl { get; }
         public PointTopUpUserControl PointTopUpUserControl { get; }
         #endregion
+
         #region PROPERTIES
         public Client Client { get; set; }
         public MFRC522ReaderWriter MFRC522ReaderWriter { get; set; }
@@ -53,7 +54,7 @@ namespace DownhillPayClient
             CardReadingUserControl = new CardReadingUserControl(this);
             CheckPointsBalanceUserControl = new CheckPointsBalanceUserControl(this); 
             NewCardUserControl = new NewCardUserControl(this);
-            PaymentMethod = new PaymentMethod(this);
+            PaymentMethodUserControl = new PaymentMethod(this);
             TopUpTypesUserControl = new TopUpTypesUserControl(this);
             NewPersonalizedCardFormUserControl = new NewPersonalizedCardFormUserControl(this);
             PointTopUpUserControl = new PointTopUpUserControl(this);

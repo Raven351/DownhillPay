@@ -53,17 +53,10 @@ namespace DownhillPayClient.UserControls
             MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
         }
 
-        private async void CashButton_Click(object sender, RoutedEventArgs e)
+        private void CashButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxLayoutInfo messageBox = new MessageBoxLayoutInfo();
-            //if (MainWindow.IsNewCard) MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, "Please place provided blank card close to the reader.");
-            if (MainWindow.Transaction is Classes.Transactions.NewCardTransaction) MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, "Please place provided blank card close to the reader.");
-            else MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, "Please place your card close to the reader.");
-            MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
-
-            MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
-            messageBox.Message = "Payment started. Please take your card and pay at the cash payment point. Your card will be activated after payment is completed.";
-            messageBox.ShowDialog();
+            if (MainWindow.Transaction is Classes.Transactions.NewCardTransaction) MainWindow.CardReadingUserControl.ChangeToControlVoid(this, "Please place your card close to the reader");
+            else MainWindow.CardReadingUserControl.ChangeToControlVoid(this, "Please place your card close to the reader.");
         }
     }
 }

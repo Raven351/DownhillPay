@@ -34,10 +34,12 @@ namespace DownhillPayClient.UserControls
 
         private async void CheckPointsBalanceButton_Click(object sender, RoutedEventArgs e)
         {
-            var task = MainWindow.CardReadingUserControl.ReadCardAsync();
-            MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this);
-            await task;
-            MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+            //var task = MainWindow.CardReadingUserControl.ReadCardAsync();
+            //MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this);
+            //await task;
+            //MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+
+            MainWindow.CardReadingUserControl.ChangeToControlVoid(this, "Please place your card close to the reader.");
 
         }
 
