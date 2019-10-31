@@ -54,8 +54,8 @@ namespace DownhillPayClient.UserControls
 
         private void Value1_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (MainWindow.Transaction is Classes.Transactions.NewCardTransaction) MainWindow.Transaction.PaymentValue += 1000;
             MainWindow.Transaction.PaymentValue += 450;
+            MainWindow.Transaction.TopUpPoints += 45;
             MainWindow.contentControl.Content = MainWindow.PaymentMethodUserControl.ChangeToControl(this);
         }
     }

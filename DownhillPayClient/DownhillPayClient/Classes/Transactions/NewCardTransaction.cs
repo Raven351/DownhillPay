@@ -14,7 +14,7 @@ namespace DownhillPayClient.Classes.Transactions
     {
         public NewCardTransaction()
         {
-            this.PaymentValue += 10;
+            this.PaymentValue += 1000;
         }
 
         public bool IsPersonalized { get; set; }

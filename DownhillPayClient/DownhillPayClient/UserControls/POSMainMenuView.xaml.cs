@@ -47,12 +47,12 @@ namespace DownhillPayClient.UserControls
         {
             MainWindow.contentControl.Content = MainWindow.NewCardUserControl.ChangeToControl(this);
             MainWindow.Transaction = new Classes.Transactions.NewCardTransaction();
+            MainWindow.Transaction.RfidCard = new APIClient.Models.RfidCard();
         }
 
         private void TopUpCardButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = MainWindow.TopUpTypesUserControl.ChangeToControl(this);
-            MainWindow.Transaction.PaymentValue = 0;
             MainWindow.Transaction = new Classes.Transactions.Transaction();
         }
     }

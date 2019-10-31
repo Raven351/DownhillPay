@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using APIClient.Models;
 using APIClient.Requests;
+using DownhillPayClient.Classes.Transactions;
 
 namespace DownhillPayClient.UserControls
 {
@@ -48,31 +49,38 @@ namespace DownhillPayClient.UserControls
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
-            MainWindow.Client = null;
             ClearTextBoxes();
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = PreviousControl;
-            MainWindow.Client = null;
             ClearTextBoxes();
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.Client = new Client(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
-                new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //create client objects with provided data
-            var clientRequest = new ClientRequest();
-            var responseData = clientRequest.Get(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
-                new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //get client from database that has the same data as provided
-            if (responseData != null) //if data was returned, show MessageBox to client
+            try
             {
-                MessageBox.Show("Client with provided data is already in database!", "Couldn't create new client");
+                ((NewCardTransaction)MainWindow.Transaction).Client = new Client(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                    new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //create client objects with provided data
+                var clientRequest = new ClientRequest();
+                var responseData = clientRequest.Get(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                    new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //get client from database that has the same data as provided
+                if (responseData != null) //if data was returned, show MessageBox to client
+                {
+                    MessageBox.Show("Client with provided data is already in database!", "Couldn't create new client");
+                }
+                else MainWindow.contentControl.Content = MainWindow.TopUpTypesUserControl.ChangeToControl(this); 
+                //else continue to next control                                                                                                
+                //var response = clientRequest.Post(MainWindow.Client); //post client to database                                                                                                
+                //Debug.WriteLine(response);
             }
-            else MainWindow.contentControl.Content = MainWindow.TopUpTypesUserControl.ChangeToControl(this); //else continue to next control 
-            //var response = clientRequest.Post(MainWindow.Client); //post client to database
-            //Debug.WriteLine(response);
+
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid format!");
+            }
 
         }
 

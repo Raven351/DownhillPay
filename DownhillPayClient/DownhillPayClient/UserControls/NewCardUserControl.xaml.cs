@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DownhillPayClient.Classes.Transactions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using APIClient.Models;
 
 namespace DownhillPayClient.UserControls
 {
@@ -43,6 +46,8 @@ namespace DownhillPayClient.UserControls
         private void PersonalizedCardButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = MainWindow.NewPersonalizedCardFormUserControl.ChangeToControl(this);
+            ((NewCardTransaction)MainWindow.Transaction).IsPersonalized = true;
+            ((NewCardTransaction)MainWindow.Transaction).Client = new Client();
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)

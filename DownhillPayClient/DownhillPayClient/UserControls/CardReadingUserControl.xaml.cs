@@ -62,17 +62,26 @@ namespace DownhillPayClient.UserControls
             {
                 MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
                 Debug.WriteLine(MainWindow.CardUid);
+                MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
             }
 
             if (previousControl == MainWindow.PaymentMethodUserControl)
             {
                 MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, message);
                 MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
-                messageBox.Message = "Payment started. Please take your card and pay at the cash payment point. Your card will be activated after payment is completed.";
-                messageBox.ShowDialog();
+                if(MainWindow.CardUid == null)
+                {
+                    messageBox.Message = "Payment canceled. Try again.";
+                    MainWindow.contentControl.Content = previousControl;
+                    messageBox.ShowDialog();
+                }
+                else
+                {
+                    messageBox.Message = "Payment started. Please take your card and pay at the cash payment point. Your card will be activated after payment is completed.";
+                    MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+                    messageBox.ShowDialog();
+                }
             }
-            MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
-
         }
 
         //public async Task<UserControl> ChangeToControlAsync(UserControl previousControl)

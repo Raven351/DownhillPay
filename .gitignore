@@ -3,3 +3,8 @@
 ################################################################################
 
 /DownhillPayClient/.vs/DownhillPayClient/v16
+/DownhillPayClient/ArduinoRFIDReader/bin/Debug
+/DownhillPayClient/ArduinoRFIDReader/obj/Debug
+/DownhillPayClient/DownhillPayClient/obj/Debug
+/DownhillPayClient/DownhillPayClient/bin/Debug
+/DownhillPayClient/packages
