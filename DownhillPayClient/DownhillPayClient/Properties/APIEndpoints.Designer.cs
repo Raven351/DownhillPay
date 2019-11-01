@@ -12,7 +12,7 @@ namespace DownhillPayClient.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0")]
     internal sealed partial class APIEndpoints : global::System.Configuration.ApplicationSettingsBase {
         
         private static APIEndpoints defaultInstance = ((APIEndpoints)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new APIEndpoints())));
@@ -83,6 +83,33 @@ namespace DownhillPayClient.Properties {
         public string spacer {
             get {
                 return ((string)(this["spacer"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("id=eq.")]
+        public string RfidCardId {
+            get {
+                return ((string)(this["RfidCardId"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("uid=eq.")]
+        public string RfidCardUid {
+            get {
+                return ((string)(this["RfidCardUid"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("rfid_card?")]
+        public string RfidCard {
+            get {
+                return ((string)(this["RfidCard"]));
             }
         }
     }

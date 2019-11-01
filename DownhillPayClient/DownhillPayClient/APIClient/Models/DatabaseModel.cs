@@ -3,7 +3,7 @@ using System;
 
 namespace APIClient.Models
 {
-    
+
     public class DatabaseModel
     {
         /// <summary>

@@ -21,6 +21,8 @@ using APIClient.Models;
 using APIClient.Requests;
 using ArduinoRFIDReader;
 using DownhillPayClient.Classes.Transactions;
+using DownhillPayClient.APIClient.Requests;
+using DownhillPayClient.APIClient.Models;
 
 namespace DownhillPayClient
 {
@@ -63,11 +65,14 @@ namespace DownhillPayClient
 
 
             //tests
-            //ClientRequest clientRequest = new ClientRequest();
-            //var sth = clientRequest.Post(new Client("Piotr", "Miotła", "631-124-111", new System.DateTime(1999, 07, 12)));
-            //var sth = clientRequest.Get(6);
-            
-            //Debug.WriteLine(sth.BirthDate);
+            ClientRequest clientRequest = new ClientRequest();
+            //var sth = clientRequest.Post(new Client("Jarosław", "Miotła", "631-124-111", new System.DateTime(1999, 07, 12)));
+            RfidCardRequest cardRequest = new RfidCardRequest();
+            var cardRequestResponse = cardRequest.Post(new RfidCard("00 00 00 00", "00 00 00 00", "1", "200", DateTime.Now, DateTime.Now));
+            Debug.WriteLine(cardRequestResponse);
+            //var sth = clientRequest.Get();
+            //Debug.WriteLine(clientRequest.EndpointUri);
+            //Debug.WriteLine(sth[0].FirstName);
 
             //MessageBox.Show(Properties.Settings.Default.API_URI);
             //var tc = new TESTCards();

@@ -65,7 +65,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="created_date" not-null="true" default-value="now()">
 		<type name="timestamp" length="0"/>
 	</column>
-	<column name="modfied_date" not-null="true" default-value="now()">
+	<column name="modified_date" not-null="true" default-value="now()">
 		<type name="timestamp" length="0"/>
 	</column>
 	<column name="timeout" default-value="now()">

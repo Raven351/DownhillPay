@@ -8,36 +8,28 @@ using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Serializers;
 using Newtonsoft.Json;
+using DownhillPayClient.APIClient.Requests;
 
 namespace APIClient.Requests
 {
-    public class ClientRequest : RestClient
+    public class ClientRequest : Request
     {
-        readonly string endpointUri;
-        readonly string endpointIdUri;
-        public ClientRequest()
+        public ClientRequest() : base()
         {
-            base.BaseUrl = new Uri(Settings.Default.API_URI);
-            endpointUri = base.BaseUrl + APIEndpoints.Default.Client;
-            endpointIdUri = APIEndpoints.Default.ClientID;
-        }
-        public ClientRequest(Uri baseUrl) : base(baseUrl)
-        {
-        }
-        public ClientRequest(string baseUrl) : base(baseUrl)
-        {
+            EndpointUri = base.BaseUrl + APIEndpoints.Default.Client;
+            EndpointUriId = APIEndpoints.Default.ClientID;
         }
 
         public List<Client> Get()
         {
-            var request = new RestRequest(endpointUri);
+            var request = new RestRequest(EndpointUri);
             var response = this.Get<List<Client>>(request);
             return response.Data;
         }
 
         public Client Get(int id)
         {
-            var request = new RestRequest(endpointUri + endpointIdUri + id);
+            var request = new RestRequest(EndpointUri + EndpointUriId + id);
             var response = this.Get<List<Client>>(request);
             var client = response.Data;
             if (client.Count == 1) return client[0];
@@ -46,7 +38,7 @@ namespace APIClient.Requests
 
         public Client Get(string firstName, string lastName, string phoneNumber, DateTime birthDate)
         {
-            var request = new RestRequest(endpointUri + 
+            var request = new RestRequest(EndpointUri + 
                 APIEndpoints.Default.ClientFirstName + firstName + "&" +
                 APIEndpoints.Default.ClientLastName + lastName + "&" + 
                 APIEndpoints.Default.ClientPhoneNumber + phoneNumber + "&" + 
@@ -57,20 +49,20 @@ namespace APIClient.Requests
             else return null;
         }
 
-        public string Post(Client client)
-        {
-            var request = new RestRequest(endpointUri, Method.POST)
-            {
-                RequestFormat = DataFormat.Json
-            };
-            request.AddHeader("Content-Type", "application/json");
-            request.JsonSerializer = new JsonNETSerializer();
-            request.AddJsonBody(client);
-            //request.AddParameter(JsonConvert.SerializeObject(client), ParameterType.RequestBody);
-            var response = this.Post(request);
-            var data = response.StatusCode;
-            return Convert.ToString(data);
-        }
+        //public string Post(Client client)
+        //{
+        //    var request = new RestRequest(EndpointUri, Method.POST)
+        //    {
+        //        RequestFormat = DataFormat.Json
+        //    };
+        //    request.AddHeader("Content-Type", "application/json");
+        //    request.JsonSerializer = new JsonNETSerializer();
+        //    request.AddJsonBody(client);
+        //    //request.AddParameter(JsonConvert.SerializeObject(client), ParameterType.RequestBody);
+        //    var response = this.Post(request);
+        //    var data = response.StatusCode;
+        //    return Convert.ToString(data);
+        //}
 
     }
 }
