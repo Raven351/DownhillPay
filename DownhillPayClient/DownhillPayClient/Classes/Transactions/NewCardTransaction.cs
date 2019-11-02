@@ -12,7 +12,7 @@ namespace DownhillPayClient.Classes.Transactions
     public class NewCardTransaction : Transaction
     /// </summary>
     {
-        public NewCardTransaction()
+        public NewCardTransaction() : base()
         {
             this.PaymentValue += 1000;
         }

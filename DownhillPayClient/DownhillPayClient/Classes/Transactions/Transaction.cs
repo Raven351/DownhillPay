@@ -11,6 +11,11 @@ namespace DownhillPayClient.Classes.Transactions
     /// </summary>
     public class Transaction
     {
+        public Transaction()
+        {
+            RfidCard = new APIClient.Models.RfidCard();
+        }
+
         #region PROPERTIES
         public int PaymentValue { get; set; }
         public TopUpTypes TopUpType { get; set; }

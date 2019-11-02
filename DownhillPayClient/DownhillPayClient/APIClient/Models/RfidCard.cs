@@ -10,8 +10,10 @@ namespace DownhillPayClient.APIClient.Models
 {
     public class RfidCard : DatabaseModel
     {
-        public RfidCard()
+        public RfidCard() : base()
         {
+            CreatedDate = DateTime.Now;
+            ModifiedDate = DateTime.Now;
         }
 
         public RfidCard(string uid, string uid2, string cardNumber, string pointsBalance, DateTime createdDate, DateTime modifiedDate) : base()

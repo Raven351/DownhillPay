@@ -65,11 +65,11 @@ namespace DownhillPayClient
 
 
             //tests
-            ClientRequest clientRequest = new ClientRequest();
+            //ClientRequest clientRequest = new ClientRequest();
             //var sth = clientRequest.Post(new Client("Jarosław", "Miotła", "631-124-111", new System.DateTime(1999, 07, 12)));
-            RfidCardRequest cardRequest = new RfidCardRequest();
-            var cardRequestResponse = cardRequest.Post(new RfidCard("00 00 00 00", "00 00 00 00", "1", "200", DateTime.Now, DateTime.Now));
-            Debug.WriteLine(cardRequestResponse);
+            //RfidCardRequest cardRequest = new RfidCardRequest();
+            //var cardRequestResponse = cardRequest.Post(new RfidCard("00 00 00 00", "00 00 00 00", "1", "200", DateTime.Now, DateTime.Now));
+            //Debug.WriteLine(cardRequestResponse);
             //var sth = clientRequest.Get();
             //Debug.WriteLine(clientRequest.EndpointUri);
             //Debug.WriteLine(sth[0].FirstName);

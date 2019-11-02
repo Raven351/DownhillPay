@@ -17,7 +17,7 @@ namespace APIClient.Requests
         public ClientRequest() : base()
         {
             EndpointUri = base.BaseUrl + APIEndpoints.Default.Client;
-            EndpointUriId = APIEndpoints.Default.ClientID;
+            EndpointUriId = EndpointUri + APIEndpoints.Default.ClientID;
         }
 
         public List<Client> Get()
@@ -29,7 +29,7 @@ namespace APIClient.Requests
 
         public Client Get(int id)
         {
-            var request = new RestRequest(EndpointUri + EndpointUriId + id);
+            var request = new RestRequest(EndpointUriId + id);
             var response = this.Get<List<Client>>(request);
             var client = response.Data;
             if (client.Count == 1) return client[0];

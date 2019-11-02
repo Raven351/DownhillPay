@@ -16,6 +16,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ArduinoRFIDReader;
+using DownhillPayClient.APIClient.Requests;
+using DownhillPayClient.Classes.Transactions;
 using DownhillPayClient.MessageBoxLayout;
 
 namespace DownhillPayClient.UserControls
@@ -30,14 +32,17 @@ namespace DownhillPayClient.UserControls
             InitializeComponent();
         }
 
+        
+
         public CardReadingUserControl(MainWindow mainWindow) : this()
         {
             MainWindow = mainWindow;
+            rfidCardRequest = new RfidCardRequest();
         }
 
         public MainWindow MainWindow { get; }
-
         public UserControl PreviousControl { get; set; }
+        private readonly RfidCardRequest rfidCardRequest;
 
         public UserControl ChangeToControl(UserControl previousControl)
         {
@@ -64,21 +69,46 @@ namespace DownhillPayClient.UserControls
                 Debug.WriteLine(MainWindow.CardUid);
                 MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
             }
-
+            
             if (previousControl == MainWindow.PaymentMethodUserControl)
             {
                 MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, message);
                 MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
-                if(MainWindow.CardUid == null)
+                if (MainWindow.CardUid != null)
                 {
-                    messageBox.Message = "Payment canceled. Try again.";
-                    MainWindow.contentControl.Content = previousControl;
-                    messageBox.ShowDialog();
+                    string rfidCardRequestResponse = null;
+                    try
+                    {
+                        if (typeof(NewCardTransaction) == MainWindow.Transaction.GetType())
+                        {
+                            var rfidCardsCount = rfidCardRequest.Get().Count();
+                            MainWindow.Transaction.RfidCard.CardNumber = DateTime.Today.Year.ToString() + DateTime.Today.Month.ToString() + "/" + rfidCardsCount;
+                            MainWindow.Transaction.RfidCard.Uid = MainWindow.CardUid.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+                            MainWindow.Transaction.RfidCard.Uid2 = MainWindow.Transaction.RfidCard.Uid + rfidCardsCount; //TEMPORARY
+                            rfidCardRequestResponse = rfidCardRequest.Post(MainWindow.Transaction.RfidCard);
+                            Debug.WriteLine(MainWindow.Transaction.RfidCard.CardNumber);
+                            Debug.WriteLine(rfidCardRequestResponse);
+                        }
+                        else
+                        {
+                            var rfidCard = rfidCardRequest.Get(MainWindow.CardUid);
+                            rfidCardRequestResponse = rfidCardRequest.PatchPoints(rfidCard.Uid, Convert.ToInt32(rfidCard.PointsBalance), MainWindow.Transaction.TopUpPoints);
+                        }
+                        messageBox.Message = "Payment started. Please take your card and pay at the cash payment point. Your card will be activated after payment is completed.";
+                        MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+                        messageBox.ShowDialog();
+                    }
+                    catch
+                    {
+                        messageBox.Message = rfidCardRequestResponse;
+                        MainWindow.contentControl.Content = previousControl;
+                        messageBox.ShowDialog();
+                    }
                 }
                 else
                 {
-                    messageBox.Message = "Payment started. Please take your card and pay at the cash payment point. Your card will be activated after payment is completed.";
-                    MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+                    messageBox.Message = "Payment canceled. Try again.";
+                    MainWindow.contentControl.Content = previousControl;
                     messageBox.ShowDialog();
                 }
             }

@@ -56,6 +56,7 @@ namespace DownhillPayClient.UserControls
         {
             MainWindow.Transaction.PaymentValue += 450;
             MainWindow.Transaction.TopUpPoints += 45;
+            MainWindow.Transaction.RfidCard.PointsBalance += 45;
             MainWindow.contentControl.Content = MainWindow.PaymentMethodUserControl.ChangeToControl(this);
         }
     }

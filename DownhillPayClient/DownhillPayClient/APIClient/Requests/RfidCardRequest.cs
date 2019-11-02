@@ -1,5 +1,7 @@
 ﻿using DownhillPayClient.APIClient.Models;
+using DownhillPayClient.APIClient.Serializers;
 using DownhillPayClient.Properties;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -11,12 +13,12 @@ namespace DownhillPayClient.APIClient.Requests
 {
     public class RfidCardRequest : Request
     {
-        public string EndpointUid { get; set; }
+        public string EndpointUriUid { get; set; }
         public RfidCardRequest() : base()
         {
             EndpointUri = base.BaseUrl + APIEndpoints.Default.RfidCard;
-            EndpointUriId = APIEndpoints.Default.RfidCardId;
-            EndpointUid = APIEndpoints.Default.RfidCardUid;
+            EndpointUriId = EndpointUri + APIEndpoints.Default.RfidCardId;
+            EndpointUriUid = EndpointUri + APIEndpoints.Default.RfidCardUid;
         }
 
         public List<RfidCard> Get()
@@ -26,19 +28,38 @@ namespace DownhillPayClient.APIClient.Requests
             return response.Data;
         }
 
-        public RfidCard Get(int id)
+        public RfidCard Get(string uid)
         {
-            var request = new RestRequest(EndpointUri + EndpointUriId + id);
+            var request = new RestRequest(EndpointUriUid + uid);
             var response = this.Get<List<RfidCard>>(request);
             var client = response.Data;
             if (client.Count == 1) return client[0];
             else return null;
         }
 
-        public void Post()
+        public string PatchPoints(string uid, int pointsRemaining, int PointToAdd)
         {
-
+            var request = new RestRequest(EndpointUriUid + uid, Method.PATCH)
+            {
+                RequestFormat = DataFormat.Json
+            };
+            request.AddHeader("Content-Type", "application/json");
+            request.JsonSerializer = new JsonNETSerializer();
+            request.AddJsonBody(new Points((pointsRemaining + PointToAdd).ToString()));
+            var response = this.Patch(request);
+            var data = response.Content;
+            return Convert.ToString(data);
         }
 
+        private struct Points
+        {
+            public Points(string pointsBalance)
+            {
+                PointsBalance = pointsBalance;
+            }
+
+            [JsonProperty("points_balance")]
+            public string PointsBalance { get; set; }
+        }
     }
 }
