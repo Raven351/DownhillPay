@@ -70,6 +70,7 @@
     <Compile Include="APIClient\Requests\ClientRequest.cs" />
     <Compile Include="APIClient\Requests\Request.cs" />
     <Compile Include="APIClient\Requests\RfidCardRequest.cs" />
+    <Compile Include="APIClient\Requests\RfidCardSubscriptionRequest.cs" />
     <Compile Include="APIClient\Serializers\JsonNETSerializer.cs" />
     <Compile Include="Classes\Transactions\NewCardTransaction.cs" />
     <Compile Include="Classes\Transactions\Enums\TopUpTypes.cs" />

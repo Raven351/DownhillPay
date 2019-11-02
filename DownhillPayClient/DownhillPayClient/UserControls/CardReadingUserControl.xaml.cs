@@ -92,18 +92,27 @@ namespace DownhillPayClient.UserControls
                         else
                         {
                             var rfidCard = rfidCardRequest.Get(MainWindow.CardUid);
+                            if (rfidCard == null) throw new NullReferenceException("Invalid card!");
                             rfidCardRequestResponse = rfidCardRequest.PatchPoints(rfidCard.Uid, Convert.ToInt32(rfidCard.PointsBalance), MainWindow.Transaction.TopUpPoints);
                         }
                         messageBox.Message = "Payment started. Please take your card and pay at the cash payment point. Your card will be activated after payment is completed.";
                         MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
                         messageBox.ShowDialog();
                     }
+                    catch (NullReferenceException e)
+                    {
+                        messageBox.Message = e.Message;
+                        MainWindow.contentControl.Content = previousControl;
+                        messageBox.ShowDialog();
+                    }
+
                     catch
                     {
                         messageBox.Message = rfidCardRequestResponse;
                         MainWindow.contentControl.Content = previousControl;
                         messageBox.ShowDialog();
                     }
+
                 }
                 else
                 {

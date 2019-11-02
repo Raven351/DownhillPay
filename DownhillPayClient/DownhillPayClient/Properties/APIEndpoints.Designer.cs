@@ -112,5 +112,14 @@ namespace DownhillPayClient.Properties {
                 return ((string)(this["RfidCard"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("subscription?")]
+        public string RfidCardSubscription {
+            get {
+                return ((string)(this["RfidCardSubscription"]));
+            }
+        }
     }
 }

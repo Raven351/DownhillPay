@@ -32,5 +32,8 @@
     <Setting Name="RfidCard" Type="System.String" Scope="Application">
       <Value Profile="(Default)">rfid_card?</Value>
     </Setting>
+    <Setting Name="RfidCardSubscription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">subscription?</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
