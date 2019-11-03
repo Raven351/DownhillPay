@@ -37,6 +37,7 @@ namespace DownhillPayClient.UserControls
         public MainWindow MainWindow { get; }
 
         public UserControl PreviousControl { get; set; }
+        private TextBox activeTextbox;
 
         public UserControl ChangeToControl(UserControl previousControl)
         {
@@ -92,6 +93,29 @@ namespace DownhillPayClient.UserControls
             dayTextBox.Clear();
             monthTextBox.Clear();
             yearTextBox.Clear();
+        }
+
+        private void Keyboard_Click(object sender, RoutedEventArgs e)
+        {
+            var key = ((TextBlock)((Viewbox)(sender as Button).Content).Child).Text;
+            activeTextbox.AppendText(key);
+        }
+
+        private void FirstNameButton_Click(object sender, RoutedEventArgs e) //TODO
+        {
+            ChooseTextbox(sender);
+            activeTextbox = firstNameTextBox;
+        }
+
+        private void ChooseTextbox(object sender)
+        {
+            (sender as Button).Background = Brushes.Yellow;
+
+            if (activeTextbox == firstNameTextBox || activeTextbox == lastNameTextBox)
+            {
+                Keyboard.IsEnabled = true;
+                Keyboard.Visibility = Visibility.Visible;
+            }
         }
     }
 }

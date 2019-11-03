@@ -9,22 +9,22 @@
              d:DesignHeight="768 " d:DesignWidth="1024">
     <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*" />
-            <RowDefinition Height="0.4*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="*" />
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>            
+            <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style TargetType="TextBox">
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Margin" Value="60"/>
                 <Setter Property="FontSize" Value="50"/>
             </Style>
             <Style TargetType="Label">
@@ -48,8 +48,6 @@
             <Style TargetType="Button">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="MinHeight" Value="100" />
-                <Setter Property="MinWidth" Value="300"/>
                 <Setter Property="FontSize" Value="30"/>
                 <Setter Property="Margin" Value="10"/>
                 <Setter Property="Template">
@@ -107,32 +105,82 @@
                 </Setter>
             </Style>
         </Grid.Resources>
-        <Viewbox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">
-            <Label  Content="First Name:"/>
-        </Viewbox>
-        <Viewbox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
-            <Label  Content="Last Name:"/>
-        </Viewbox>
-        <Viewbox Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left">
-            <Label  Content="Phone Number:"/>
-        </Viewbox>
-        <Viewbox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">
-            <Label  Content="Birth Date"/>
-        </Viewbox>
-        <TextBox x:Name="firstNameTextBox" Grid.Column="0" Grid.Row="2"/>
-        <TextBox x:Name="lastNameTextBox" Grid.Column="1" Grid.Row="2"/>
-        <TextBox x:Name="phoneNumberTextBox" Grid.Column="0" Grid.Row="4"/>
-        <Grid Grid.Column="1" Grid.Row="4">
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="dayTextBox" Grid.Column="0" Margin="10" HorizontalContentAlignment="Center"/>
-            <TextBox x:Name="monthTextBox" Grid.Column="1" Margin="10" HorizontalContentAlignment="Center"/>
-            <TextBox x:Name="yearTextBox" Grid.Column="2" Margin="10" HorizontalContentAlignment="Center"/>
+            <Button x:Name="firstNameButton" Click="FirstNameButton_Click">
+                <Viewbox Stretch="Uniform">
+                    <TextBlock>
+                        First Name:
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <TextBox x:Name="firstNameTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button>
+                <Viewbox Stretch="Uniform">
+                    <TextBlock>
+                        Last Name:
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <TextBox x:Name="lastNameTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+        </Grid>        
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button>
+                <Viewbox>
+                    <TextBlock>
+                        Phone Number:
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <TextBox x:Name="phoneNumberTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>       
+            <Button Grid.Column="0" Grid.Row="0">
+                <Viewbox>
+                    <TextBlock>
+                        Day
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <TextBox x:Name="dayTextBox" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="monthTextBox" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="yearTextBox" Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -144,7 +192,315 @@
                 <Button x:Name="GoBackButton" Content="Go Back" Grid.Column="2" MinWidth="350" MinHeight="120" RenderTransformOrigin="0.346,0.346" Click="GoBackButton_Click"/>
             </Viewbox>
         </Grid>
-        <Button x:Name="ConfirmButton" Content="Confirm" Grid.Column="1" Grid.Row="5" MinHeight="120" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,70,0" Click="ConfirmButton_Click"/>
-
+        <Viewbox Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="ConfirmButton" Content="Confirm"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="ConfirmButton_Click"/>
+        </Viewbox>
+        <!--Keyboard-->
+        <Grid x:Name="Keyboard" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Visible" IsEnabled="True">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Q
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="1" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        W
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="2" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        E
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="3" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        R
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="4" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        T
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="5" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Y
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="6" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    U
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="7" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    I
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="8" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    O
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="9" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    P
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        A
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        S
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        D
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        F
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        G
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="5" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        H
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="6" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    J
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="7" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    K
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="8" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    L
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="9" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    -
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Z
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        X
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        C
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        V
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="4" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        B
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="5" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        N
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="6" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    M
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="7" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    ↩
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="8" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                    ⌫
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+        </Grid>
+        <!--PL Keyboard-->
+        <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden" IsEnabled="False">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="2" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Ę
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="8" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Ó
+                    </TextBlock>
+                </Viewbox>
+            </Button>            
+            <Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Ą
+                    </TextBlock>
+                </Viewbox>
+            </Button>             
+            <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Ś
+                    </TextBlock>
+                </Viewbox>
+            </Button>            
+            <Button Grid.Row="1" Grid.Column="8" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Ł
+                    </TextBlock>
+                </Viewbox>
+            </Button>            
+            <Button Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Ż
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Ź
+                    </TextBlock>
+                </Viewbox>
+            </Button>            
+            <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Ć
+                    </TextBlock>
+                </Viewbox>
+            </Button>            
+            <Button Grid.Row="2" Grid.Column="5" HorizontalAlignment="Stretch" Click="Keyboard_Click">
+                <Viewbox>
+                    <TextBlock>
+                        Ń
+                    </TextBlock>
+                </Viewbox>
+            </Button>
+        </Grid>
+        
     </Grid>
 </UserControl>
