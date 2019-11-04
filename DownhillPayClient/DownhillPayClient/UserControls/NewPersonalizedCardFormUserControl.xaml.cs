@@ -101,21 +101,67 @@ namespace DownhillPayClient.UserControls
             activeTextbox.AppendText(key);
         }
 
-        private void FirstNameButton_Click(object sender, RoutedEventArgs e) //TODO
+        private void PlKeyboard_Click(object sender, RoutedEventArgs e)
         {
-            ChooseTextbox(sender);
-            activeTextbox = firstNameTextBox;
+            Keyboard_Click(sender, e);
+            PlKeyboard.Visibility = Visibility.Hidden;
+            PlKeyboard.IsEnabled = false;
+            Keyboard.IsEnabled = true;
+        }
+
+        private void KeyboardBackspace_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                activeTextbox.Text = activeTextbox.Text.Substring(0, activeTextbox.Text.Length - 1);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+
+            }         
         }
 
         private void ChooseTextbox(object sender)
         {
-            (sender as Button).Background = Brushes.Yellow;
 
+            firstNameButton.Background = Brushes.White; //set default color
             if (activeTextbox == firstNameTextBox || activeTextbox == lastNameTextBox)
             {
                 Keyboard.IsEnabled = true;
                 Keyboard.Visibility = Visibility.Visible;
             }
+            (sender as Button).Background = Brushes.Yellow; //set selected color
+        }
+
+
+        private void FirstNameButton_Click(object sender, RoutedEventArgs e) //TODO
+        {
+            activeTextbox = firstNameTextBox;
+            ChooseTextbox(sender);
+        }
+
+
+        private void LastNameButton_Click(object sender, RoutedEventArgs e)
+        {            
+            activeTextbox = lastNameTextBox;
+            ChooseTextbox(sender);
+        }
+
+        private void PlKeysButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Keyboard.IsEnabled == true)
+            {
+                Keyboard.IsEnabled = false;
+                PlKeyboard.Visibility = Visibility.Visible;
+                PlKeyboard.IsEnabled = true;
+            }
+            else
+            {
+                Keyboard.IsEnabled = true;
+                PlKeyboard.Visibility = Visibility.Hidden;
+                PlKeyboard.IsEnabled = false;
+            }
+
         }
     }
 }
