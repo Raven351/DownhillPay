@@ -125,10 +125,20 @@ namespace DownhillPayClient.UserControls
         {
 
             firstNameButton.Background = Brushes.White; //set default color
+            lastNameButton.Background = Brushes.White;
             if (activeTextbox == firstNameTextBox || activeTextbox == lastNameTextBox)
             {
                 Keyboard.IsEnabled = true;
                 Keyboard.Visibility = Visibility.Visible;
+                NumKeyboard.IsEnabled = false;
+                NumKeyboard.Visibility = Visibility.Hidden;
+            }
+            if (activeTextbox == phoneNumberTextBox || activeTextbox == dayTextBox || activeTextbox == monthTextBox || activeTextbox == yearTextBox)
+            {
+                Keyboard.IsEnabled = false;
+                Keyboard.Visibility = Visibility.Hidden;
+                NumKeyboard.IsEnabled = true;
+                NumKeyboard.Visibility = Visibility.Visible;
             }
             (sender as Button).Background = Brushes.Yellow; //set selected color
         }
@@ -162,6 +172,12 @@ namespace DownhillPayClient.UserControls
                 PlKeyboard.IsEnabled = false;
             }
 
+        }
+
+        private void PhoneNumberButton_Click(object sender, RoutedEventArgs e)
+        {
+            activeTextbox = phoneNumberTextBox;
+            ChooseTextbox(sender);
         }
     }
 }

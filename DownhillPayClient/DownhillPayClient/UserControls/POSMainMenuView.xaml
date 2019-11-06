@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DownhillPayClient.UserControls"
              mc:Ignorable="d"
-             Background="Gainsboro"
+             Background="DeepSkyBlue"
              d:DesignHeight="768 " d:DesignWidth="1024">
     <Grid>
         <Grid.RowDefinitions>
@@ -86,7 +86,7 @@
                 </Setter>
             </Style>
         </Grid.Resources>
-        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="DeepSkyBlue"/>
+        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="Gainsboro"/>
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
