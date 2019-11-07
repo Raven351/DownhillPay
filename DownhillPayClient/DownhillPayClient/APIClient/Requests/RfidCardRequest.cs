@@ -37,7 +37,7 @@ namespace DownhillPayClient.APIClient.Requests
             else return null;
         }
 
-        public string PatchPoints(string uid, int pointsRemaining, int PointToAdd)
+        public IRestResponse PatchPoints(string uid, int pointsRemaining, int PointToAdd)
         {
             var request = new RestRequest(EndpointUriUid + uid, Method.PATCH)
             {
@@ -47,8 +47,7 @@ namespace DownhillPayClient.APIClient.Requests
             request.JsonSerializer = new JsonNETSerializer();
             request.AddJsonBody(new Points((pointsRemaining + PointToAdd).ToString()));
             var response = this.Patch(request);
-            var data = response.Content;
-            return Convert.ToString(data);
+            return response;
         }
 
         private struct Points

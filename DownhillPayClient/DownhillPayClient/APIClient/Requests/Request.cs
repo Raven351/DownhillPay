@@ -19,7 +19,7 @@ namespace DownhillPayClient.APIClient.Requests
         public Request() => base.BaseUrl = new Uri(Settings.Default.API_URI);
         public string EndpointUri { get; set; }
         public string EndpointUriId { get; set; }
-        public string Post(DatabaseModel databaseModel)
+        public IRestResponse Post(DatabaseModel databaseModel)
         {
             var request = new RestRequest(EndpointUri, Method.POST)
             {
@@ -30,8 +30,7 @@ namespace DownhillPayClient.APIClient.Requests
             request.AddJsonBody(databaseModel);
             //request.AddParameter(JsonConvert.SerializeObject(client), ParameterType.RequestBody);
             var response = this.Post(request);
-            var data = response.Content;
-            return Convert.ToString(data);
+            return response;
         }
     }
 }
