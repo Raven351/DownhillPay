@@ -83,6 +83,11 @@ namespace DownhillPayClient.UserControls
                 MessageBox.Show("Invalid format!");
             }
 
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+
         }
 
         private void ClearTextBoxes()
@@ -178,6 +183,29 @@ namespace DownhillPayClient.UserControls
         {
             activeTextbox = phoneNumberTextBox;
             ChooseTextbox(sender);
+        }
+
+        private void DayButton_Click(object sender, RoutedEventArgs e)
+        {
+            activeTextbox = dayTextBox;
+            ChooseTextbox(sender);
+        }
+
+        private void MonthButton_Click(object sender, RoutedEventArgs e)
+        {
+            activeTextbox = monthTextBox;
+            ChooseTextbox(sender);
+        }
+
+        private void YearButton_Click(object sender, RoutedEventArgs e)
+        {
+            activeTextbox = yearTextBox;
+            ChooseTextbox(sender);
+        }
+
+        private void DayTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DayButton_Click(dayButton, e);
         }
     }
 }
