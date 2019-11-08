@@ -16,23 +16,23 @@ using System.Windows.Shapes;
 namespace DownhillPayClient.UserControls
 {
     /// <summary>
-    /// Interaction logic for TopUpTypesUserControl.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class TopUpTypesUserControl : UserControl, IUserControlWindow
+    public partial class SubscriptionTopUpUserControl : UserControl, IUserControlWindow
     {
-        public TopUpTypesUserControl()
+        public SubscriptionTopUpUserControl()
         {
             InitializeComponent();
         }
 
-        public TopUpTypesUserControl(MainWindow mainWindow) : this()
+        public SubscriptionTopUpUserControl(MainWindow mainWindow) : this()
         {
             MainWindow = mainWindow;
         }
 
         public MainWindow MainWindow { get; }
 
-        public UserControl PreviousControl { get; set; }
+        public UserControl PreviousControl { get ; set ; }
 
         public UserControl ChangeToControl(UserControl previousControl)
         {
@@ -52,14 +52,9 @@ namespace DownhillPayClient.UserControls
             MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
         }
 
-        private void PointsButton_Click(object sender, RoutedEventArgs e)
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.contentControl.Content = MainWindow.PointTopUpUserControl.ChangeToControl(this);
-        }
-
-        private void SubscriptionButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.contentControl.Content = MainWindow.SubscriptionTopUpUserControl.ChangeToControl(this);
+            MessageBox.Show("Not implemented");
         }
     }
 }

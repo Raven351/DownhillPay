@@ -126,9 +126,9 @@ namespace DownhillPayClient.UserControls
             }         
         }
 
-        private void ChooseTextbox(object sender)
+        private void ChooseTextbox(object sender, TextBox previousActiveTextbox)
         {
-
+            if (previousActiveTextbox != null) previousActiveTextbox.Background = Brushes.White;
             firstNameButton.Background = Brushes.White; //set default color
             lastNameButton.Background = Brushes.White;
             if (activeTextbox == firstNameTextBox || activeTextbox == lastNameTextBox)
@@ -146,20 +146,23 @@ namespace DownhillPayClient.UserControls
                 NumKeyboard.Visibility = Visibility.Visible;
             }
             (sender as Button).Background = Brushes.Yellow; //set selected color
+            activeTextbox.Background = Brushes.Yellow;
         }
 
 
-        private void FirstNameButton_Click(object sender, RoutedEventArgs e) //TODO
+        private void FirstNameButton_Click(object sender, RoutedEventArgs e) //TODO: UI
         {
+            var previousActiveTextbox = activeTextbox;
             activeTextbox = firstNameTextBox;
-            ChooseTextbox(sender);
+            ChooseTextbox(sender, previousActiveTextbox);
         }
 
 
         private void LastNameButton_Click(object sender, RoutedEventArgs e)
-        {            
+        {
+            var previousActiveTextbox = activeTextbox;
             activeTextbox = lastNameTextBox;
-            ChooseTextbox(sender);
+            ChooseTextbox(sender, previousActiveTextbox);
         }
 
         private void PlKeysButton_Click(object sender, RoutedEventArgs e)
@@ -179,28 +182,32 @@ namespace DownhillPayClient.UserControls
 
         }
 
-        private void PhoneNumberButton_Click(object sender, RoutedEventArgs e)
+        private void PhoneNumberButton_Click(object sender, RoutedEventArgs e) //TODO: Optimize
         {
+            var previousActiveTextbox = activeTextbox;
             activeTextbox = phoneNumberTextBox;
-            ChooseTextbox(sender);
+            ChooseTextbox(sender, previousActiveTextbox);
         }
 
         private void DayButton_Click(object sender, RoutedEventArgs e)
         {
+            var previousActiveTextbox = activeTextbox;
             activeTextbox = dayTextBox;
-            ChooseTextbox(sender);
+            ChooseTextbox(sender, previousActiveTextbox);
         }
 
         private void MonthButton_Click(object sender, RoutedEventArgs e)
         {
+            var previousActiveTextbox = activeTextbox;
             activeTextbox = monthTextBox;
-            ChooseTextbox(sender);
+            ChooseTextbox(sender, previousActiveTextbox);
         }
 
         private void YearButton_Click(object sender, RoutedEventArgs e)
         {
+            var previousActiveTextbox = activeTextbox;
             activeTextbox = yearTextBox;
-            ChooseTextbox(sender);
+            ChooseTextbox(sender, previousActiveTextbox);
         }
 
         private void DayTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)

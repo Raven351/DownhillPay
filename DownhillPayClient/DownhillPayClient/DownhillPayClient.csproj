@@ -112,6 +112,9 @@
     <Compile Include="UserControls\TopUpTypesUserControl.xaml.cs">
       <DependentUpon>TopUpTypesUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SubscriptionTopUpUserControl.xaml.cs">
+      <DependentUpon>SubscriptionTopUpUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views.cs" />
     <Page Include="MessageBoxLayout\MessageBoxLayoutInfo.xaml">
       <SubType>Designer</SubType>
@@ -179,6 +182,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\SubscriptionTopUpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -219,6 +226,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APIClient\Requests\Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\error.png" />
+    <Resource Include="Resources\img\info.png" />
+    <Resource Include="Resources\img\left-arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

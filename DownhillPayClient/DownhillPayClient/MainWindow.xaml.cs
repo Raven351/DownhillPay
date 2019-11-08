@@ -40,6 +40,7 @@ namespace DownhillPayClient
         public TopUpTypesUserControl TopUpTypesUserControl { get; }
         public NewPersonalizedCardFormUserControl NewPersonalizedCardFormUserControl { get; }
         public PointTopUpUserControl PointTopUpUserControl { get; }
+        public SubscriptionTopUpUserControl SubscriptionTopUpUserControl { get; }
         #endregion
 
         #region PROPERTIES
@@ -60,6 +61,7 @@ namespace DownhillPayClient
             TopUpTypesUserControl = new TopUpTypesUserControl(this);
             NewPersonalizedCardFormUserControl = new NewPersonalizedCardFormUserControl(this);
             PointTopUpUserControl = new PointTopUpUserControl(this);
+            SubscriptionTopUpUserControl = new SubscriptionTopUpUserControl(this);
             this.contentControl.Content = POSMainMenuView;
             MFRC522ReaderWriter = new MFRC522ReaderWriter(Properties.Settings.Default.RFID_USB_PORT, 9600);
 

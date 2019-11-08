@@ -83,7 +83,7 @@ namespace DownhillPayClient.UserControls
                 {
                     try
                     {
-                        if (typeof(NewCardTransaction) == MainWindow.Transaction.GetType()) //TODO Add client POST
+                        if (typeof(NewCardTransaction) == MainWindow.Transaction.GetType())
                         {
                             var rfidCardsCount = rfidCardRequest.Get().Count();
                             MainWindow.Transaction.RfidCard.CardNumber = DateTime.Today.Year.ToString() + DateTime.Today.Month.ToString() + "/" + rfidCardsCount;

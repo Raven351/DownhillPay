@@ -1,0 +1,253 @@
+﻿<UserControl x:Class="DownhillPayClient.UserControls.SubscriptionTopUpUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DownhillPayClient.UserControls"
+             mc:Ignorable="d" 
+             Background="DeepSkyBlue"
+             d:DesignHeight="768" d:DesignWidth="1024">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Margin" Value="10"/>
+                </Style>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="42"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="Margin" Value="20,0,0,0"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+                <Style x:Key="ButtonUpper">
+                    
+                </Style>
+                <Style TargetType="Button">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="30"/>
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="FontFamily" Value="Tahoma"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid x:Name="grid">
+                                    <Border x:Name="border" CornerRadius="8" BorderBrush="Black" BorderThickness="2">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="AliceBlue"/>
+                                        </Border.Background>
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          TextElement.FontWeight="Bold">
+                                        </ContentPresenter>
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" TargetName="border">
+                                            <Setter.Value>
+                                                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                                    <RadialGradientBrush.RelativeTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                            <TranslateTransform X="0.02" Y="0.3"/>
+                                                        </TransformGroup>
+                                                    </RadialGradientBrush.RelativeTransform>
+                                                    <GradientStop Color="#00000000" Offset="1"/>
+                                                    <GradientStop Color="#FF303030" Offset="0.3"/>
+                                                </RadialGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Viewbox  Grid.Row="0" Grid.Column="0" Margin="20" HorizontalAlignment="Left">
+                    <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="10" Background="AliceBlue" Padding="7">
+                        <Label Content="Choose Subscription" Grid.ColumnSpan="1" FontFamily="Tahoma"/>
+                    </Border>
+                </Viewbox>
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="HelpButton" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Click="HelpButton_Click">
+                        <Viewbox>
+                            <Image Source ="/Resources/img/info.png" Margin="10" />
+                        </Viewbox>
+                    </Button>
+                    <Button x:Name="CancelButton" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Click="CancelButton_Click">
+                        <Viewbox>
+                            <Image Source ="/Resources/img/error.png" Margin="10" />
+                        </Viewbox>
+                    </Button>
+                    <Button x:Name="GoBackButton" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Click="GoBackButton_Click" >
+                        <Viewbox>
+                            <Image Source ="/Resources/img/left-arrow.png" Margin="10" />
+                        </Viewbox>
+                    </Button>                       
+                </Grid>
+            </Grid>
+            <!--TODO: TAGS-->
+            <!--Hours Top Ups-->
+            <Border Grid.Row="2" Grid.Column="1" BorderBrush="#FF000000" BorderThickness="2" CornerRadius="10" Background="#389735" Padding="10" > 
+                <Grid Grid.Row="2" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="Value0_Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="">
+                        <TextBlock TextAlignment="Center">
+                        1 hour <LineBreak/>
+                        45 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value1_Button" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        2 hours <LineBreak/>
+                        55 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value2_Button" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        3 hours <LineBreak/>
+                        65 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value3_Button" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        4 hours <LineBreak/>
+                        75 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value4_Button" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        5 hours <LineBreak/>
+                        85 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value5_Button" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        6 hours <LineBreak/>
+                        90 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value6_Button" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center" FontSize="22">
+                        5 hours <LineBreak/>
+                        After 16:00 <LineBreak/>
+                        50 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value7_Button" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="False">
+                        <TextBlock TextAlignment="Center">
+                        Unavailable
+                        </TextBlock>
+                    </Button>
+                </Grid>
+            </Border>
+            <!--Days Top Ups-->
+            <Border Grid.Column="1" Grid.Row="4" BorderBrush="#FF000000" BorderThickness="2" CornerRadius="10" Background="#973535" Padding="10">
+                <Grid Grid.Row="4" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="Value8_Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        1 day <LineBreak/>
+                        99 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value9_Button" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        2 days <LineBreak/>
+                        185 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value10_Button" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        3 days <LineBreak/>
+                        265 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value11_Button" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        4 days <LineBreak/>
+                        330 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value12_Button" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        5 days <LineBreak/>
+                        380 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value13_Button" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        6 hours <LineBreak/>
+                        430 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value14_Button" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock TextAlignment="Center">
+                        7 days <LineBreak/>
+                        470 PLN
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value15_Button" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="False">
+                        <TextBlock TextAlignment="Center">
+                            Unavailable
+                        </TextBlock>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
