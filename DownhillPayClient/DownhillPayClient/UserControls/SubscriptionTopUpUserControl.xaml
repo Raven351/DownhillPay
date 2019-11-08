@@ -8,7 +8,7 @@
              Background="DeepSkyBlue"
              d:DesignHeight="768" d:DesignWidth="1024">
     <Grid>
-        <Grid>
+        <Grid x:Name="SubscriptionTopUpGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="0.5*"/>
@@ -125,7 +125,7 @@
             <!--TODO: TAGS-->
             <!--Hours Top Ups-->
             <Border Grid.Row="2" Grid.Column="1" BorderBrush="#FF000000" BorderThickness="2" CornerRadius="10" Background="#389735" Padding="10" > 
-                <Grid Grid.Row="2" Grid.Column="1">
+                <Grid x:Name="HoursTopUpsButtons" Grid.Row="2" Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -136,50 +136,42 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="Value0_Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="Client" Click="Subscription_Click">
+                    <Button x:Name="Value0_Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="0" Click="Subscription_Click">
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap">
+                            Unavailable
+                        </TextBlock>
+                    </Button>
+                    <Button x:Name="Value1_Button" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="1" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        1 hour <LineBreak/>
-                        45 PLN
+                            Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value1_Button" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value2_Button" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="2" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        2 hours <LineBreak/>
-                        55 PLN
+                            Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value2_Button" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value3_Button" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="3" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        3 hours <LineBreak/>
-                        65 PLN
+                            Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value3_Button" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value4_Button" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="4" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        4 hours <LineBreak/>
-                        75 PLN
+                            Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value4_Button" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value5_Button" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="5" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        5 hours <LineBreak/>
-                        85 PLN
+                            Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value5_Button" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock TextAlignment="Center">
-                        6 hours <LineBreak/>
-                        90 PLN
+                    <Button x:Name="Value6_Button" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="6" Click="Subscription_Click">
+                        <TextBlock TextAlignment="Center" TextWrapping="Wrap">
+                            Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value6_Button" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <TextBlock TextAlignment="Center" FontSize="22">
-                        5 hours <LineBreak/>
-                        After 16:00 <LineBreak/>
-                        50 PLN
-                        </TextBlock>
-                    </Button>
-                    <Button x:Name="Value7_Button" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="False">
+                    <Button x:Name="Value7_Button" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="7" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
                         Unavailable
                         </TextBlock>
@@ -188,7 +180,7 @@
             </Border>
             <!--Days Top Ups-->
             <Border Grid.Column="1" Grid.Row="4" BorderBrush="#FF000000" BorderThickness="2" CornerRadius="10" Background="#973535" Padding="10">
-                <Grid Grid.Row="4" Grid.Column="1">
+                <Grid x:Name="DaysTopUpsButtons" Grid.Row="4" Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -199,49 +191,42 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="Value8_Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value8_Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="8" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        1 day <LineBreak/>
-                        99 PLN
+                        Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value9_Button" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value9_Button" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="9" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        2 days <LineBreak/>
-                        185 PLN
+                        Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value10_Button" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value10_Button" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="10" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        3 days <LineBreak/>
-                        265 PLN
+                        Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value11_Button" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value11_Button" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="11" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        4 days <LineBreak/>
-                        330 PLN
+                        Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value12_Button" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value12_Button" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="12" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        5 days <LineBreak/>
-                        380 PLN
+                        Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value13_Button" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value13_Button" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="13" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        6 hours <LineBreak/>
-                        430 PLN
+                        Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value14_Button" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="Value14_Button" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="14" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
-                        7 days <LineBreak/>
-                        470 PLN
+                        Unavailable
                         </TextBlock>
                     </Button>
-                    <Button x:Name="Value15_Button" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="False">
+                    <Button x:Name="Value15_Button" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="15" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
                             Unavailable
                         </TextBlock>

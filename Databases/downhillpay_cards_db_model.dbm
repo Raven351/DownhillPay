@@ -190,6 +190,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="pos_number">
 		<type name="smallint" length="0"/>
 	</column>
+	<column name="date_start">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Optional if subscription plan requires it.]]></comment>
+	</column>
 	<column name="name">
 		<type name="varchar" length="60"/>
 	</column>
@@ -227,7 +231,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="gate">
 	<schema name="devices"/>
-	<position x="380" y="480"/>
+	<position x="380" y="500"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -252,7 +256,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="ski_lift">
 	<schema name="devices"/>
-	<position x="720" y="500"/>
+	<position x="720" y="520"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
