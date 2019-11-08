@@ -35,5 +35,11 @@
     <Setting Name="RfidCardSubscription" Type="System.String" Scope="Application">
       <Value Profile="(Default)">subscription?</Value>
     </Setting>
+    <Setting Name="Subscription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">subscription_prices?</Value>
+    </Setting>
+    <Setting Name="SubscriptionPOS" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">pos_number=eq.</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -136,7 +136,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button x:Name="Value0_Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="">
+                    <Button x:Name="Value0_Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="Client" Click="Subscription_Click">
                         <TextBlock TextAlignment="Center">
                         1 hour <LineBreak/>
                         45 PLN

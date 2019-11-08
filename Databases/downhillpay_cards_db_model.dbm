@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="1"
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,90" last-zoom="1"
 	 default-schema="public" default-owner="postgres">
 <database name="downhillpay_cards_db" is-template="false" allow-conns="true">
 </database>
@@ -74,8 +74,14 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="rfid_card_pk" type="pk-constr" table="cards.rfid_card">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
-	<constraint name="rfid_card_uq" type="uq-constr" table="cards.rfid_card">
-		<columns names="uid,card_number,uid2" ref-type="src-columns"/>
+	<constraint name="rfid_card_uq_uuid" type="uq-constr" table="cards.rfid_card">
+		<columns names="uid" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rfid_card_uq_uuid2" type="uq-constr" table="cards.rfid_card">
+		<columns names="uid2" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="rfid_card_uq_card_number" type="uq-constr" table="cards.rfid_card">
+		<columns names="card_number" ref-type="src-columns"/>
 	</constraint>
 
 	<customidxs object-type="column">
@@ -83,8 +89,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="client_fk" index="2"/>
-		<object name="rfid_card_uq1" index="3"/>
+		<object name="client_fk" index="4"/>
+		<object name="rfid_card_uq" index="5"/>
 	</customidxs>
 </table>
 
@@ -181,6 +187,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="period" not-null="true">
 		<type name="interval" length="0"/>
 	</column>
+	<column name="pos_number">
+		<type name="smallint" length="0"/>
+	</column>
 	<column name="name">
 		<type name="varchar" length="60"/>
 	</column>
@@ -189,6 +198,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="subscription_pk" type="pk-constr" table="prices.subscription">
 		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="subscription_pos_uq" type="uq-constr" table="prices.subscription">
+		<columns names="pos_number" ref-type="src-columns"/>
 	</constraint>
 </table>
 
@@ -225,13 +237,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="gate_pk" type="pk-constr" table="devices.gate">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
+	<constraint name="gate_number_uq" type="uq-constr" table="devices.gate">
+		<columns names="number" ref-type="src-columns"/>
+	</constraint>
 
 	<customidxs object-type="column">
 		<object name="id_ski_lift" index="2"/>
 	</customidxs>
 
 	<customidxs object-type="constraint">
-		<object name="ski_lift_fk" index="1"/>
+		<object name="ski_lift_fk" index="2"/>
 	</customidxs>
 </table>
 

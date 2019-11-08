@@ -67,10 +67,12 @@
     <Compile Include="APIClient\Models\DatabaseModel.cs" />
     <Compile Include="APIClient\Models\RfidCard.cs" />
     <Compile Include="APIClient\Models\RfidCardSubscription.cs" />
+    <Compile Include="APIClient\Models\Subscription.cs" />
     <Compile Include="APIClient\Requests\ClientRequest.cs" />
     <Compile Include="APIClient\Requests\Request.cs" />
     <Compile Include="APIClient\Requests\RfidCardRequest.cs" />
     <Compile Include="APIClient\Requests\RfidCardSubscriptionRequest.cs" />
+    <Compile Include="APIClient\Requests\SubscriptionRequest.cs" />
     <Compile Include="APIClient\Serializers\JsonNETSerializer.cs" />
     <Compile Include="Classes\Transactions\NewCardTransaction.cs" />
     <Compile Include="Classes\Transactions\Enums\TopUpTypes.cs" />

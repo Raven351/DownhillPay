@@ -21,6 +21,7 @@ namespace DownhillPayClient.Classes.Transactions
         public TopUpTypes TopUpType { get; set; }
         public APIClient.Models.RfidCard RfidCard { get; set; }
         public int TopUpPoints { get; set; }
+        public TimeSpan SubscriptionTimespan { get; set; }
         public APIClient.Models.RfidCardSubscription RfidCardSubscription { get; set; }
         #endregion
     }

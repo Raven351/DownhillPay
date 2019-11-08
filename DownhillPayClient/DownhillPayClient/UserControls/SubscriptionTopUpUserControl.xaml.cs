@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DownhillPayClient.Properties;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,6 +57,11 @@ namespace DownhillPayClient.UserControls
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Not implemented");
+        }
+
+        private void Subscription_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine(APIEndpoints.Default.GetType().GetProperty(((Button)sender).Tag.ToString()).GetValue(APIEndpoints.Default));
         }
     }
 }
