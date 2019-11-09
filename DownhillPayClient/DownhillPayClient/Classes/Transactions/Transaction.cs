@@ -14,6 +14,7 @@ namespace DownhillPayClient.Classes.Transactions
         public Transaction()
         {
             RfidCard = new APIClient.Models.RfidCard();
+            RfidCardSubscription = new APIClient.Models.RfidCardSubscription();
         }
 
         #region PROPERTIES

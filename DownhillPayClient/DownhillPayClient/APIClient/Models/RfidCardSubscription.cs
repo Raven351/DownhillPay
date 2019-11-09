@@ -11,7 +11,7 @@ namespace DownhillPayClient.APIClient.Models
         /// <summary>
         /// Creates empty object
         /// </summary>
-        RfidCardSubscription()
+        public RfidCardSubscription()
         {
 
         }

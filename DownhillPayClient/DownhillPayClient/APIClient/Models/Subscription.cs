@@ -33,7 +33,9 @@ namespace DownhillPayClient.APIClient.Models
         public string Name { get; set; }
         [JsonProperty ("description")]
         public string Description { get; set; }
-        [JsonProperty ("date_start")]
-        public DateTime StartDate { get; set; }
+        [JsonProperty ("start_time")]
+        public DateTime StartTime { get; set; }
+        [JsonProperty ("end_time")]
+        public DateTime EndTime { get; set; }
     }
 }

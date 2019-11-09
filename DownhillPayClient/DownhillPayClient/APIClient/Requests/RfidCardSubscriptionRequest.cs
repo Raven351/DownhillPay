@@ -23,7 +23,7 @@ namespace DownhillPayClient.APIClient.Requests
             if (rfidCardRequestResponse == null) throw new NullReferenceException("Invalid card!");
             var request = new RestRequest(
                 EndpointUri + "or=(and(date_start.lte." + startDate + "," + "date_end.gte." + startDate + 
-                "),and(date_start.lte." + endDate + "," + "date_end.gte." + endDate + "))&id=eq." + rfidCardRequestResponse.Id);
+                "),and(date_start.lte." + endDate + "," + "date_end.gte." + endDate + "))&id_rfid_card=eq." + rfidCardRequestResponse.Id);
             var response = this.Get<List<RfidCardSubscription>>(request);
             if (response.Data.Count == 0) return false;
             else return true;

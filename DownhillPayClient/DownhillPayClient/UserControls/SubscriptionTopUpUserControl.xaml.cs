@@ -66,8 +66,14 @@ namespace DownhillPayClient.UserControls
             MainWindow.Transaction.TopUpType = Classes.Transactions.TopUpTypes.Subscription;
             MainWindow.Transaction.SubscriptionTimespan = ((Subscription)((Button)sender).Tag).Period;
             MainWindow.Transaction.PaymentValue = ((Subscription)((Button)sender).Tag).Price;
-            if (((Subscription)((Button)sender).Tag).StartDate != null) MainWindow.Transaction.RfidCardSubscription.DateStart = ((Subscription)((Button)sender).Tag).StartDate;
-            MainWindow.contentControl.Content = MainWindow.PaymentMethodUserControl;
+            if (((Subscription)((Button)sender).Tag).StartTime > new DateTime(year:0001, 1, 1)) //TODO: START DATE CORRECT
+            {
+                MainWindow.Transaction.RfidCardSubscription.DateStart = ((Subscription)((Button)sender).Tag).StartTime; 
+                MainWindow.Transaction.RfidCardSubscription.DateEnd = ((Subscription)((Button)sender).Tag).EndTime;
+                if (MainWindow.Transaction.RfidCardSubscription.DateEnd - TimeSpan.FromHours(1) <= DateTime.Now) MessageBox.Show("Cannot buy this subscription for today anymore!");
+                else MainWindow.contentControl.Content = MainWindow.PaymentMethodUserControl.ChangeToControl(this);
+            }       
+            else MainWindow.contentControl.Content = MainWindow.PaymentMethodUserControl.ChangeToControl(this);
         }
         #endregion
 

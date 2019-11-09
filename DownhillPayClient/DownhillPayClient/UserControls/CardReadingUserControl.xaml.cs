@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using APIClient.Requests;
 using ArduinoRFIDReader;
+using DownhillPayClient.APIClient.Models;
 using DownhillPayClient.APIClient.Requests;
 using DownhillPayClient.Classes.Transactions;
 using DownhillPayClient.MessageBoxLayout;
@@ -42,12 +43,14 @@ namespace DownhillPayClient.UserControls
             MainWindow = mainWindow;
             rfidCardRequest = new RfidCardRequest();
             clientRequest = new ClientRequest();
+            rfidCardSubscriptionRequest = new RfidCardSubscriptionRequest();
         }
 
         public MainWindow MainWindow { get; }
         public UserControl PreviousControl { get; set; }
         private readonly RfidCardRequest rfidCardRequest;
         private readonly ClientRequest clientRequest;
+        private readonly RfidCardSubscriptionRequest rfidCardSubscriptionRequest;
 
         public UserControl ChangeToControl(UserControl previousControl)
         {
@@ -108,12 +111,26 @@ namespace DownhillPayClient.UserControls
                             Debug.WriteLine(MainWindow.Transaction.RfidCard.CardNumber);
                             Debug.WriteLine(rfidCardRequestResponse.Content);
                         }
-                        else
-                        {
-                            var rfidCard = rfidCardRequest.Get(MainWindow.CardUid);
-                            if (rfidCard == null) throw new NullReferenceException("Invalid card!");
+                        var rfidCard = rfidCardRequest.Get(MainWindow.CardUid);
+                        if (rfidCard == null) throw new NullReferenceException("Invalid card!");
+                        else if (MainWindow.Transaction.TopUpType == TopUpTypes.Points)
+                        {                          
                             var rfidCardRequestResponse = rfidCardRequest.PatchPoints(rfidCard.Uid, Convert.ToInt32(rfidCard.PointsBalance), MainWindow.Transaction.TopUpPoints);
                         }
+                        #region Subscriptions Top Up
+                        else if (MainWindow.Transaction.TopUpType == TopUpTypes.Subscription)
+                        {
+                            MainWindow.Transaction.RfidCardSubscription.IdRfidCard = rfidCard.Id; 
+                            if (MainWindow.Transaction.RfidCardSubscription.DateStart == null || MainWindow.Transaction.RfidCardSubscription.DateStart < DateTime.Now)
+                            {
+                                MainWindow.Transaction.RfidCardSubscription.DateStart = DateTime.Now;
+                                MainWindow.Transaction.RfidCardSubscription.DateEnd = DateTime.Now + MainWindow.Transaction.SubscriptionTimespan;
+                            }
+                            if (rfidCardSubscriptionRequest.Exists(MainWindow.CardUid, MainWindow.Transaction.RfidCardSubscription.DateStart, MainWindow.Transaction.RfidCardSubscription.DateEnd) == true)
+                                throw new Exception("Subscription for given dates already exists for this card!");
+                            var postResponse = rfidCardSubscriptionRequest.Post(MainWindow.Transaction.RfidCardSubscription);
+                        } 
+                        #endregion
                         messageBox.Message = "Payment started. Please take your card and pay at the cash payment point. Your card will be activated after payment is completed.";
                         MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
                         messageBox.ShowDialog();

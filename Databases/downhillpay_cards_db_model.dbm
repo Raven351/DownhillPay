@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,90" last-zoom="1"
+<dbmodel pgmodeler-ver="0.9.1" last-position="1,0" last-zoom="1"
 	 default-schema="public" default-owner="postgres">
 <database name="downhillpay_cards_db" is-template="false" allow-conns="true">
 </database>
@@ -22,10 +22,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="uuid" length="0"/>
 	</column>
 	<column name="date_start" not-null="true">
-		<type name="date" length="0"/>
+		<type name="timestamp" length="0"/>
 	</column>
 	<column name="date_end" not-null="true">
-		<type name="date" length="0"/>
+		<type name="timestamp" length="0"/>
 	</column>
 	<constraint name="subscription_pk" type="pk-constr" table="cards.subscription">
 		<columns names="id" ref-type="src-columns"/>
@@ -60,7 +60,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="integer" length="0"/>
 	</column>
 	<column name="card_expiration">
-		<type name="date" length="0"/>
+		<type name="timestamp" length="0"/>
 	</column>
 	<column name="created_date" not-null="true" default-value="now()">
 		<type name="timestamp" length="0"/>
@@ -69,7 +69,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="timestamp" length="0"/>
 	</column>
 	<column name="timeout" default-value="now()">
-		<type name="date" length="0"/>
+		<type name="timestamp" length="0"/>
 	</column>
 	<constraint name="rfid_card_pk" type="pk-constr" table="cards.rfid_card">
 		<columns names="id" ref-type="src-columns"/>
@@ -135,13 +135,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="cards.rfid_card"
 	 src-required="false" dst-required="false"/>
 
-<schema name="users" rect-visible="true" fill-color="#aa55ff">
+<schema name="users" rect-visible="true" fill-color="#aa55ff" faded-out="true">
 	<role name="postgres"/>
 </schema>
 
-<table name="user">
+<table name="user" faded-out="true">
 	<schema name="users"/>
-	<position x="20" y="280"/>
+	<position x="20" y="340"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -177,7 +177,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="subscription">
 	<schema name="prices"/>
-	<position x="380" y="300"/>
+	<position x="380" y="320"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -190,9 +190,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="pos_number">
 		<type name="smallint" length="0"/>
 	</column>
-	<column name="date_start">
-		<type name="integer" length="0"/>
+	<column name="start_time">
+		<type name="time" length="0"/>
 		<comment><![CDATA[Optional if subscription plan requires it.]]></comment>
+	</column>
+	<column name="end_time">
+		<type name="time" length="0"/>
 	</column>
 	<column name="name">
 		<type name="varchar" length="60"/>
@@ -210,7 +213,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="points">
 	<schema name="prices"/>
-	<position x="700" y="300"/>
+	<position x="720" y="360"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -231,7 +234,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="gate">
 	<schema name="devices"/>
-	<position x="380" y="500"/>
+	<position x="380" y="540"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -256,7 +259,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="ski_lift">
 	<schema name="devices"/>
-	<position x="720" y="520"/>
+	<position x="760" y="560"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
