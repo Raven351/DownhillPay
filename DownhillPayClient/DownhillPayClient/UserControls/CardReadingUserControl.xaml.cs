@@ -71,21 +71,38 @@ namespace DownhillPayClient.UserControls
         {
             MessageBoxLayoutInfo messageBox = new MessageBoxLayoutInfo();
             MainWindow.contentControl.Content = ChangeToControl(previousControl, message);
-            if (previousControl == MainWindow.POSMainMenuView)
+            try
             {
-                MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
-                Debug.WriteLine(MainWindow.CardUid);
-                MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
-            }
-            
-            if (previousControl == MainWindow.PaymentMethodUserControl)
-            {
-                MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, message);
-                MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
-                if (MainWindow.CardUid != null)
+                if (previousControl == MainWindow.POSMainMenuView)
                 {
-                    try
+                    MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
+                    if (MainWindow.CardUid != null)
                     {
+                        var card = rfidCardRequest.Get(MainWindow.CardUid);
+                        if (card == null) throw new NullReferenceException("Invalid card!");
+                        else
+                        {
+                            var subscription = rfidCardSubscriptionRequest.GetClosestUpcoming(card.Id);
+                            messageBox.Message = "Card no. " + card.CardNumber + "\n\n Points balance: " + card.PointsBalance + "\n";
+                            if (subscription.DateEnd < DateTime.Now) messageBox.Message += "Subscription:\n No active or upcoming subscriptions";
+                            else if (rfidCardSubscriptionRequest.Exists(MainWindow.CardUid, subscription.DateStart, subscription.DateEnd))
+                                messageBox.Message += "\nSubscription active until\n " + subscription.DateEnd.Year + "-" + subscription.DateEnd.Month + "-" + subscription.DateEnd.Day + "\n"
+                                    + subscription.DateEnd.Hour + ":" + subscription.DateEnd.Minute;
+                            else messageBox.Message += "Subscription starts on\n " + subscription.DateStart + "\n ends on\n " + subscription.DateEnd;
+                        }
+                    }
+                    else messageBox.Message = "Invalid card!";
+                    messageBox.ShowDialog();
+                    if (messageBox.DialogResult == true) MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+                }
+
+                if (previousControl == MainWindow.PaymentMethodUserControl)
+                {
+                    MainWindow.contentControl.Content = MainWindow.CardReadingUserControl.ChangeToControl(this, message);
+                    MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
+                    if (MainWindow.CardUid != null)
+                    {
+
                         if (typeof(NewCardTransaction) == MainWindow.Transaction.GetType())
                         {
                             var rfidCardsCount = rfidCardRequest.Get().Count();
@@ -114,13 +131,13 @@ namespace DownhillPayClient.UserControls
                         var rfidCard = rfidCardRequest.Get(MainWindow.CardUid);
                         if (rfidCard == null) throw new NullReferenceException("Invalid card!");
                         else if (MainWindow.Transaction.TopUpType == TopUpTypes.Points)
-                        {                          
+                        {
                             var rfidCardRequestResponse = rfidCardRequest.PatchPoints(rfidCard.Uid, Convert.ToInt32(rfidCard.PointsBalance), MainWindow.Transaction.TopUpPoints);
                         }
                         #region Subscriptions Top Up
                         else if (MainWindow.Transaction.TopUpType == TopUpTypes.Subscription)
                         {
-                            MainWindow.Transaction.RfidCardSubscription.IdRfidCard = rfidCard.Id; 
+                            MainWindow.Transaction.RfidCardSubscription.IdRfidCard = rfidCard.Id;
                             if (MainWindow.Transaction.RfidCardSubscription.DateStart == null || MainWindow.Transaction.RfidCardSubscription.DateStart < DateTime.Now)
                             {
                                 MainWindow.Transaction.RfidCardSubscription.DateStart = DateTime.Now;
@@ -129,33 +146,35 @@ namespace DownhillPayClient.UserControls
                             if (rfidCardSubscriptionRequest.Exists(MainWindow.CardUid, MainWindow.Transaction.RfidCardSubscription.DateStart, MainWindow.Transaction.RfidCardSubscription.DateEnd) == true)
                                 throw new Exception("Subscription for given dates already exists for this card!");
                             var postResponse = rfidCardSubscriptionRequest.Post(MainWindow.Transaction.RfidCardSubscription);
-                        } 
+                        }
                         #endregion
                         messageBox.Message = "Payment started. Please take your card and pay at the cash payment point. Your card will be activated after payment is completed.";
                         MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
                         messageBox.ShowDialog();
+
+
                     }
-                    catch (NullReferenceException e)
+                    else
                     {
-                        messageBox.Message = e.Message;
+                        messageBox.Message = "PAYMENT CANCELED\n TRY AGAIN";
+                        messageBox.MessageBoxContent.Background = new SolidColorBrush(Color.FromRgb(211, 105, 105));
                         MainWindow.contentControl.Content = previousControl;
                         messageBox.ShowDialog();
                     }
-
-                    catch (Exception e)
-                    {
-                        messageBox.Message = e.Message;
-                        MainWindow.contentControl.Content = previousControl;
-                        messageBox.ShowDialog();
-                    }
-
                 }
-                else
-                {
-                    messageBox.Message = "Payment canceled. Try again.";
-                    MainWindow.contentControl.Content = previousControl;
-                    messageBox.ShowDialog();
-                }
+            }
+            catch (NullReferenceException e)
+            {
+                messageBox.Message = e.Message;
+                MainWindow.contentControl.Content = previousControl;
+                messageBox.ShowDialog();
+            }
+
+            catch (Exception e)
+            {
+                messageBox.Message = e.Message;
+                MainWindow.contentControl.Content = previousControl;
+                messageBox.ShowDialog();
             }
         }
 

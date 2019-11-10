@@ -10,28 +10,80 @@
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True" Background="Transparent">
 
-    <Border BorderThickness="5" BorderBrush="White" CornerRadius="20" Background="SkyBlue">
+    <Border x:Name="MessageBoxContent" BorderThickness="15" BorderBrush="GhostWhite" CornerRadius="50" Background="#72c9e3">
         <Grid>
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="30"/>
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="FontFamily" Value="Tahoma"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid x:Name="grid">
+                                    <Border x:Name="border" CornerRadius="8" BorderBrush="Black" BorderThickness="2">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="AliceBlue"/>
+                                        </Border.Background>
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          TextElement.FontWeight="Bold">
+                                        </ContentPresenter>
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" TargetName="border">
+                                            <Setter.Value>
+                                                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                                    <RadialGradientBrush.RelativeTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                            <TranslateTransform X="0.02" Y="0.3"/>
+                                                        </TransformGroup>
+                                                    </RadialGradientBrush.RelativeTransform>
+                                                    <GradientStop Color="#00000000" Offset="1"/>
+                                                    <GradientStop Color="#FF303030" Offset="0.3"/>
+                                                </RadialGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="0.5*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-
-            <Viewbox Grid.Row="1">
-                <TextBlock x:Name="messageTextBlock" Width="750" FontSize="42" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Text=""/>
+            <Viewbox Grid.Row="1" Margin="0">
+                <Border Background="GhostWhite" BorderBrush="Black" BorderThickness="3" Padding="7" CornerRadius="10" Margin="40 0 40 0" >
+                    <TextBlock x:Name="messageTextBlock" Width="750" FontFamily="Tahoma" FontSize="42" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Text=""/>
+                </Border>
             </Viewbox>
-
-            <Viewbox Grid.Row="3">
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="OK" x:Name="Yes" Margin="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="55" Click="Ok_Click"/>
-                </StackPanel>
+            <Viewbox Grid.Row="3" >
+                <Button x:Name="Yes" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" MinWidth="150" MinHeight="100" Click="Ok_Click">
+                    <Viewbox>
+                        <Image x:Name="MessageBoxButton" Source="/Resources/img/error.png" Margin="10" />
+                    </Viewbox>
+                </Button>
             </Viewbox>
         </Grid>
     </Border>
