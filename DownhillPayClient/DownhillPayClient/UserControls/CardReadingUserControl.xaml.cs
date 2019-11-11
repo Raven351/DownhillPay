@@ -73,6 +73,7 @@ namespace DownhillPayClient.UserControls
             MainWindow.contentControl.Content = ChangeToControl(previousControl, message);
             try
             {
+                #region Checking card balance
                 if (previousControl == MainWindow.POSMainMenuView)
                 {
                     MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
@@ -84,17 +85,21 @@ namespace DownhillPayClient.UserControls
                         {
                             var subscription = rfidCardSubscriptionRequest.GetClosestUpcoming(card.Id);
                             messageBox.Message = "Card no. " + card.CardNumber + "\n\n Points balance: " + card.PointsBalance + "\n";
-                            if (subscription.DateEnd < DateTime.Now) messageBox.Message += "Subscription:\n No active or upcoming subscriptions";
+                            if (subscription.DateEnd < DateTime.Now) messageBox.Message += "\nSubscription:\n No active or upcoming subscriptions";
                             else if (rfidCardSubscriptionRequest.Exists(MainWindow.CardUid, subscription.DateStart, subscription.DateEnd))
                                 messageBox.Message += "\nSubscription active until\n " + subscription.DateEnd.Year + "-" + subscription.DateEnd.Month + "-" + subscription.DateEnd.Day + "\n"
                                     + subscription.DateEnd.Hour + ":" + subscription.DateEnd.Minute;
-                            else messageBox.Message += "Subscription starts on\n " + subscription.DateStart + "\n ends on\n " + subscription.DateEnd;
+                            else messageBox.Message += "\nSubscription starts on\n " + subscription.DateStart.Year + "-" + subscription.DateStart.Month + "-" + subscription.DateStart.Day + " "
+                                    + subscription.DateStart.Hour + ":" + subscription.DateStart.Minute +
+                                    "\n ends on\n " + subscription.DateEnd.Year + "-" + subscription.DateEnd.Month + "-" + subscription.DateEnd.Day + " "
+                                    + subscription.DateEnd.Hour + ":" + subscription.DateEnd.Minute;
                         }
                     }
-                    else messageBox.Message = "Invalid card!";
+                    else messageBox.Message = "Operation canceled!";
                     messageBox.ShowDialog();
                     if (messageBox.DialogResult == true) MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
-                }
+                } 
+                #endregion
 
                 if (previousControl == MainWindow.PaymentMethodUserControl)
                 {
@@ -103,8 +108,10 @@ namespace DownhillPayClient.UserControls
                     if (MainWindow.CardUid != null)
                     {
 
+                        #region New card
                         if (typeof(NewCardTransaction) == MainWindow.Transaction.GetType())
                         {
+                            if (rfidCardRequest.Get(MainWindow.CardUid) != null) throw new Exception("This card is already registered!");
                             var rfidCardsCount = rfidCardRequest.Get().Count();
                             MainWindow.Transaction.RfidCard.CardNumber = DateTime.Today.Year.ToString() + DateTime.Today.Month.ToString() + "/" + rfidCardsCount;
                             MainWindow.Transaction.RfidCard.Uid = MainWindow.CardUid.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
@@ -127,13 +134,17 @@ namespace DownhillPayClient.UserControls
                             Debug.WriteLine((int)rfidCardRequestResponse.StatusCode);
                             Debug.WriteLine(MainWindow.Transaction.RfidCard.CardNumber);
                             Debug.WriteLine(rfidCardRequestResponse.Content);
-                        }
+                        } 
+                        #endregion
+
                         var rfidCard = rfidCardRequest.Get(MainWindow.CardUid);
                         if (rfidCard == null) throw new NullReferenceException("Invalid card!");
+                        #region Points Top Up
                         else if (MainWindow.Transaction.TopUpType == TopUpTypes.Points)
                         {
                             var rfidCardRequestResponse = rfidCardRequest.PatchPoints(rfidCard.Uid, Convert.ToInt32(rfidCard.PointsBalance), MainWindow.Transaction.TopUpPoints);
-                        }
+                        } 
+                        #endregion
                         #region Subscriptions Top Up
                         else if (MainWindow.Transaction.TopUpType == TopUpTypes.Subscription)
                         {
@@ -151,8 +162,6 @@ namespace DownhillPayClient.UserControls
                         messageBox.Message = "Payment started. Please take your card and pay at the cash payment point. Your card will be activated after payment is completed.";
                         MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
                         messageBox.ShowDialog();
-
-
                     }
                     else
                     {

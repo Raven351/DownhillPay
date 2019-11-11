@@ -65,10 +65,12 @@
     </ApplicationDefinition>
     <Compile Include="APIClient\Models\Client.cs" />
     <Compile Include="APIClient\Models\DatabaseModel.cs" />
+    <Compile Include="APIClient\Models\Points.cs" />
     <Compile Include="APIClient\Models\RfidCard.cs" />
     <Compile Include="APIClient\Models\RfidCardSubscription.cs" />
     <Compile Include="APIClient\Models\Subscription.cs" />
     <Compile Include="APIClient\Requests\ClientRequest.cs" />
+    <Compile Include="APIClient\Requests\PointsRequest.cs" />
     <Compile Include="APIClient\Requests\Request.cs" />
     <Compile Include="APIClient\Requests\RfidCardRequest.cs" />
     <Compile Include="APIClient\Requests\RfidCardSubscriptionRequest.cs" />

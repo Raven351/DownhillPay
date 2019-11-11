@@ -139,5 +139,14 @@ namespace DownhillPayClient.Properties {
                 return ((string)(this["SubscriptionPOS"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("points_prices?")]
+        public string Points {
+            get {
+                return ((string)(this["Points"]));
+            }
+        }
     }
 }

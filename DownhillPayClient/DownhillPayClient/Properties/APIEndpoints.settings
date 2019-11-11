@@ -41,5 +41,8 @@
     <Setting Name="SubscriptionPOS" Type="System.String" Scope="Application">
       <Value Profile="(Default)">pos_number=eq.</Value>
     </Setting>
+    <Setting Name="Points" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">points_prices?</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -119,10 +119,9 @@
                         <Viewbox>
                             <Image Source ="/Resources/img/left-arrow.png" Margin="10" />
                         </Viewbox>
-                    </Button>                       
+                    </Button>
                 </Grid>
             </Grid>
-            <!--TODO: TAGS-->
             <!--Hours Top Ups-->
             <Border Grid.Row="2" Grid.Column="1" BorderBrush="#FF000000" BorderThickness="2" CornerRadius="10" Background="#389735" Padding="10" > 
                 <Grid x:Name="HoursTopUpsButtons" Grid.Row="2" Grid.Column="1">

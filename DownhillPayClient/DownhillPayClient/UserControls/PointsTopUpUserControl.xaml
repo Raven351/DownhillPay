@@ -5,16 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DownhillPayClient.UserControls"
              mc:Ignorable="d" 
-             Background="SteelBlue"
+             Background="DeepSkyBlue"
              d:DesignHeight="768 " d:DesignWidth="1024">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="0.3*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style TargetType="TextBox">
                 <Setter Property="VerticalAlignment" Value="Center"/>
@@ -30,37 +36,28 @@
                 <Setter Property="Margin" Value="20,0,0,0"/>
                 <Setter Property="FontWeight" Value="Bold"/>
             </Style>
+            <Style x:Key="ButtonUpper">
+
+            </Style>
             <Style TargetType="Button">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="MinHeight" Value="200" />
-                <Setter Property="MinWidth" Value="320"/>
                 <Setter Property="FontSize" Value="30"/>
                 <Setter Property="Margin" Value="10"/>
+                <Setter Property="FontFamily" Value="Tahoma"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid x:Name="grid">
                                 <Border x:Name="border" CornerRadius="8" BorderBrush="Black" BorderThickness="2">
                                     <Border.Background>
-                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
-                                            <RadialGradientBrush.RelativeTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" 
-                                                        ScaleX="1.5" ScaleY="1.5"/>
-                                                    <TranslateTransform X="0.02" Y="0.3"/>
-                                                </TransformGroup>
-                                            </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Offset="1" Color="#00000000"/>
-                                            <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
-                                        </RadialGradientBrush>
+                                        <SolidColorBrush Color="AliceBlue"/>
                                     </Border.Background>
                                     <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
                                           TextElement.FontWeight="Bold">
                                     </ContentPresenter>
                                 </Border>
-
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsPressed" Value="True">
@@ -85,93 +82,98 @@
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
                                 </Trigger>
-
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
         </Grid.Resources>
-        <Label Content="Choose Top-up Value" Grid.Row="0" Grid.ColumnSpan="1"/>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Viewbox Grid.Column="0" Grid.Row="1">
-                <Button x:Name="Value1_Button" Click="Value1_Button_Click">
-                    <TextBlock TextAlignment="Center">
-                        45 Points <LineBreak/>
-                        4,50 PLN
-                    </TextBlock>
-                </Button>
-            </Viewbox>
-            <Viewbox Grid.Column="1" Grid.Row="1">
-                <Button x:Name="Value2_Button" >
-                    <TextBlock TextAlignment="Center">
-                        90 Points <LineBreak/>
-                        9 PLN
-                    </TextBlock>
-                </Button>
-            </Viewbox>
-            <Viewbox Grid.Column="2" Grid.Row="1">
-                <Button x:Name="Value3_Button">
-                    <TextBlock TextAlignment="Center">
-                        180 Points <LineBreak/>
-                        18 PLN
-                    </TextBlock>
-                </Button>
-            </Viewbox>
-        </Grid>
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Viewbox Grid.Column="0" Grid.Row="1">
-                <Button x:Name="Value4_Button">
-                    <TextBlock TextAlignment="Center">
-                        270 Points <LineBreak/>
-                        27 PLN
-                    </TextBlock>
-                </Button>
-            </Viewbox>
-            <Viewbox Grid.Column="1" Grid.Row="1">
-                <Button x:Name="Value5_Button">
-                    <TextBlock TextAlignment="Center">
-                        360 Points <LineBreak/>
-                        36 PLN
-                    </TextBlock>
-                </Button>
-            </Viewbox>
-            <Viewbox Grid.Column="2" Grid.Row="1">
-                <Button x:Name="Value6_Button">
-                    <TextBlock TextAlignment="Center">
-                        450 Points <LineBreak/>
-                        45 PLN
-                    </TextBlock>
-                </Button>
-            </Viewbox>
-        </Grid>
-        <Grid Grid.Row="0">
+        <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1" Grid.Row="0">
+            <Viewbox  Grid.Row="0" Grid.Column="0" Margin="20" HorizontalAlignment="Left">
+                <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="10" Background="AliceBlue" Padding="7">
+                    <Label Content="CHOOSE POINTS TOP UP" Grid.ColumnSpan="1" FontFamily="Tahoma"/>
+                </Border>
+            </Viewbox>
+            <Grid Grid.Row="0" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Viewbox Grid.Column="0">
-                    <Button x:Name="CancelButton" Content="Cancel" Grid.Column="2" MinWidth="350" MinHeight="120" RenderTransformOrigin="0.346,0.346" Click="CancelButton_Click"/>
-                </Viewbox>
-                <Viewbox Grid.Column="1">
-                    <Button x:Name="GoBackButton" Content="Go Back" Grid.Column="2" MinWidth="350" MinHeight="120" RenderTransformOrigin="0.346,0.346" Click="GoBackButton_Click"/>
-                </Viewbox>
+                <Button x:Name="HelpButton" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Click="HelpButton_Click">
+                    <Viewbox>
+                        <Image Source ="/Resources/img/info.png" Margin="10" />
+                    </Viewbox>
+                </Button>
+                <Button x:Name="CancelButton" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Click="CancelButton_Click">
+                    <Viewbox>
+                        <Image Source ="/Resources/img/error.png" Margin="10" />
+                    </Viewbox>
+                </Button>
+                <Button x:Name="GoBackButton" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Click="GoBackButton_Click" >
+                    <Viewbox>
+                        <Image Source ="/Resources/img/left-arrow.png" Margin="10" />
+                    </Viewbox>
+                </Button>
             </Grid>
         </Grid>
+        <Border Grid.Row="2" Grid.Column="1" BorderBrush="#FF000000" BorderThickness="2" CornerRadius="10" Background="#4365d6" Padding="10" >
+            <Grid x:Name="PointsTopUpButtonsRow1" Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="Value0_Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="0" Click="PointsClick">
+                    <TextBlock TextAlignment="Center" TextWrapping="Wrap">
+                            Unavailable
+                    </TextBlock>
+                </Button>
+                <Button x:Name="Value1_Button" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="1" Click="PointsClick">
+                    <TextBlock TextAlignment="Center">
+                            Unavailable
+                    </TextBlock>
+                </Button>
+                <Button x:Name="Value2_Button" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="2" Click="PointsClick">
+                    <TextBlock TextAlignment="Center">
+                            Unavailable
+                    </TextBlock>
+                </Button>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="4" BorderBrush="#FF000000" BorderThickness="2" CornerRadius="10" Background="#4365d6" Padding="10">
+            <Grid x:Name="PointsTopUpButtonsRow2" Grid.Row="4" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="Value3_Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="3" Click="PointsClick">
+                    <TextBlock TextAlignment="Center">
+                        Unavailable
+                    </TextBlock>
+                </Button>
+                <Button x:Name="Value4_Button" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="4" Click="PointsClick">
+                    <TextBlock TextAlignment="Center">
+                        Unavailable
+                    </TextBlock>
+                </Button>
+                <Button x:Name="Value5_Button" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Tag="5" Click="PointsClick">
+                    <TextBlock TextAlignment="Center">
+                        Unavailable
+                    </TextBlock>
+                </Button>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
