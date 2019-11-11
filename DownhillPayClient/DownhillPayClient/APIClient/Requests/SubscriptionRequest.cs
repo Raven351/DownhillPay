@@ -22,12 +22,23 @@ namespace DownhillPayClient.APIClient.Requests
         /// </summary>
         /// <param name="PosNumber">Number of button in subscriptions menu</param>
         /// <returns></returns>
-        public Subscription Get(int PosNumber)
+        public Subscription GetByPosNumber(int PosNumber)
         {
             var request = new RestRequest(pOSNumberUri + PosNumber);
             var response = this.Get<List<Subscription>>(request);
             var subscription = response.Data;
             if (subscription.Count == 1) return subscription[0];
+            else return null;
+        }
+
+        public List<Subscription>GetByPosNumber(bool notNull)
+        {
+            RestRequest request = new RestRequest();
+            if (notNull == true) request.Resource = EndpointUri + "pos_number=not.is.null";
+            else request.Resource = EndpointUri + "pos_number=is.null";
+            var reponse = this.Get<List<Subscription>>(request);
+            var subscriptionCollection = reponse.Data;
+            if (subscriptionCollection.Count > 0) return subscriptionCollection;
             else return null;
         }
     }

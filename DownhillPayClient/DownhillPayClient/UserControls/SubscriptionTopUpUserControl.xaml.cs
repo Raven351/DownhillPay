@@ -84,13 +84,13 @@ namespace DownhillPayClient.UserControls
         {
             //For optimization - could be done with one request to list TODO 
             //START - All buttons have Tag property with their consecutive number
-            var buttons = HoursTopUpsButtons.Children.OfType<Button>().Concat(DaysTopUpsButtons.Children.OfType<Button>()); //Concat collection (grids) of buttons (red and green background in UI)
-            foreach (var button in buttons.Where(button => button.Tag != null)) //For every button in collection which Tag property is not empty...
+            var buttons = HoursTopUpsButtons.Children.OfType<Button>().Concat(DaysTopUpsButtons.Children.OfType<Button>()); 
+            var subscriptionCollection = new SubscriptionRequest().GetByPosNumber(notNull: true);
+            foreach (var button in buttons.Where(button => button.Tag != null)) 
             {
-                var subcribtionRequest = new SubscriptionRequest(); //Create API Request object.
-                button.Tag = subcribtionRequest.Get(Convert.ToInt32(button.Tag.ToString())); //Execute GET request for Subscription object which PosNumber == Button.Tag and overwrite Button.Tag with returned object
-                if (button.Tag == null) button.IsEnabled = false; //If button's tag was overwritten with null, that means there is no corresponding subscription in DB for this button, so it gets disabled.
-                else ((TextBlock)button.Content).Text = ((Subscription)button.Tag).Name + "\n" + ((decimal)((Subscription)button.Tag).Price / 100).ToString("0") + " PLN"; //Else show subscription's data as button's textblock
+                button.Tag = subscriptionCollection.Where(subscription => subscription.PosNumber == Convert.ToInt32(button.Tag.ToString())).FirstOrDefault();       
+                if (button.Tag == null) button.IsEnabled = false; 
+                else ((TextBlock)button.Content).Text = ((Subscription)button.Tag).Name + "\n" + ((decimal)((Subscription)button.Tag).Price / 100).ToString("0") + " PLN"; 
             }
         }
 
