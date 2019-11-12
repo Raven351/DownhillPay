@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -109,6 +110,7 @@ namespace DownhillPayClient.UserControls
         private void PlKeyboard_Click(object sender, RoutedEventArgs e)
         {
             Keyboard_Click(sender, e);
+            PlKeyboardBorder.Visibility = Visibility.Hidden;
             PlKeyboard.Visibility = Visibility.Hidden;
             PlKeyboard.IsEnabled = false;
             Keyboard.IsEnabled = true;
@@ -133,17 +135,22 @@ namespace DownhillPayClient.UserControls
             lastNameButton.Background = Brushes.White;
             if (activeTextbox == firstNameTextBox || activeTextbox == lastNameTextBox)
             {
-                Keyboard.IsEnabled = true;
-                Keyboard.Visibility = Visibility.Visible;
+                NumKeyboardBorder.Visibility = Visibility.Hidden;
                 NumKeyboard.IsEnabled = false;
                 NumKeyboard.Visibility = Visibility.Hidden;
+                KeyboardBorder.Visibility = Visibility.Visible;
+                Keyboard.IsEnabled = true;
+                Keyboard.Visibility = Visibility.Visible;
             }
             if (activeTextbox == phoneNumberTextBox || activeTextbox == dayTextBox || activeTextbox == monthTextBox || activeTextbox == yearTextBox)
             {
+                KeyboardBorder.Visibility = Visibility.Hidden;
                 Keyboard.IsEnabled = false;
                 Keyboard.Visibility = Visibility.Hidden;
+                PlKeyboardBorder.Visibility = Visibility.Hidden;
+                NumKeyboardBorder.Visibility = Visibility.Visible;
                 NumKeyboard.IsEnabled = true;
-                NumKeyboard.Visibility = Visibility.Visible;
+                NumKeyboard.Visibility = Visibility.Visible; 
             }
             (sender as Button).Background = Brushes.Yellow; //set selected color
             activeTextbox.Background = Brushes.Yellow;
@@ -170,12 +177,14 @@ namespace DownhillPayClient.UserControls
             if (Keyboard.IsEnabled == true)
             {
                 Keyboard.IsEnabled = false;
+                PlKeyboardBorder.Visibility = Visibility.Visible;
                 PlKeyboard.Visibility = Visibility.Visible;
                 PlKeyboard.IsEnabled = true;
             }
             else
             {
                 Keyboard.IsEnabled = true;
+                PlKeyboardBorder.Visibility = Visibility.Hidden;
                 PlKeyboard.Visibility = Visibility.Hidden;
                 PlKeyboard.IsEnabled = false;
             }
@@ -213,6 +222,18 @@ namespace DownhillPayClient.UserControls
         private void DayTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             DayButton_Click(dayButton, e);
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LetterTextboxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex regex = new Regex(@"[^0-9^+^\-^\/^\*^\(^\)]");
+            MatchCollection matches = regex.Matches(((TextBox)sender).Text);
+            if (matches.Count > 1) e.Handled = true;
         }
     }
 }

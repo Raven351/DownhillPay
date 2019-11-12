@@ -82,7 +82,6 @@ namespace DownhillPayClient.UserControls
         /// </summary>
         private void InitializeSubscriptionButtons()
         {
-            //For optimization - could be done with one request to list TODO 
             //START - All buttons have Tag property with their consecutive number
             var buttons = HoursTopUpsButtons.Children.OfType<Button>().Concat(DaysTopUpsButtons.Children.OfType<Button>()); 
             var subscriptionCollection = new SubscriptionRequest().GetByPosNumber(notNull: true);
@@ -90,7 +89,7 @@ namespace DownhillPayClient.UserControls
             {
                 button.Tag = subscriptionCollection.Where(subscription => subscription.PosNumber == Convert.ToInt32(button.Tag.ToString())).FirstOrDefault();       
                 if (button.Tag == null) button.IsEnabled = false; 
-                else ((TextBlock)button.Content).Text = ((Subscription)button.Tag).Name + "\n" + ((decimal)((Subscription)button.Tag).Price / 100).ToString("0") + " PLN"; 
+                else ((TextBlock)button.Content).Text = ((Subscription)button.Tag).Name + "\n" + ((decimal)((Subscription)button.Tag).Price / 100).ToString("0.00") + " PLN"; 
             }
         }
 

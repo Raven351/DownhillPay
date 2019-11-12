@@ -84,7 +84,7 @@ namespace DownhillPayClient.UserControls
             {
                 button.Tag = pointsCollection.Where(points => points.PosNumber == Convert.ToInt32(button.Tag.ToString())).FirstOrDefault();
                 if (button.Tag == null) button.IsEnabled = false;
-                else ((TextBlock)button.Content).Text = ((Points)button.Tag).Amount + " points\n" + ((decimal)((Points)button.Tag).Price / 100).ToString("0") + " PLN";
+                else ((TextBlock)button.Content).Text = ((Points)button.Tag).Amount + " points\n" + ((decimal)((Points)button.Tag).Price / 100).ToString("0.00") + " PLN";
             }
         }
     }
