@@ -28,6 +28,7 @@ namespace DownhillPayClient.UserControls
         public NewPersonalizedCardFormUserControl()
         {
             InitializeComponent();
+            RevertState();
         }
 
         public NewPersonalizedCardFormUserControl(MainWindow mainWindow) : this()
@@ -51,42 +52,46 @@ namespace DownhillPayClient.UserControls
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
-            ClearTextBoxes();
+            RevertState();
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.contentControl.Content = PreviousControl;
-            ClearTextBoxes();
+            RevertState();
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (IsDataProvidedCorrect() == false) MessageBox.Show("Data provided is incorrect!");
+            else
             {
-                ((NewCardTransaction)MainWindow.Transaction).Client = new Client(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
-                    new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //create client objects with provided data
-                var clientRequest = new ClientRequest();
-                var responseData = clientRequest.Get(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
-                    new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //get client from database that has the same data as provided
-                if (responseData != null) //if data was returned, show MessageBox to client
+                try
                 {
-                    MessageBox.Show("Client with provided data is already in database!", "Couldn't create new client");
+                    ((NewCardTransaction)MainWindow.Transaction).Client = new Client(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                        new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //create client objects with provided data
+                    var clientRequest = new ClientRequest();
+                    var responseData = clientRequest.Get(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                        new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //get client from database that has the same data as provided
+                    if (responseData != null) //if data was returned, show MessageBox to client
+                    {
+                        MessageBox.Show("Client with provided data is already in database!", "Couldn't create new client");
+                    }
+                    else MainWindow.contentControl.Content = MainWindow.TopUpTypesUserControl.ChangeToControl(this);
+                    //else continue to next control                                                                                                
+                    //var response = clientRequest.Post(MainWindow.Client); //post client to database                                                                                                
+                    //Debug.WriteLine(response);
                 }
-                else MainWindow.contentControl.Content = MainWindow.TopUpTypesUserControl.ChangeToControl(this); 
-                //else continue to next control                                                                                                
-                //var response = clientRequest.Post(MainWindow.Client); //post client to database                                                                                                
-                //Debug.WriteLine(response);
-            }
 
-            catch (FormatException)
-            {
-                MessageBox.Show("Invalid format!");
-            }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invalid format!");
+                }
 
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
             }
 
         }
@@ -101,10 +106,16 @@ namespace DownhillPayClient.UserControls
             yearTextBox.Clear();
         }
 
+        private void RevertState()
+        {
+            ClearTextBoxes();
+            FirstNameButton_Click(firstNameButton, e: null);
+        }
+
         private void Keyboard_Click(object sender, RoutedEventArgs e)
         {
             var key = ((TextBlock)((Viewbox)(sender as Button).Content).Child).Text;
-            activeTextbox.AppendText(key);
+            if(activeTextbox.Text.Length < activeTextbox.MaxLength) activeTextbox.AppendText(key);
         }
 
         private void PlKeyboard_Click(object sender, RoutedEventArgs e)
@@ -154,10 +165,11 @@ namespace DownhillPayClient.UserControls
             }
             (sender as Button).Background = Brushes.Yellow; //set selected color
             activeTextbox.Background = Brushes.Yellow;
+            activeTextbox.Focus();
         }
 
 
-        private void FirstNameButton_Click(object sender, RoutedEventArgs e) //TODO: UI
+        private void FirstNameButton_Click(object sender, RoutedEventArgs e)
         {
             var previousActiveTextbox = activeTextbox;
             activeTextbox = firstNameTextBox;
@@ -219,9 +231,14 @@ namespace DownhillPayClient.UserControls
             ChooseTextbox(sender, previousActiveTextbox);
         }
 
-        private void DayTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            DayButton_Click(dayButton, e);
+            if (sender == firstNameTextBox) FirstNameButton_Click(firstNameButton, e);
+            if (sender == lastNameTextBox) LastNameButton_Click(lastNameButton, e);
+            if (sender == phoneNumberTextBox) PhoneNumberButton_Click(phoneNumberButton, e);
+            if (sender == dayTextBox) DayButton_Click(dayButton, e);
+            if (sender == monthTextBox) MonthButton_Click(monthButton, e);
+            if (sender == yearTextBox) YearButton_Click(yearButton, e);
         }
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
@@ -229,11 +246,112 @@ namespace DownhillPayClient.UserControls
 
         }
 
-        private void LetterTextboxTextChanged(object sender, TextChangedEventArgs e)
+        private void PreviewTextInputHandlerLetterKeyboard(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex(@"[^0-9^+^\-^\/^\*^\(^\)]");
-            MatchCollection matches = regex.Matches(((TextBox)sender).Text);
-            if (matches.Count > 1) e.Handled = true;
+            var regex = new Regex(@"[^a-ząćęłńóśźżA-ZĄĆĘŁŃÓŚŹŻ\-\s]");
+            if (regex.IsMatch(e.Text)) e.Handled = true;
         }
+
+        private void PreviewTextInputHanderNumberKeyboard(object sender, TextCompositionEventArgs e)
+        {
+            var regex = new Regex(@"[^0-9\s]");
+            if (regex.IsMatch(e.Text)) e.Handled = true;
+        }
+
+        private bool IsDataProvidedCorrect()
+        {
+            IsFirstNameCorrect();
+            IsLastNameCorrect();
+            IsPhoneNumberCorrect();
+            IsDayCorrect();
+            IsMonthCorrect();
+            IsYearCorrect();
+            return IsFirstNameCorrect() != false && IsLastNameCorrect() != false && IsPhoneNumberCorrect() != false && IsDayCorrect() != false && IsMonthCorrect() != false && IsYearCorrect() != false;
+        }
+
+        private bool IsFirstNameCorrect()
+        {
+            if (firstNameTextBox.Text.Length < 2)
+            {
+                firstNameTextBox.Background = Brushes.IndianRed;
+                return false;
+            }
+            else return true;
+        }
+
+        private bool IsLastNameCorrect()
+        {
+            if (lastNameTextBox.Text.Length < 2)
+            {
+                lastNameTextBox.Background = Brushes.IndianRed;
+                return false;
+            }
+            else return true;
+        }
+
+        private bool IsPhoneNumberCorrect()
+        {
+            if (phoneNumberTextBox.Text.Length < 5)
+            {
+                phoneNumberTextBox.Background = Brushes.IndianRed;
+                return false;
+            }
+            else return true;
+        }
+
+        private bool IsDayCorrect()
+        {
+            if (dayTextBox.Text.Length > 0)
+            {
+                if (dayTextBox.Text.Length > 2 || Convert.ToInt32(dayTextBox.Text) > 31 || Convert.ToInt32(dayTextBox.Text) < 1)
+                {
+                    dayTextBox.Background = Brushes.IndianRed;
+                    return false;
+                }
+                else return true;
+            }
+            else
+            {
+                dayTextBox.Background = Brushes.IndianRed;
+                return false;
+            }
+        }
+
+        private bool IsMonthCorrect()
+        {
+            if (monthTextBox.Text.Length > 0)
+            {
+                if (monthTextBox.Text.Length > 2 || Convert.ToInt32(monthTextBox.Text) > 12 || Convert.ToInt32(monthTextBox.Text) < 1)
+                {
+                    monthTextBox.Background = Brushes.IndianRed;
+                    return false;
+                }
+                else return true;
+            }
+            else
+            {
+                dayTextBox.Background = Brushes.IndianRed;
+                return false;
+            }
+        }
+
+        private bool IsYearCorrect()
+        {
+            if (yearTextBox.Text.Length > 0)
+            {
+                if (yearTextBox.Text.Length > 4 || Convert.ToInt32(yearTextBox.Text) > DateTime.Now.Year - 4 || Convert.ToInt32(yearTextBox.Text) < 1900)
+                {
+                    yearTextBox.Background = Brushes.IndianRed;
+                    return false;
+                }
+                else return true;
+            }
+            else
+            {
+                dayTextBox.Background = Brushes.IndianRed;
+                return false;
+            }
+        }
+       
     }
 }
