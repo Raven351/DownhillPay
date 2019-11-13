@@ -50,10 +50,10 @@ namespace ArduinoRFIDReader
         {
             string uid = null;
             this.ReadTimeout = 5000;
-            this.Open();
-            this.WriteLine(ReadUidCommand);
             try
             {
+                this.Open();
+                this.WriteLine(ReadUidCommand);
                 uid = this.ReadLine();
                 if(uid.Contains(">") && uid.Contains("<"))
                 {
@@ -80,6 +80,20 @@ namespace ArduinoRFIDReader
         public async Task<string> ReadUIDAsync()
         {
             return await Task.Run(() => ReadUID());
+        }
+
+        public bool IsAvailable()
+        {
+            try
+            {
+                this.Open();
+                this.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
