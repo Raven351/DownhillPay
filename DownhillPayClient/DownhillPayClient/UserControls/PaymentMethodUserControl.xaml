@@ -5,18 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DownhillPayClient.UserControls"
              mc:Ignorable="d" 
-             Background="SteelBlue"
+             Background="DeepSkyBlue"
              d:DesignHeight="768 " d:DesignWidth="1024">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.2*" />
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style TargetType="TextBox">
@@ -36,34 +40,22 @@
             <Style TargetType="Button">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="MinHeight" Value="240" />
-                <Setter Property="MinWidth" Value="350"/>
                 <Setter Property="FontSize" Value="30"/>
                 <Setter Property="Margin" Value="10"/>
+                <Setter Property="FontFamily" Value="Tahoma"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid x:Name="grid">
                                 <Border x:Name="border" CornerRadius="8" BorderBrush="Black" BorderThickness="2">
                                     <Border.Background>
-                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
-                                            <RadialGradientBrush.RelativeTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" 
-                                                        ScaleX="1.5" ScaleY="1.5"/>
-                                                    <TranslateTransform X="0.02" Y="0.3"/>
-                                                </TransformGroup>
-                                            </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Offset="1" Color="#00000000"/>
-                                            <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
-                                        </RadialGradientBrush>
+                                        <SolidColorBrush Color="AliceBlue"/>
                                     </Border.Background>
                                     <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
                                           TextElement.FontWeight="Bold">
                                     </ContentPresenter>
                                 </Border>
-
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsPressed" Value="True">
@@ -88,64 +80,86 @@
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
                                 </Trigger>
-
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
         </Grid.Resources>
-        <Grid Grid.Column="1" Grid.ColumnSpan="2">
+        <Viewbox  Grid.Row="0" Grid.Column="1" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Border BorderBrush="#FF000000" BorderThickness="2" CornerRadius="10" Background="LightSteelBlue" Padding="30 5 30 5">
+                <Label Content="PAYMENT METHOD" Grid.ColumnSpan="1" FontFamily="Cambria"/>
+            </Border>
+        </Viewbox>
+        <Grid Grid.Column="2" Grid.ColumnSpan="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Viewbox Grid.Column="0">
-                <Button x:Name="CancelButton" Content="Cancel" Grid.Column="0" MinWidth="350" MinHeight="120" Click="CancelButton_Click"/>
-            </Viewbox>
-            <Viewbox Grid.Column="1">
-                <Button x:Name="GoBackButton" Content="Go Back" Grid.Column="2" MinWidth="350" MinHeight="120" RenderTransformOrigin="0.346,0.346" Click="GoBackButton_Click"/>
-            </Viewbox>
-        </Grid>
-        <Viewbox Margin="10" Grid.Column="0" Grid.Row="1">
-            <Button x:Name="CashButton" Click="CashButton_Click">
-                <TextBlock TextAlignment="Center" FontWeight="Bold">
-                    Cash
-                </TextBlock>
+            <Button x:Name="CancelButton" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Click="CancelButton_Click">
+                <Viewbox>
+                    <Image Source ="/Resources/img/error.png" Margin="10" />
+                </Viewbox>
             </Button>
-        </Viewbox>
-        <Viewbox Margin="10" Grid.Column="1" Grid.Row="1">
-            <Button x:Name="CardButton" IsEnabled="False">
-                <TextBlock TextAlignment="Center" FontWeight="Bold">
-                    Card <LineBreak/>
-                    (unavailable)
-                </TextBlock>
+            <Button x:Name="GoBackButton" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Click="GoBackButton_Click" >
+                <Viewbox>
+                    <Image Source ="/Resources/img/left-arrow.png" Margin="10" />
+                </Viewbox>
             </Button>
-        </Viewbox>
-        <Grid Grid.Column="2" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="1.5*"/>
-            </Grid.RowDefinitions>
-            <Viewbox Margin="10" Grid.Column="2" Grid.Row="0" VerticalAlignment="Bottom">
-                <TextBox MinHeight="70" MinWidth="350" FontSize="52" Text="BLIK CODE"/>
-            </Viewbox>
-            <Viewbox Margin="10" Grid.Column="2" Grid.Row="1" VerticalAlignment="Top">
-                <Button x:Name="BlikButton" Content="BLIK" MinHeight="135" VerticalAlignment="Bottom"/>
-            </Viewbox>
         </Grid>
-        <Grid Grid.Column="2" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Viewbox Grid.Column="0">
-                <Label Grid.Column="0" Content="Amount:" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-            </Viewbox>
-            <Viewbox Grid.Column="1">
-                <Label x:Name="AmountLabel" Grid.Column="1" Content="XXX PLN" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            </Viewbox>
-        </Grid>
+        <Border Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" BorderBrush="AliceBlue" BorderThickness="3" Background="#355fe9" CornerRadius="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="CashButton" Click="CashButton_Click" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" >
+                    <Viewbox>
+                        <TextBlock Padding="40">
+                            CASH
+                        </TextBlock>
+                    </Viewbox>
+                </Button>
+                <Button x:Name="CardButton"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" IsEnabled="False">
+                    <Viewbox>
+                        <TextBlock Padding="20" TextAlignment="Center">
+                             Card <LineBreak/>
+                            (unavailable)
+                        </TextBlock>
+                    </Viewbox>
+                </Button>
+                <Grid Grid.Column ="2" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="1.5*"/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="BlikButton" Grid.Row="1" Margin="0 20 0 10" HorizontalAlignment="Stretch" IsEnabled="False" >
+                        <Viewbox>
+                            <TextBlock Padding="20">
+                                BLIK
+                            </TextBlock>
+                        </Viewbox>
+                    </Button>
+                    <TextBox FontSize="46" Text="BLIK CODE" Margin="10" Grid.Column="2" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsEnabled="False"/>
 
+
+                </Grid>
+            </Grid>
+        </Border>
+        <Border Grid.Column="2" Grid.Row="4" Background="#355fe9" CornerRadius="20" BorderBrush="Black" BorderThickness="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Grid.Column="0">
+                    <Label Grid.Column="0" Content="Total amount:" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Foreground ="White"/>
+                </Viewbox>
+                <Viewbox Grid.Column="1">
+                    <Label x:Name="AmountLabel" Grid.Column="1" Content="XXX PLN" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Foreground="White"/>
+                </Viewbox>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

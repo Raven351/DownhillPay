@@ -33,7 +33,7 @@
                 <Setter Property="FontSize" Value="42"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="Margin" Value="20,0,0,0"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
                 <Setter Property="FontWeight" Value="Bold"/>
             </Style>
             <Style x:Key="ButtonUpper">
@@ -94,8 +94,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Viewbox  Grid.Row="0" Grid.Column="0" Margin="20" HorizontalAlignment="Left">
-                <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="10" Background="AliceBlue" Padding="7">
-                    <Label Content="CHOOSE POINTS TOP UP" Grid.ColumnSpan="1" FontFamily="Tahoma"/>
+                <Border BorderBrush="#FF000000" BorderThickness="2" CornerRadius="10" Background="LightSteelBlue" Padding="20">
+                    <Label Content="CHOOSE POINTS TOP UP" Grid.ColumnSpan="1" FontFamily="Cambria"/>
                 </Border>
             </Viewbox>
             <Grid Grid.Row="0" Grid.Column="1">

@@ -239,5 +239,16 @@
   <ItemGroup>
     <Resource Include="Resources\img\success.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\PL.png" />
+    <Resource Include="Resources\img\UK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\account-balance.png" />
+    <Resource Include="Resources\img\mastercard.png" />
+    <Resource Include="Resources\img\new_card.png" />
+    <Resource Include="Resources\img\topup.png" />
+    <Resource Include="Resources\img\visa.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

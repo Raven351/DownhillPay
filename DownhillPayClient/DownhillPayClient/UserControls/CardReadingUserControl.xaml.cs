@@ -96,8 +96,9 @@ namespace DownhillPayClient.UserControls
                         }
                     }
                     else messageBox.Message = "Operation canceled!";
+                    
+                    MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
                     messageBox.ShowDialog();
-                    if (messageBox.DialogResult == true) MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
                 } 
                 #endregion
 

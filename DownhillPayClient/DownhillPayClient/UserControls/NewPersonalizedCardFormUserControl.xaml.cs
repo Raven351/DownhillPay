@@ -68,7 +68,7 @@ namespace DownhillPayClient.UserControls
             {
                 try
                 {
-                    ((NewCardTransaction)MainWindow.Transaction).Client = new Client(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                    ((NewCardTransaction)MainWindow.Transaction).Client = new Client(firstNameTextBox.Text.ToUpper(), lastNameTextBox.Text.ToUpper(), phoneNumberTextBox.Text,
                         new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //create client objects with provided data
                     var clientRequest = new ClientRequest();
                     var responseData = clientRequest.Get(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,

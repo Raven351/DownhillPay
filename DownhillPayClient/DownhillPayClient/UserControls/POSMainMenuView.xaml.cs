@@ -55,5 +55,10 @@ namespace DownhillPayClient.UserControls
             MainWindow.contentControl.Content = MainWindow.TopUpTypesUserControl.ChangeToControl(this);
             MainWindow.Transaction = new Classes.Transactions.Transaction();
         }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

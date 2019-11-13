@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DownhillPayClient.UserControls"
              mc:Ignorable="d" 
-             Background="SteelBlue"
+             Background="DeepSkyBlue"
              d:DesignHeight="768 " d:DesignWidth="1024">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,8 +16,11 @@
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style TargetType="TextBox">
@@ -31,40 +34,28 @@
                 <Setter Property="FontSize" Value="62"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="Margin" Value="20,0,0,0"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
                 <Setter Property="FontWeight" Value="Bold"/>
             </Style>
             <Style TargetType="Button">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="MinHeight" Value="140" />
-                <Setter Property="MinWidth" Value="350"/>
                 <Setter Property="FontSize" Value="30"/>
                 <Setter Property="Margin" Value="10"/>
+                <Setter Property="FontFamily" Value="Tahoma"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid x:Name="grid">
                                 <Border x:Name="border" CornerRadius="8" BorderBrush="Black" BorderThickness="2">
                                     <Border.Background>
-                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
-                                            <RadialGradientBrush.RelativeTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" 
-                                                        ScaleX="1.5" ScaleY="1.5"/>
-                                                    <TranslateTransform X="0.02" Y="0.3"/>
-                                                </TransformGroup>
-                                            </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Offset="1" Color="#00000000"/>
-                                            <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
-                                        </RadialGradientBrush>
+                                        <SolidColorBrush Color="AliceBlue"/>
                                     </Border.Background>
                                     <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
                                           TextElement.FontWeight="Bold">
                                     </ContentPresenter>
                                 </Border>
-
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsPressed" Value="True">
@@ -89,23 +80,29 @@
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
                                 </Trigger>
-
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
         </Grid.Resources>
-        <Grid Grid.Column="1">
+        <Viewbox  Grid.Row="0" Grid.Column="1" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Border BorderBrush="#FF000000" BorderThickness="3" CornerRadius="10" Background="LightSteelBlue" Padding="30 5 30 5">
+                <Label Content="CARD TYPE" Grid.ColumnSpan="1" FontFamily="Cambria"/>
+            </Border>
+        </Viewbox>
+        <Grid Grid.Column="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Viewbox Grid.Column="1">
-                <Button x:Name="GoBackButton" Content="Go Back" Grid.Column="2" MinWidth="350" MinHeight="120" RenderTransformOrigin="0.346,0.346" Click="GoBackButton_Click"/>
-            </Viewbox>
+            <Button x:Name="GoBackButton" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Click="GoBackButton_Click" >
+                <Viewbox>
+                    <Image Source ="/Resources/img/left-arrow.png" Margin="10" />
+                </Viewbox>
+            </Button>
         </Grid>
-        <Viewbox Grid.Row="2" Grid.Column="0" Margin="10">
+        <Viewbox Grid.Row="2" Grid.Column="1" Margin="10">
             <Grid Grid.Row="1" Grid.Column="0">
                 <Border BorderThickness="2" CornerRadius="50,50,50,50" BorderBrush="Black" Background="LightPink" Width="500" Height="300">
                     <RichTextBox  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32"  Margin="20" Background="Transparent" BorderBrush="Transparent" Focusable="False" IsReadOnly="True" BorderThickness="0">
@@ -124,7 +121,7 @@
                 </Border>
             </Grid>
         </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="1" Margin="10">
+        <Viewbox Grid.Row="2" Grid.Column="3" Margin="10">
             <Grid Grid.Row="1" Grid.Column="1">
                 <Border BorderThickness="2" CornerRadius="50,50,50,50" BorderBrush="Black" Background="LightPink" Width="500" Height="300">
                     <RichTextBox  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="32"  Margin="20" Background="Transparent" BorderBrush="Transparent" Focusable="False" IsReadOnly="True" BorderThickness="0">
@@ -144,11 +141,21 @@
                 </Border>
             </Grid>
         </Viewbox>
-        <Viewbox Grid.Row="3" Grid.Column="0">
-            <Button x:Name="NonPersonalizedCardButton" Content="Non-Personalized Card" Grid.Column="0" Grid.Row="2" Click="NonPersonalizedCardButton_Click"/>
-        </Viewbox>
-        <Viewbox Grid.Column="1" Grid.Row="3">
-            <Button x:Name="PersonalizedCardButton" Content="Personalized Card" Grid.Column="1" Grid.Row="2" Click="PersonalizedCardButton_Click"/>
-        </Viewbox>
+        <Button  x:Name="NonPersonalizedCardButton" Grid.Row="3" Grid.Column="1" Click="NonPersonalizedCardButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="20">
+            <Viewbox>
+                <TextBlock TextAlignment="Center" Padding="20">
+                    NON-PERSONALIZED <LineBreak/>
+                    CARD
+                </TextBlock>
+            </Viewbox>
+        </Button>
+        <Button x:Name="PersonalizedCardButton" Grid.Row="3" Grid.Column="3" Click="PersonalizedCardButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="20">
+            <Viewbox>
+                <TextBlock TextAlignment="Center" Padding="20">
+                    PERSONALIZED <LineBreak/>
+                    CARD
+                </TextBlock>
+            </Viewbox>
+        </Button>
     </Grid>
 </UserControl>

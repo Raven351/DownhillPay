@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DownhillPayClient.UserControls"
              mc:Ignorable="d" 
-             Background="SteelBlue"
+             Background="DeepSkyBlue"
              d:DesignHeight="768 " d:DesignWidth="1024">
     <Grid>
         <Grid.RowDefinitions>
@@ -32,34 +32,22 @@
             <Style TargetType="Button">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="MinHeight" Value="140" />
-                <Setter Property="MinWidth" Value="350"/>
                 <Setter Property="FontSize" Value="30"/>
                 <Setter Property="Margin" Value="10"/>
+                <Setter Property="FontFamily" Value="Tahoma"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid x:Name="grid">
                                 <Border x:Name="border" CornerRadius="8" BorderBrush="Black" BorderThickness="2">
                                     <Border.Background>
-                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
-                                            <RadialGradientBrush.RelativeTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" 
-                                                        ScaleX="1.5" ScaleY="1.5"/>
-                                                    <TranslateTransform X="0.02" Y="0.3"/>
-                                                </TransformGroup>
-                                            </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Offset="1" Color="#00000000"/>
-                                            <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
-                                        </RadialGradientBrush>
+                                        <SolidColorBrush Color="AliceBlue"/>
                                     </Border.Background>
                                     <ContentPresenter HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
                                           TextElement.FontWeight="Bold">
                                     </ContentPresenter>
                                 </Border>
-
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsPressed" Value="True">
@@ -84,7 +72,6 @@
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
                                 </Trigger>
-
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
@@ -93,7 +80,7 @@
         </Grid.Resources>
         <Grid Grid.Row="1">
             <Viewbox Margin="20">
-                <Border BorderThickness="2" CornerRadius="50,50,50,50" BorderBrush="Black" Background="Green" Width="500" Height="200" Padding="10,0,10,0">
+                <Border BorderThickness="2" CornerRadius="50,50,50,50" BorderBrush="Black" Background="#93dc9f" Width="500" Height="200" Padding="10,0,10,0">
                     <RichTextBox x:Name="MessageTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="48" FontWeight="SemiBold" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
                         <RichTextBox.Resources>
                             <Style TargetType="{x:Type Paragraph}">
@@ -102,15 +89,24 @@
                             </Style>
                         </RichTextBox.Resources>
                         <FlowDocument x:Name="messageFlowDocument">
-                            <Paragraph>Please place your card next to the reader.</Paragraph>
+                            <Paragraph>Please place your card close to the reader.</Paragraph>
                         </FlowDocument>
                     </RichTextBox>
                 </Border>
             </Viewbox>
         </Grid>
-        <Viewbox Grid.Row="2">
-            <Button x:Name="CancelButton" Content="Cancel" Grid.Column="1" Click="CancelButton_Click"/>
-        </Viewbox>
-        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="CancelButton" Grid.Column="1"  Click="CancelButton_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="20">
+                <Viewbox>
+                    <Image Source ="/Resources/img/error.png" Margin="10" />
+                </Viewbox>
+            </Button>
+        </Grid>
+
     </Grid>
 </UserControl>
