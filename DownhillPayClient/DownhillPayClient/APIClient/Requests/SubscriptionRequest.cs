@@ -36,8 +36,8 @@ namespace DownhillPayClient.APIClient.Requests
             RestRequest request = new RestRequest();
             if (notNull == true) request.Resource = EndpointUri + "pos_number=not.is.null";
             else request.Resource = EndpointUri + "pos_number=is.null";
-            var reponse = this.Get<List<Subscription>>(request);
-            var subscriptionCollection = reponse.Data;
+            var response = this.Get<List<Subscription>>(request);
+            var subscriptionCollection = response.Data;
             if (subscriptionCollection.Count > 0) return subscriptionCollection;
             else return null;
         }

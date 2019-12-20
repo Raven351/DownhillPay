@@ -14,13 +14,15 @@ namespace DownhillPayClient.APIClient.Models
         {
         }
 
-        public Subscription(int price, TimeSpan period, int posNumber, string name, string description)
+        public Subscription(int price, TimeSpan period, int posNumber, string name, string description, DateTime startTime, DateTime endTime)
         {
             Price = price;
             Period = period;
             PosNumber = posNumber;
             Name = name;
             Description = description;
+            StartTime = startTime;
+            EndTime = endTime;
         }
 
         [JsonProperty ("price")]
