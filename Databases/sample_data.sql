@@ -13,7 +13,15 @@ insert into prices.subscription(id, price, "period", pos_number, start_time, end
 (uuid_generate_v4(), 8000, '4 hours', 3, null, null, '4 hours'),
 (uuid_generate_v4(), 8500, '5 hours', 4, null, null, '5 hours'),
 (uuid_generate_v4(), 9500, '6 hours', 5, null, null, '6 hours'),
-(uuid_generate_v4(), 6000, '6 hours', 6, '16:00', '21:00', '6 hour after 16:00');
+(uuid_generate_v4(), 6000, '6 hours', 6, '16:00', '21:00', '6 hour after 16:00'),
+(uuid_generate_v4(), 10500, '24 hours', 8, null, null, '1 day'),
+(uuid_generate_v4(), 19500, '48 hours', 9, null, null, '2 days'),
+(uuid_generate_v4(), 28000, '72 hours', 10, null, null, '3 days'),
+(uuid_generate_v4(), 35500, '96 hours', 11, null, null, '4 days'),
+(uuid_generate_v4(), 41000, '120 hours', 12, null, null, '5 days'),
+(uuid_generate_v4(), 46000, '144 hours', 13, null, null, '6 days'),
+(uuid_generate_v4(), 49500, '168 hours', 14, null, null, '7 days');
+
 
 insert into devices.ski_lift (id, "name", points_price) values 
 ('4171a50d-87be-47c2-833f-99930f2ba0af', 'Zwyrtlik', 40),
@@ -21,4 +29,4 @@ insert into devices.ski_lift (id, "name", points_price) values
 
 insert into devices.gate(id, "number", id_ski_lift) values 
 (uuid_generate_v4(), 1, 'c7f01f88-9b7f-4e0e-b262-493aa3014b20'),
-(uuid_generate_v4(), 1, 'c7f01f88-9b7f-4e0e-b262-493aa3014b20');
+(uuid_generate_v4(), 2, 'c7f01f88-9b7f-4e0e-b262-493aa3014b20');

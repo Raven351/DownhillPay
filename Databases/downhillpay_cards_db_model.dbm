@@ -42,7 +42,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="rfid_card">
 	<schema name="cards"/>
-	<position x="540" y="20"/>
+	<position x="560" y="20"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -105,7 +105,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="client">
 	<schema name="cards"/>
-	<position x="20" y="60"/>
+	<position x="20" y="40"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -124,6 +124,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="client_pk" type="pk-constr" table="cards.client">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
+	<constraint name="all_client_data_uq" type="uq-constr" table="cards.client">
+		<columns names="first_name,last_name,phone_number,birth_date" ref-type="src-columns"/>
+	</constraint>
 </table>
 
 <relationship name="rfid_card_has_one_client" type="rel11"
@@ -133,7 +136,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#83af1f"
 	 src-table="cards.client"
 	 dst-table="cards.rfid_card"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
 <schema name="users" rect-visible="true" fill-color="#aa55ff" faded-out="true">
 	<role name="postgres"/>
@@ -160,15 +167,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="user_unique" type="uq-constr" table="users.&quot;user&quot;">
 		<columns names="email" ref-type="src-columns"/>
 	</constraint>
-
-	<customidxs object-type="column">
-		<object name="id_client" index="3"/>
-	</customidxs>
-
-	<customidxs object-type="constraint">
-		<object name="client_fk" index="2"/>
-		<object name="user_uq" index="3"/>
-	</customidxs>
 </table>
 
 <schema name="prices" rect-visible="true" fill-color="#ffaa00">
@@ -177,7 +175,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="subscription">
 	<schema name="prices"/>
-	<position x="380" y="320"/>
+	<position x="20" y="340"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -213,7 +211,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="points">
 	<schema name="prices"/>
-	<position x="720" y="360"/>
+	<position x="300" y="380"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -240,7 +238,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="gate">
 	<schema name="devices"/>
-	<position x="380" y="540"/>
+	<position x="20" y="560"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -265,7 +263,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="ski_lift">
 	<schema name="devices"/>
-	<position x="760" y="560"/>
+	<position x="400" y="580"/>
 	<column name="id" not-null="true">
 		<type name="uuid" length="0"/>
 	</column>
@@ -293,10 +291,14 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-col-pattern="{sc}_{st}"
 	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
 	 src-fk-pattern="{st}_fk"
-	 custom-color="#83af1f"
+	 custom-color="#83af1f" faded-out="true"
 	 src-table="cards.client"
 	 dst-table="users.&quot;user&quot;"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
 
 <schema name="api" rect-visible="true" fill-color="#94e1e5">
 	<role name="postgres"/>
@@ -305,13 +307,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <view name="client">
 	<schema name="api"/>
 	<role name="postgres"/>
-	<position x="1040" y="360"/>
+	<position x="960" y="500"/>
 	<reference table="cards.client"/>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">0</expression>
 </view>
 
-<relationship name="rel_client_client" type="reltv" faded-out="true"
+<relationship name="rel_client_client" type="reltv"
 	 src-table="api.client"
 	 dst-table="cards.client"
 	 src-required="false" dst-required="false"/>
@@ -319,13 +321,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <view name="rfid_card">
 	<schema name="api"/>
 	<role name="postgres"/>
-	<position x="1120" y="360"/>
+	<position x="1040" y="500"/>
 	<reference table="cards.rfid_card"/>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">0</expression>
 </view>
 
-<relationship name="rel_rfid_card_rfid_card" type="reltv" faded-out="true"
+<relationship name="rel_rfid_card_rfid_card" type="reltv"
 	 src-table="api.rfid_card"
 	 dst-table="cards.rfid_card"
 	 src-required="false" dst-required="false"/>
@@ -333,13 +335,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <view name="subscription">
 	<schema name="api"/>
 	<role name="postgres"/>
-	<position x="1220" y="360"/>
+	<position x="1140" y="500"/>
 	<reference table="cards.subscription"/>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">0</expression>
 </view>
 
-<relationship name="rel_new_object_subscription" type="reltv" faded-out="true"
+<relationship name="rel_new_object_subscription" type="reltv"
 	 src-table="api.subscription"
 	 dst-table="cards.subscription"
 	 src-required="false" dst-required="false"/>
@@ -347,13 +349,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <view name="subscription_prices">
 	<schema name="api"/>
 	<role name="postgres"/>
-	<position x="1040" y="420"/>
+	<position x="960" y="560"/>
 	<reference table="prices.subscription"/>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">0</expression>
 </view>
 
-<relationship name="rel_subscription_prices_subscription" type="reltv" faded-out="true"
+<relationship name="rel_subscription_prices_subscription" type="reltv"
 	 src-table="api.subscription_prices"
 	 dst-table="prices.subscription"
 	 src-required="false" dst-required="false"/>
@@ -361,13 +363,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <view name="points_prices">
 	<schema name="api"/>
 	<role name="postgres"/>
-	<position x="1220" y="420"/>
+	<position x="1140" y="560"/>
 	<reference table="prices.points"/>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">0</expression>
 </view>
 
-<relationship name="rel_points_prices_points" type="reltv" faded-out="true"
+<relationship name="rel_points_prices_points" type="reltv"
 	 src-table="api.points_prices"
 	 dst-table="prices.points"
 	 src-required="false" dst-required="false"/>
@@ -375,13 +377,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <view name="gate">
 	<schema name="api"/>
 	<role name="postgres"/>
-	<position x="1100" y="480"/>
+	<position x="1020" y="620"/>
 	<reference table="devices.gate"/>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">0</expression>
 </view>
 
-<relationship name="rel_gate_gate" type="reltv" faded-out="true"
+<relationship name="rel_gate_gate" type="reltv"
 	 src-table="api.gate"
 	 dst-table="devices.gate"
 	 src-required="false" dst-required="false"/>
@@ -389,13 +391,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <view name="ski_lift">
 	<schema name="api"/>
 	<role name="postgres"/>
-	<position x="1220" y="480"/>
+	<position x="1140" y="620"/>
 	<reference table="devices.ski_lift"/>
 	<expression type="select-exp">0</expression>
 	<expression type="from-exp">0</expression>
 </view>
 
-<relationship name="rel_ski_lift_ski_lift" type="reltv" faded-out="true"
+<relationship name="rel_ski_lift_ski_lift" type="reltv"
 	 src-table="api.ski_lift"
 	 dst-table="devices.ski_lift"
 	 src-required="false" dst-required="false"/>
