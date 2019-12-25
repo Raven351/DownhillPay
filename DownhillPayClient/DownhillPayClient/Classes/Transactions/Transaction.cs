@@ -15,6 +15,7 @@ namespace DownhillPayClient.Classes.Transactions
         {
             RfidCard = new APIClient.Models.RfidCard();
             RfidCardSubscription = new APIClient.Models.RfidCardSubscription();
+            TopUpPoints = 0;
         }
 
         #region PROPERTIES
