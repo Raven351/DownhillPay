@@ -76,6 +76,7 @@
     <Compile Include="APIClient\Requests\RfidCardSubscriptionRequest.cs" />
     <Compile Include="APIClient\Requests\SubscriptionRequest.cs" />
     <Compile Include="APIClient\Serializers\JsonNETSerializer.cs" />
+    <Compile Include="Classes\MessageBoxes\CardInfo.cs" />
     <Compile Include="Classes\Transactions\NewCardTransaction.cs" />
     <Compile Include="Classes\Transactions\Enums\TopUpTypes.cs" />
     <Compile Include="Classes\Transactions\Transaction.cs" />

@@ -11,6 +11,10 @@ namespace DownhillPayClient.Classes.MessageBoxes
 {
     public class CardInfo
     {
+        /// <summary>
+        /// Builder class for MessageBoxLayoutInfo with card's information as messagebox message.
+        /// </summary>
+        /// <param name="card">Card object of which information are to be displayed</param>
         public CardInfo(RfidCard card)
         {
             this.card = card;
@@ -22,6 +26,10 @@ namespace DownhillPayClient.Classes.MessageBoxes
         private readonly MessageBoxLayoutInfo messageBox;
         private readonly RfidCardSubscriptionRequest rfidCardSubscriptionRequest;
         private readonly RfidCardSubscription subscription;
+        /// <summary>
+        /// Gets messagebox object that contains message parameter with card's info.
+        /// </summary>
+        /// <returns></returns>
         public MessageBoxLayoutInfo GetMessageBox()
         {
             messageBox.Message = "Card no. " + card.CardNumber + "\n\n Points balance: " + card.PointsBalance + "\n";

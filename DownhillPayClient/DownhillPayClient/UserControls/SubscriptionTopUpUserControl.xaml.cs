@@ -38,7 +38,7 @@ namespace DownhillPayClient.UserControls
         public MainWindow MainWindow { get; }
 
         public UserControl PreviousControl { get ; set ; }
-
+        
         public UserControl ChangeToControl(UserControl previousControl)
         {
             PreviousControl = previousControl;
