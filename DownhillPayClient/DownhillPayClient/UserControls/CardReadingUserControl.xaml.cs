@@ -20,6 +20,7 @@ using APIClient.Requests;
 using ArduinoRFIDReader;
 using DownhillPayClient.APIClient.Models;
 using DownhillPayClient.APIClient.Requests;
+using DownhillPayClient.Classes.MessageBoxes;
 using DownhillPayClient.Classes.Transactions;
 using DownhillPayClient.MessageBoxLayout;
 using RestSharp;
@@ -35,8 +36,6 @@ namespace DownhillPayClient.UserControls
         {
             InitializeComponent();
         }
-
-        
 
         public CardReadingUserControl(MainWindow mainWindow) : this()
         {
@@ -76,29 +75,7 @@ namespace DownhillPayClient.UserControls
                 #region Checking card balance
                 if (previousControl == MainWindow.POSMainMenuView)
                 {
-                    MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
-                    if (MainWindow.CardUid != null)
-                    {
-                        var card = rfidCardRequest.Get(MainWindow.CardUid);
-                        if (card == null) throw new NullReferenceException("Invalid card!");
-                        else
-                        {
-                            var subscription = rfidCardSubscriptionRequest.GetClosestUpcoming(card.Id);
-                            messageBox.Message = "Card no. " + card.CardNumber + "\n\n Points balance: " + card.PointsBalance + "\n";
-                            if (subscription.DateEnd < DateTime.Now) messageBox.Message += "\nSubscription:\n No active or upcoming subscriptions";
-                            else if (rfidCardSubscriptionRequest.Exists(MainWindow.CardUid, subscription.DateStart, subscription.DateEnd))
-                                messageBox.Message += "\nSubscription active until\n " + subscription.DateEnd.Year + "-" + subscription.DateEnd.Month + "-" + subscription.DateEnd.Day + "\n"
-                                    + subscription.DateEnd.Hour + ":" + subscription.DateEnd.Minute;
-                            else messageBox.Message += "\nSubscription starts on\n " + subscription.DateStart.Year + "-" + subscription.DateStart.Month + "-" + subscription.DateStart.Day + " "
-                                    + subscription.DateStart.Hour + ":" + subscription.DateStart.Minute +
-                                    "\n ends on\n " + subscription.DateEnd.Year + "-" + subscription.DateEnd.Month + "-" + subscription.DateEnd.Day + " "
-                                    + subscription.DateEnd.Hour + ":" + subscription.DateEnd.Minute;
-                        }
-                    }
-                    else messageBox.Message = "Operation canceled!";
-                    
-                    MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
-                    messageBox.ShowDialog();
+                    CheckCardBalance();
                 } 
                 #endregion
 
@@ -207,6 +184,26 @@ namespace DownhillPayClient.UserControls
             CancellationTokenSource cancellationToken = new CancellationTokenSource();
             string uid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
             Debug.WriteLine(uid);
+        }
+
+        private async void CheckCardBalance()
+        {
+            MessageBoxLayoutInfo messageBox = new MessageBoxLayoutInfo();
+            MainWindow.CardUid = await MainWindow.MFRC522ReaderWriter.ReadUIDAsync();
+            if (MainWindow.CardUid != null)
+            {
+                var card = rfidCardRequest.Get(MainWindow.CardUid);
+                if (card == null) throw new NullReferenceException("Invalid card!");
+                else
+                {
+                    var cardInfo = new CardInfo(card);
+                    messageBox = cardInfo.GetMessageBox();
+                }
+            }
+            else messageBox.Message = "Operation canceled!";
+
+            MainWindow.contentControl.Content = MainWindow.POSMainMenuView;
+            messageBox.ShowDialog();
         }
     }
 }
