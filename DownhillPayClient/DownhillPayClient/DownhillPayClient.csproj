@@ -95,9 +95,6 @@
     <Compile Include="UserControls\CardReadingUserControl.xaml.cs">
       <DependentUpon>CardReadingUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CheckPointsBalanceUserControl.xaml.cs">
-      <DependentUpon>CheckPointsBalanceUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\NewCardUserControl.xaml.cs">
       <DependentUpon>NewCardUserControl.xaml</DependentUpon>
     </Compile>
@@ -137,14 +134,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\CheckPointsBalanceUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\LoginUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -155,9 +144,6 @@
     </Compile>
     <Compile Include="UserControls\AppSettingsUserControl.xaml.cs">
       <DependentUpon>AppSettingsUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\LoginUserControl.xaml.cs">
-      <DependentUpon>LoginUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

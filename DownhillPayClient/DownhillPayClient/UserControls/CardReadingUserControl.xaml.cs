@@ -104,25 +104,10 @@ namespace DownhillPayClient.UserControls
 
         private void AddNewCard()
         {
-            if (rfidCardRequest.Get(MainWindow.CardUid) != null) throw new Exception("This card is already registered!");
-            var rfidCardsCount = rfidCardRequest.Get().Count();
-            MainWindow.Transaction.RfidCard.CardNumber = DateTime.Today.Year.ToString() + DateTime.Today.Month.ToString() + "/" + rfidCardsCount;
-            MainWindow.Transaction.RfidCard.Uid = MainWindow.CardUid.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
-            MainWindow.Transaction.RfidCard.Uid2 = MainWindow.Transaction.RfidCard.Uid + rfidCardsCount; //TEMPORARY UID2
-            var rfidCardRequestResponse = rfidCardRequest.Post(MainWindow.Transaction.RfidCard);
-            if (rfidCardRequestResponse.StatusCode != HttpStatusCode.Created)
-            {
-                if (rfidCardRequestResponse.StatusCode == HttpStatusCode.Conflict)
-                    throw new Exception("This card has already been registered!");
-                else throw new Exception("Error " + (int)rfidCardRequestResponse.StatusCode + "\r" + rfidCardRequestResponse.Content);
-            }
-            if (((NewCardTransaction)MainWindow.Transaction).IsPersonalized == true)
-            {
-                AddNewClient();
-            }
-            Debug.WriteLine((int)rfidCardRequestResponse.StatusCode);
-            Debug.WriteLine(MainWindow.Transaction.RfidCard.CardNumber);
-            Debug.WriteLine(rfidCardRequestResponse.Content);
+            if (IsCardInDatabase() == true) throw new Exception("This card is already registered!");
+            CreateRfidCardObject();
+            if (((NewCardTransaction)MainWindow.Transaction).IsPersonalized == true) AddNewClient();
+            PostCardToDatabase();         
         }
 
         private void AddNewClient()
@@ -207,6 +192,36 @@ namespace DownhillPayClient.UserControls
             if (rfidCardSubscriptionRequest.Exists(MainWindow.CardUid, MainWindow.Transaction.RfidCardSubscription.DateStart, MainWindow.Transaction.RfidCardSubscription.DateEnd) == true)
                 throw new Exception("Subscription for given dates already exists for this card!");
             var response = rfidCardSubscriptionRequest.Post(MainWindow.Transaction.RfidCardSubscription);
+        }
+
+        private bool IsCardInDatabase()
+        {
+            if (rfidCardRequest.Get(MainWindow.CardUid) != null) return true;
+            else return false;
+        }
+
+        private void CreateRfidCardObject()
+        {
+            var rfidCardsCount = rfidCardRequest.Get().Count();
+            MainWindow.Transaction.RfidCard.CardNumber = DateTime.Today.Year.ToString() + DateTime.Today.Month.ToString() + "/" + rfidCardsCount;
+            MainWindow.Transaction.RfidCard.Uid = MainWindow.CardUid.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+            MainWindow.Transaction.RfidCard.Uid2 = MainWindow.Transaction.RfidCard.Uid + rfidCardsCount; //TEMPORARY UID2
+            if (((NewCardTransaction)MainWindow.Transaction).IsPersonalized == true)
+            {
+                MainWindow.Transaction.RfidCard.ClientId = ((NewCardTransaction)MainWindow.Transaction).Client.Id;
+            }
+            else MainWindow.Transaction.RfidCard.ClientId = null;
+        }
+
+        private void PostCardToDatabase()
+        {
+            var rfidCardRequestResponse = rfidCardRequest.Post(MainWindow.Transaction.RfidCard);
+            if (rfidCardRequestResponse.StatusCode != HttpStatusCode.Created)
+            {
+                if (rfidCardRequestResponse.StatusCode == HttpStatusCode.Conflict)
+                    throw new Exception("Database conflict!");
+                else throw new Exception("Error " + (int)rfidCardRequestResponse.StatusCode + "\r" + rfidCardRequestResponse.Content);
+            }
         }
     }
 }

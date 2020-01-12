@@ -68,19 +68,9 @@ namespace DownhillPayClient.UserControls
             {
                 try
                 {
-                    ((NewCardTransaction)MainWindow.Transaction).Client = new Client(firstNameTextBox.Text.ToUpper(), lastNameTextBox.Text.ToUpper(), phoneNumberTextBox.Text,
-                        new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //create client objects with provided data
-                    var clientRequest = new ClientRequest();
-                    var responseData = clientRequest.Get(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
-                        new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //get client from database that has the same data as provided
-                    if (responseData != null) //if data was returned, show MessageBox to client
-                    {
-                        MessageBox.Show("Client with provided data is already in database!", "Couldn't create new client");
-                    }
+                    ((NewCardTransaction)MainWindow.Transaction).Client = CreateClientObjectWithProvidedData();
+                    if (IsClientInDatabase() == true) MessageBox.Show("Client with provided data is already in database!", "Couldn't create new client");
                     else MainWindow.contentControl.Content = MainWindow.TopUpTypesUserControl.ChangeToControl(this);
-                    //else continue to next control                                                                                                
-                    //var response = clientRequest.Post(MainWindow.Client); //post client to database                                                                                                
-                    //Debug.WriteLine(response);
                 }
 
                 catch (FormatException)
@@ -168,14 +158,12 @@ namespace DownhillPayClient.UserControls
             activeTextbox.Focus();
         }
 
-
         private void FirstNameButton_Click(object sender, RoutedEventArgs e)
         {
             var previousActiveTextbox = activeTextbox;
             activeTextbox = firstNameTextBox;
             ChooseTextbox(sender, previousActiveTextbox);
         }
-
 
         private void LastNameButton_Click(object sender, RoutedEventArgs e)
         {
@@ -353,5 +341,20 @@ namespace DownhillPayClient.UserControls
             }
         }
        
+        private Client CreateClientObjectWithProvidedData()
+        {
+            Client client = new Client(firstNameTextBox.Text.ToUpper(), lastNameTextBox.Text.ToUpper(), phoneNumberTextBox.Text,
+                        new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text)));
+            return client;
+        }
+
+        private bool IsClientInDatabase()
+        {
+            var clientRequest = new ClientRequest();
+            var responseData = clientRequest.Get(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                new DateTime(Convert.ToInt32(yearTextBox.Text), Convert.ToInt32(monthTextBox.Text), Convert.ToInt32(dayTextBox.Text))); //get client from database that has the same data as provided
+            if (responseData != null) return true;
+            else return false;
+        }
     }
 }

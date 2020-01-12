@@ -47,6 +47,6 @@ namespace DownhillPayClient.APIClient.Models
         [JsonProperty("timeout")]
         public DateTime Timeout { get; set; }
         [JsonProperty("id_client")]
-        public Guid ClientId { get; set; }
+        public Guid? ClientId { get; set; }
     }
 }
