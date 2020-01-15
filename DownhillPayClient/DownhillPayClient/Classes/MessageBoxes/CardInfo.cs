@@ -36,11 +36,11 @@ namespace DownhillPayClient.Classes.MessageBoxes
             if (subscription.DateEnd < DateTime.Now) messageBox.Message += "\nSubscription:\n No active or upcoming subscriptions";
             else if (rfidCardSubscriptionRequest.Exists(card.Uid, subscription.DateStart, subscription.DateEnd))
                 messageBox.Message += "\nSubscription active until\n " + subscription.DateEnd.Year + "-" + subscription.DateEnd.Month + "-" + subscription.DateEnd.Day + "\n"
-                    + subscription.DateEnd.Hour + ":" + subscription.DateEnd.Minute;
+                    + subscription.DateEnd.ToString("HH:mm");
             else messageBox.Message += "\nSubscription starts on\n " + subscription.DateStart.Year + "-" + subscription.DateStart.Month + "-" + subscription.DateStart.Day + " "
                     + subscription.DateStart.Hour + ":" + subscription.DateStart.Minute +
                     "\n ends on\n " + subscription.DateEnd.Year + "-" + subscription.DateEnd.Month + "-" + subscription.DateEnd.Day + " "
-                    + subscription.DateEnd.Hour + ":" + subscription.DateEnd.Minute;
+                    + subscription.DateEnd.ToString("HH:mm");
             return messageBox;
         }
     }
